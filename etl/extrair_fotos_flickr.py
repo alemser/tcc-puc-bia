@@ -14,20 +14,20 @@ from .ExifWorker import *
 key=u'820a5f399dc0032c41be29241cecdf36'
 secret=u'33d128d07ba9406a'
 
-def get_urls(image_tag, MAX_COUNT):
+def get_urls(categoria, tags, MAX_COUNT):
+
     flickr = FlickrAPI(key, secret)
     photos = flickr.walk(media='photos',
-                        text=image_tag,
                         content_type=1,
                         tag_mode='all',
-                        tags=image_tag,
+                        tags=tags,
                         extras='url_o,tags',
                         per_page=500,
                         sort='date-posted-desc',
                         privacy_filter=1)
     count = 0
 
-    worker = ExifWorker(MAX_COUNT)
+    worker = ExifWorker(categoria, MAX_COUNT)
     worker.daemon = True
     worker.start()
 
@@ -36,11 +36,11 @@ def get_urls(image_tag, MAX_COUNT):
         if url and len(url) > 0:
             titulo = None if not photo.get('title') else photo.get('title')
             tags = None if not photo.get('tags') else photo.get('tags')
-            inserir_info_basica_bd(titulo, url, tags, image_tag)
+            inserir_info_basica_bd(titulo, url, tags, categoria)
             count = count + 1
         if count > MAX_COUNT:
             break
-    print(count, "URLs de imagens armazenadas")
+    print(count, "URLs de imagens armazenadas para a categoria", categoria)
     worker.allowed_to_stop = True
     worker.join()
 
