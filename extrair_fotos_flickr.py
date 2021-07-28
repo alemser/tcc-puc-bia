@@ -13,6 +13,7 @@ import psycopg
 
 key=u'820a5f399dc0032c41be29241cecdf36'
 secret=u'33d128d07ba9406a'
+
 def get_urls(image_tag,MAX_COUNT):
     flickr = FlickrAPI(key, secret)
     photos = flickr.walk(media='photos',
@@ -22,7 +23,7 @@ def get_urls(image_tag,MAX_COUNT):
                         tags=image_tag,
                         extras='url_o,tags',
                         per_page=500,
-                        sort='relevance',
+                        sort='date-posted-desc',
                         privacy_filter=1)
     count = 0
 
