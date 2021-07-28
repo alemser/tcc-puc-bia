@@ -6,15 +6,15 @@
 from flickrapi import FlickrAPI
 import sys
 import psycopg
-from extrair_exif_fotos import extrair_exif
 from threading import Thread
 from time import sleep
 import psycopg
+from .ExifWorker import *
 
 key=u'820a5f399dc0032c41be29241cecdf36'
 secret=u'33d128d07ba9406a'
 
-def get_urls(image_tag,MAX_COUNT):
+def get_urls(image_tag, MAX_COUNT):
     flickr = FlickrAPI(key, secret)
     photos = flickr.walk(media='photos',
                         text=image_tag,
@@ -27,22 +27,22 @@ def get_urls(image_tag,MAX_COUNT):
                         privacy_filter=1)
     count = 0
 
-    # thread = Thread(target = extrair_exif, args = [])
-    # thread.start()
-    # print("thread para extrair EXIF iniciada...")
+    worker = ExifWorker(MAX_COUNT)
+    worker.daemon = True
+    worker.start()
 
     for photo in photos:
-        url=photo.get('url_o')
-        titulo=photo.get('title')
-        tags = photo.get('tags')
+        url = photo.get('url_o')
         if url and len(url) > 0:
+            titulo = None if not photo.get('title') else photo.get('title')
+            tags = None if not photo.get('tags') else photo.get('tags')
             inserir_info_basica_bd(titulo, url, tags, image_tag)
-            extrair_exif()
             count = count + 1
         if count > MAX_COUNT:
             break
-    print(count, "imagens armazenadas")
-    # thread.join()
+    print(count, "URLs de imagens armazenadas")
+    worker.allowed_to_stop = True
+    worker.join()
 
 def inserir_info_basica_bd(titulo, url, tags, categoria):
     with psycopg.connect("dbname=postgres user=alemser") as conn:
@@ -52,13 +52,3 @@ def inserir_info_basica_bd(titulo, url, tags, categoria):
                 VALUES (%s, %s, %s, %s)
                 ON CONFLICT (nm_url) DO NOTHING;
                 """, (titulo, url, categoria, tags))
-
-def main():
-    tag=sys.argv[1]
-    MAX_COUNT=int(sys.argv[2])
-    get_urls(tag,MAX_COUNT)
-
-#https://gist.github.com/yunjey/14e3a069ad2aa3adf72dee93a53117d6
-
-if __name__=='__main__':
-    main()
