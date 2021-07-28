@@ -11,47 +11,49 @@ import psycopg
 import datetime
 
 def extrair_exif():
-    while True:
-        with psycopg.connect("dbname=postgres user=alemser") as conn:
-            with conn.cursor() as cur:
-                cur.execute("""SELECT id_fotografia, nm_url FROM t_fotografias WHERE fl_lido = false LIMIT 100""")
-                remaining_records = cur.rowcount
-                print("Atualizando", remaining_records, " registros")
-                for record in cur:
-                    img = PIL.Image.open(requests.get(record[1], stream=True).raw)
-                    exif_data = img._getexif()
-                    data_dict = {'id_fotografia': record[0]}
-                    if exif_data:
-                        for k in exif_data:
-                            if (TAGS[k] == 'ShutterSpeedValue'):
-                                data_dict['nu_tempo_exposicao'] = exif_data[k]
-                            if (TAGS[k] == 'ApertureValue'):
-                                data_dict['nu_abertura'] = exif_data[k]
-                            if (TAGS[k] == 'ISOSpeedRatings'):
-                                data_dict['nu_iso'] = exif_data[k]
-                            if (TAGS[k] == 'LensSpecification'):
-                                data_dict['tp_lente'] = 'Zoom' if len(exif_data[k]) > 1 else 'Prime'
-                            if (TAGS[k] == 'LensModel'):
-                                data_dict['nm_lente'] = exif_data[k]
-                            if (TAGS[k] == 'LensMake'):
-                                data_dict['nm_fabric_lente'] = exif_data[k]
-                            if (TAGS[k] == 'DateTimeOriginal'):
-                                data_dict['dt_foto'] = exif_data[k]
-                            if (TAGS[k] == 'DateTimeOriginal'):
-                                data_dict['dt_foto'] = exif_data[k]
-                            if (TAGS[k] == 'Make'):
-                                data_dict['nm_fabric_camera'] = exif_data[k]
-                            if (TAGS[k] == 'Model'):
-                                data_dict['nm_camera'] = exif_data[k]
-                            if (TAGS[k] == 'FocalLength'):
-                                data_dict['nu_dist_focal_lente'] = exif_data[k]
-                            if (TAGS[k] == 'FocalLengthIn35mmFilm'):
-                                data_dict['nu_dist_focal_lente_35mmEq'] = exif_data[k]
-                            if (TAGS[k] == 'Flash'):
-                                data_dict['fl_flash'] = False if exif_data[k] == 0 else True
+    #while True:
+    with psycopg.connect("dbname=postgres user=alemser") as conn:
+        with conn.cursor() as cur:
+            cur.execute("""SELECT id_fotografia, nm_url FROM t_fotografias WHERE fl_lido = false LIMIT 100""")
+            remaining_records = cur.rowcount
+            print("Atualizando", remaining_records, " registros")
+            for record in cur:
+                img = PIL.Image.open(requests.get(record[1], stream=True).raw)
+                exif_data = img._getexif()
+                data_dict = {'id_fotografia': record[0]}
+                if exif_data:
+                    for k in exif_data:
+                        if (TAGS[k] == 'ShutterSpeedValue'):
+                            data_dict['nu_tempo_exposicao'] = exif_data[k]._numerator / exif_data[k]._denominator
+                            print('=>',data_dict['nu_tempo_exposicao'])
+                        if (TAGS[k] == 'ApertureValue'):
+                            data_dict['nu_abertura'] = exif_data[k]._numerator / exif_data[k]._denominator
+                        if (TAGS[k] == 'ISOSpeedRatings'):
+                            data_dict['nu_iso'] = exif_data[k]
+                        if (TAGS[k] == 'LensSpecification'):
+                            data_dict['tp_lente'] = 'Zoom' if len(exif_data[k]) > 1 else 'Prime'
+                        if (TAGS[k] == 'LensModel'):
+                            data_dict['nm_lente'] = exif_data[k]
+                        if (TAGS[k] == 'LensMake'):
+                            data_dict['nm_fabric_lente'] = exif_data[k]
+                        if (TAGS[k] == 'DateTimeOriginal'):
+                            data_dict['dt_foto'] = exif_data[k]
+                        if (TAGS[k] == 'DateTimeOriginal'):
+                            data_dict['dt_foto'] = exif_data[k]
+                        if (TAGS[k] == 'Make'):
+                            data_dict['nm_fabric_camera'] = exif_data[k]
+                        if (TAGS[k] == 'Model'):
+                            data_dict['nm_camera'] = exif_data[k]
+                        if (TAGS[k] == 'FocalLength'):
+                            print(exif_data[k]._numerator,exif_data[k]._denominator,exif_data[k])
+                            data_dict['nu_dist_focal_lente'] = exif_data[k]._numerator / exif_data[k]._denominator
+                        if (TAGS[k] == 'FocalLengthIn35mmFilm'):
+                            data_dict['nu_dist_focal_lente_35mmEq'] = exif_data[k]
+                        if (TAGS[k] == 'Flash'):
+                            data_dict['fl_flash'] = False if exif_data[k] == 0 else True
 
-                    atualizar_exif(data_dict)
-        sleep(1000)
+                atualizar_exif(data_dict)
+        #sleep(1000)
 
 def atualizar_exif(data_dict):
     with psycopg.connect("dbname=postgres user=alemser") as conn:
@@ -74,23 +76,23 @@ def atualizar_exif(data_dict):
                     fl_lido = true
                 WHERE id_fotografia = %s
                 """, (datetime.datetime.now(),
-                    k_or_n(data_dict, 'tp_lente', ' '),
-                    k_or_n(data_dict, 'nm_lente', ' '),
-                    k_or_n(data_dict, 'nm_fabric_lente', ' '),
-                    k_or_n(data_dict, 'nu_dist_focal_lente', 0.0),
-                    k_or_n(data_dict, 'tp_camera', ' '),
-                    k_or_n(data_dict, 'nm_camera', ' '),
-                    k_or_n(data_dict, 'nm_fabric_camera', ' '),
-                    k_or_n(data_dict, 'nu_dist_focal_lente_35mmEq', 0.0),
-                    k_or_n(data_dict, 'nu_abertura', 0.0),
-                    k_or_n(data_dict, 'nu_tempo_exposicao', 0.0),
-                    k_or_n(data_dict, 'nu_iso', 0.0),
-                    k_or_n(data_dict, 'fl_flash', False),
-                    k_or_n(data_dict, 'id_fotografia', data_dict['id_fotografia'])))
+                    value_or_default(data_dict, 'tp_lente', None),
+                    value_or_default(data_dict, 'nm_lente', None),
+                    value_or_default(data_dict, 'nm_fabric_lente', None),
+                    value_or_default(data_dict, 'nu_dist_focal_lente', 0.0),
+                    value_or_default(data_dict, 'tp_camera', None),
+                    value_or_default(data_dict, 'nm_camera', None),
+                    value_or_default(data_dict, 'nm_fabric_camera', None),
+                    value_or_default(data_dict, 'nu_dist_focal_lente_35mmEq', 0.0),
+                    value_or_default(data_dict, 'nu_abertura', 0.0),
+                    value_or_default(data_dict, 'nu_tempo_exposicao', 0.0),
+                    value_or_default(data_dict, 'nu_iso', 0.0),
+                    value_or_default(data_dict, 'fl_flash', False),
+                    data_dict['id_fotografia']))
 
-def k_or_n(dict, key, default_value):
+def value_or_default(dict, key, default_value):
     try:
         return dict[key]
     except Exception as e:
-        print(default_value)
+        print(key, 'Default: ',default_value)
         return default_value

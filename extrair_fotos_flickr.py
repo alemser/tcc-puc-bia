@@ -26,9 +26,9 @@ def get_urls(image_tag,MAX_COUNT):
                         privacy_filter=1)
     count = 0
 
-    thread = Thread(target = extrair_exif, args = [])
-    thread.start()
-    print("thread para extrair EXIF iniciada...")
+    # thread = Thread(target = extrair_exif, args = [])
+    # thread.start()
+    # print("thread para extrair EXIF iniciada...")
 
     for photo in photos:
         url=photo.get('url_o')
@@ -36,11 +36,12 @@ def get_urls(image_tag,MAX_COUNT):
         tags = photo.get('tags')
         if url and len(url) > 0:
             inserir_info_basica_bd(titulo, url, tags, image_tag)
+            extrair_exif()
             count = count + 1
         if count > MAX_COUNT:
             break
     print(count, "imagens armazenadas")
-    thread.join()
+    # thread.join()
 
 def inserir_info_basica_bd(titulo, url, tags, categoria):
     with psycopg.connect("dbname=postgres user=alemser") as conn:
