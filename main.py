@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+DATABASE_CONFIG = {
+    'host': 'localhost',
+    'dbname': 'postgres',
+    'user': 'postgres',
+    'password': 'docker',
+    'port': 5432
+}
 
 from etl.ImageUrlExtractor import ImageUrlExtractor
 from etl.ExifWorker import ExifWorker
