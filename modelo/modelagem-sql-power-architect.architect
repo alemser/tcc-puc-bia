@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <architect-project version="1.0" appversion="1.0.9">
- <project-name>sqlpa_tcc</project-name>
+ <project-name>modelagem-sql-power-architect</project-name>
  <print-settings numCopies="1" zoom="1.0" pageNumbersPrinted="true" orientation="1" paperWidth="612.0" paperHeight="792.0" leftBorder="50.0" rightBorder="50.0" topBorder="50.0" bottomBorder="50.0" />
  <project-data-sources>
   <data-source id="DS0">
@@ -795,7 +795,7 @@
     <column id="COL222" populated="true" UUID="1d92814f-4f2e-4251-bf5c-3d24cea106de" autoIncrement="false" autoIncrementSequenceName="t_fotografias_nm_fabric_lente_seq" defaultValue="" name="nm_fabric_lente" nullable="1" physicalName="nm_fabric_lente" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL223" populated="true" UUID="2edd97db-996e-462f-bfe5-f4804874328d" autoIncrement="false" autoIncrementSequenceName="t_fotografias_nu_dist_focal_seq" defaultValue="" name="nu_dist_focal" nullable="1" physicalName="nu_dist_focal" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="3" userDefinedTypeUUID="cc1304ea-628a-4fc5-a84a-06ba14759152" >
+    <column id="COL223" populated="true" UUID="b1ff6f16-a31b-4e8c-9c81-619350f44389" autoIncrement="false" autoIncrementSequenceName="t_fotografias_nu_dist_focal_seq" defaultValue="" name="nu_dist_focal" nullable="0" physicalName="nu_dist_focal" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="3" userDefinedTypeUUID="cc1304ea-628a-4fc5-a84a-06ba14759152" >
      <remarks></remarks>
     </column>
     <column id="COL224" populated="true" UUID="89c3eb6f-4809-438a-9e3a-1b2a52ecb07c" autoIncrement="false" autoIncrementSequenceName="t_fotografias_tp_camera_seq" defaultValue="" name="tp_camera" nullable="1" physicalName="tp_camera" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
@@ -872,7 +872,7 @@
  <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="false" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
- <play-pen zoom="1.189207115002721" viewportX="237" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
+ <play-pen zoom="1.189207115002721" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
   <table-pane table-ref="TAB156" x="508" y="75" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB163" x="822" y="201" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB168" x="58" y="412" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>

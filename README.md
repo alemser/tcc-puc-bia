@@ -1,7 +1,7 @@
 # tcc-puc-bia
 TCC PUC Minas - Business Intelligence and Analytics
 
-Para maiores detalhes sobre o projeto leia o [Relatório Técnico](docs/AIB - Relatório Técnico - Alessandro.pages).
+Para maiores detalhes sobre o projeto leia o Relatório Técnico no diretório `docs`.
 
 # Pré-requisitos
 
@@ -68,7 +68,7 @@ Para instalar as bibliotecas requeridas execute:
 
 ## Scripts
 
-### Inicio rápido
+### Inicio rápido com dados pré-processados
 
 Para pular a etapa de ETL e ter uma base dimensional já preparada com os dados de uma
 extração feita anteriormente, execute:
@@ -76,6 +76,9 @@ extração feita anteriormente, execute:
 `python3 etl/pre_load_db.py`
 
 ### Executando todo o processo
+
+> Caso tenha sido executado o início rápido detalhado acima, lembre-se de remover
+a base de dados em `$HOME/docker/volumes/postgres`
 
 Para executar o script de coleta de dados no Flickr e processamento do EXIF, execute:
 
@@ -92,3 +95,9 @@ sucesso o registro relativo à URL é atualizado e mercado como processado (`fl_
 Mesmo que o processamento seja abortado no meio e reiniciado posteriormente, não haverá prejuízo para o trabalho já feito.
 
 Ao final do carregamento dos dados de EXIF que eram válidos, a base dimensional é povoada (`load_dw`).
+
+O processo pode ser executado quantas vezes for necessário. A base dimensional irá evoluir sem prejuízo.
+
+Para executar somente a parte de extração de EXIF e load da base dimensional, execute:
+
+`python3 main.py X`
