@@ -29,6 +29,7 @@ Contém os scripts de extração, transformação e carga.
 * `image_url_extractor.py` varre a base de imagens do flickr e armazena dados básicos como a URL da imagem, titulo e tags.
 * `exif_worker.py` é uma thread que, a partir de uma URL de imagem, obtém dados de EXIF das mesmas e os armazena no BD.
 * `load_dw.py` é o script que popula a base de dados dimensional, o DWH.
+* `create_tables.py` é o script que cria as tabelas do modelo relcional e dimensional no banco de dados.
 * `pre_load_db.py` é o script que pre-carrega a base com uma execução anterior da ETL. Ele permite experimentar um DW já
 com dados carregados de uma execução anterior.
 
@@ -77,10 +78,14 @@ extração feita anteriormente, execute:
 
 ### Executando todo o processo
 
-> Caso tenha sido executado o início rápido detalhado acima, lembre-se de remover
-a base de dados em `$HOME/docker/volumes/postgres`
+> Caso tenha sido executado o início rápido detalhado acima, lembre-se de que
+existirão dados na base
 
-Para executar o script de coleta de dados no Flickr e processamento do EXIF, execute:
+1. Crie as tabelas do modelo relacional e dimensional
+
+`python3 etl/create_tables.py`
+
+2. Execute o script de coleta de dados no Flickr e processamento do EXIF
 
 `python3 main.py`
 
