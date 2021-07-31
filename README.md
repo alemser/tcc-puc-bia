@@ -88,20 +88,18 @@ extração feita anteriormente, execute:
 
 # Detalhes dos scripts
 
-O script principal `main.py` está preparado para ser executado mais de uma vez
-sem prejuízo de dados duplicados ou perda de processamento.
+O script principal `main.py` está preparado para ser executado mais de uma vez sem prejuízo relacionado a dados duplicados ou perda de processamento.
 
 Numa primeira etapa as URLs das imagens são armazenadas na tabela `f_fotografias` pelo script `image_url_extractor.py`. 
 
-Em paralelo, uma thread busca as URLs na tabela `f_fotografias` e lê a imagem para extrair o EXIF (`exif_worker`). Ao ler o EXIF com
-sucesso o registro relativo à URL é atualizado e mercado como processado (`fl_lido=True`).
+Em paralelo, uma thread (`exif_worker.py`) busca as URLs na tabela `f_fotografias` e lê a imagem para extrair o EXIF. Ao ler o EXIF com
+sucesso o registro relativo à URL é atualizado na tabela `f_fotografias` e mercado como processado (`fl_lido=True`).
 
 Mesmo que o processamento seja abortado no meio e reiniciado posteriormente, não haverá prejuízo para o trabalho já feito.
 
-Ao final do carregamento dos dados de EXIF que eram válidos, a base dimensional é povoada (`load_dw`).
+Ao final do carregamento dos dados de EXIF o script `load_dw.py` povoa a base dimensional.
 
 O processo pode ser executado quantas vezes for necessário. A base dimensional irá evoluir sem prejuízo.
 
-Para executar somente a parte de extração de EXIF e load da base dimensional, execute:
-
-`python3 main.py X`
+> Para executar somente a parte de extração de EXIF e load da base dimensional, execute `python3 main.py X` isso pula a etapa 
+de extração da URL que é a menos custosa e que normalmente finaliza rapidamente.
