@@ -22,9 +22,14 @@ pelos scripts (requirements.txt) e executar os scripts.
 
 Para iniciar o banco de dados execute:
 
+
+
 ```
-# diretorio usado para volume do BD
+# Para LINUX/MAC: cria o diretorio usado para volume do BD
 mkdir -p $HOME/docker/volumes/postgres
+
+# Para WINDOWS: cria o diretorio usado para volume do BD
+mkdir %HOMEDRIVE%%HOMEPATH%/docker/volumes/postgres
 
 # Construindo a imagem
 docker pull postgres
