@@ -13,34 +13,6 @@ Para maiores detalhes sobre o projeto leia o Relatório Técnico no diretório `
 
 Para a execução dos scripts de ETL é preciso ter o Python3 instalado (juntamente com o pip3).
 
-# Entendendo a estrutura do projeto
-
-## Diretórios
-
-### Raiz
-
-Contém o arquivo de entrada principal da ETL (`main.py`) e o arquivo que descreve as bibliotecas
-necessárias para os scripts Python rodarem (`requirements.txt`).
-
-### etl
-
-Contém os scripts de extração, transformação e carga.
-
-* `image_url_extractor.py` varre a base de imagens do flickr e armazena dados básicos como a URL da imagem, titulo e tags.
-* `exif_worker.py` é uma thread que, a partir de uma URL de imagem, obtém dados de EXIF das mesmas e os armazena no BD.
-* `load_dw.py` é o script que popula a base de dados dimensional, o DWH.
-* `create_tables.py` é o script que cria as tabelas do modelo relcional e dimensional no banco de dados.
-* `pre_load_db.py` é o script que pre-carrega a base com uma execução anterior da ETL. Ele permite experimentar um DW já
-com dados carregados de uma execução anterior.
-
-### modelo
-
-Contém arquivos relacionados ao modelo de dados.
-
-### docs
-
-Documentos relacionados ao TCC.
-
 # Preparando o ambiente para execução
 
 Para executar os scripts de ETL é necessário colocar o banco de dados no ar (docker), obter as bibliotecas requeridas
@@ -103,3 +75,33 @@ O processo pode ser executado quantas vezes for necessário. A base dimensional 
 
 > Para executar somente a parte de extração de EXIF e load da base dimensional, execute `python3 main.py X` isso pula a etapa 
 de extração da URL que é a menos custosa e que normalmente finaliza rapidamente.
+
+# Entendendo a estrutura do projeto
+
+## Diretórios
+
+### Raiz
+
+Contém o arquivo de entrada principal da ETL (`main.py`) e o arquivo que descreve as bibliotecas
+necessárias para os scripts Python rodarem (`requirements.txt`).
+
+### etl
+
+Contém os scripts de extração, transformação e carga.
+
+* `image_url_extractor.py` varre a base de imagens do flickr e armazena dados básicos como a URL da imagem, titulo e tags.
+* `exif_worker.py` é uma thread que, a partir de uma URL de imagem, obtém dados de EXIF das mesmas e os armazena no BD.
+* `load_dw.py` é o script que popula a base de dados dimensional, o DWH.
+* `create_tables.py` é o script que cria as tabelas do modelo relcional e dimensional no banco de dados.
+* `pre_load_db.py` é o script que pre-carrega a base com uma execução anterior da ETL. Ele permite experimentar um DW já
+com dados carregados de uma execução anterior.
+
+### modelo
+
+Contém arquivos relacionados ao modelo de dados.
+
+### docs
+
+Documentos relacionados ao TCC.
+
+
