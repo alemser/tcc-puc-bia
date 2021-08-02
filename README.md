@@ -20,31 +20,42 @@ pelos scripts (requirements.txt) e executar os scripts.
 
 ## Banco de dados
 
+O banco de dados é provido via Docker e usa a [imagem oficial](https://hub.docker.com/_/postgres).
+
+A configuração abaixo foi baseada no nas orientações [deste site](https://hackernoon.com/dont-install-postgres-docker-pull-postgres-bee20e200198) e pode ser usada como referência para casos de dúvidas adicionais.
+
 Para iniciar o banco de dados execute:
 
-
+### Linux/Mac
 
 ```
-# Para LINUX/MAC: cria o diretorio usado para volume do BD
 mkdir -p $HOME/docker/volumes/postgres
-
-# Para WINDOWS: cria o diretorio usado para volume do BD
-mkdir %HOMEDRIVE%%HOMEPATH%/docker/volumes/postgres
-
-# Construindo a imagem
 docker pull postgres
-
-# Iniciando o container a partir da imagem
 docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres
 ```
 
-## Bibliotecas
+### Windows
+
+```
+mkdir %HOMEDRIVE%%HOMEPATH%/docker/volumes/postgres
+docker pull postgres
+docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v %HOMEDRIVE%%HOMEPATH%/docker/volumes/postgres:/var/lib/postgresql/data postgres
+```
+
+> Nota: Os comandos para Windows não foram testados, porém, exceto pelo comando `mkdir`, os demais comandos são padrões do Docker. Caso tenha dificuldades, por favor, revise as variáveis `%HOMEDRIVE%` e `%HOMEPATH%`.
+
+## Bibliotecas Python requeridas
 
 Para instalar as bibliotecas requeridas execute:
 
 `pip3 install -r requirements.txt`
 
-## Scripts
+## Scripts Python
+
+Existem duas opções aqui. 
+
+* Executar todo o processo. Neste caso, o script irá obter os dados do Flickr, extrair o EXIF, transformar os dados e popular a base dimensional.
+* Obter um modelo dimensional pronto. Neste caso, o script popula a base dimensional com dados de uma extração completa executada anteriormente. 
 
 ### Executando todo o processo
 
