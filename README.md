@@ -13,34 +13,6 @@ Para maiores detalhes sobre o projeto leia o Relatório Técnico no diretório `
 
 Para a execução dos scripts de ETL é preciso ter o Python3 instalado (juntamente com o pip3).
 
-# Entendendo a estrutura do projeto
-
-## Diretórios
-
-### Raiz
-
-Contém o arquivo de entrada principal da ETL (`main.py`) e o arquivo que descreve as bibliotecas
-necessárias para os scripts Python rodarem (`requirements.txt`).
-
-### etl
-
-Contém os scripts de extração, transformação e carga.
-
-* `image_url_extractor.py` varre a base de imagens do flickr e armazena dados básicos como a URL da imagem, titulo e tags.
-* `exif_worker.py` é uma thread que, a partir de uma URL de imagem, obtém dados de EXIF das mesmas e os armazena no BD.
-* `load_dw.py` é o script que popula a base de dados dimensional, o DWH.
-* `create_tables.py` é o script que cria as tabelas do modelo relcional e dimensional no banco de dados.
-* `pre_load_db.py` é o script que pre-carrega a base com uma execução anterior da ETL. Ele permite experimentar um DW já
-com dados carregados de uma execução anterior.
-
-### modelo
-
-Contém arquivos relacionados ao modelo de dados.
-
-### docs
-
-Documentos relacionados ao TCC.
-
 # Preparando o ambiente para execução
 
 Para executar os scripts de ETL é necessário colocar o banco de dados no ar (docker), obter as bibliotecas requeridas
@@ -48,26 +20,42 @@ pelos scripts (requirements.txt) e executar os scripts.
 
 ## Banco de dados
 
+O banco de dados é provido via Docker e usa a [imagem oficial](https://hub.docker.com/_/postgres).
+
+A configuração abaixo foi baseada no nas orientações [deste site](https://hackernoon.com/dont-install-postgres-docker-pull-postgres-bee20e200198) e pode ser usada como referência para casos de dúvidas adicionais.
+
 Para iniciar o banco de dados execute:
 
+### Linux/Mac
+
 ```
-# diretorio usado para volume do BD
 mkdir -p $HOME/docker/volumes/postgres
-
-# Construindo a imagem
 docker pull postgres
-
-# Iniciando o container a partir da imagem
 docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres
 ```
 
-## Bibliotecas
+### Windows
+
+```
+mkdir %HOMEDRIVE%%HOMEPATH%/docker/volumes/postgres
+docker pull postgres
+docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v %HOMEDRIVE%%HOMEPATH%/docker/volumes/postgres:/var/lib/postgresql/data postgres
+```
+
+> Nota: Os comandos para Windows não foram testados, porém, exceto pelo comando `mkdir`, os demais comandos são padrões do Docker. Caso tenha dificuldades, por favor, revise as variáveis `%HOMEDRIVE%` e `%HOMEPATH%`.
+
+## Bibliotecas Python requeridas
 
 Para instalar as bibliotecas requeridas execute:
 
 `pip3 install -r requirements.txt`
 
-## Scripts
+## Scripts Python
+
+Existem duas opções aqui. 
+
+* Executar todo o processo. Neste caso, o script irá obter os dados do Flickr, extrair o EXIF, transformar os dados e popular a base dimensional.
+* Obter um modelo dimensional pronto. Neste caso, o script popula a base dimensional com dados de uma extração completa executada anteriormente. 
 
 ### Executando todo o processo
 
@@ -103,3 +91,33 @@ O processo pode ser executado quantas vezes for necessário. A base dimensional 
 
 > Para executar somente a parte de extração de EXIF e load da base dimensional, execute `python3 main.py X` isso pula a etapa 
 de extração da URL que é a menos custosa e que normalmente finaliza rapidamente.
+
+# Entendendo a estrutura do projeto
+
+## Diretórios
+
+### Raiz
+
+Contém o arquivo de entrada principal da ETL (`main.py`) e o arquivo que descreve as bibliotecas
+necessárias para os scripts Python rodarem (`requirements.txt`).
+
+### etl
+
+Contém os scripts de extração, transformação e carga.
+
+* `image_url_extractor.py` varre a base de imagens do flickr e armazena dados básicos como a URL da imagem, titulo e tags.
+* `exif_worker.py` é uma thread que, a partir de uma URL de imagem, obtém dados de EXIF das mesmas e os armazena no BD.
+* `load_dw.py` é o script que popula a base de dados dimensional, o DWH.
+* `create_tables.py` é o script que cria as tabelas do modelo relcional e dimensional no banco de dados.
+* `pre_load_db.py` é o script que pre-carrega a base com uma execução anterior da ETL. Ele permite experimentar um DW já
+com dados carregados de uma execução anterior.
+
+### modelo
+
+Contém arquivos relacionados ao modelo de dados.
+
+### docs
+
+Documentos relacionados ao TCC.
+
+
