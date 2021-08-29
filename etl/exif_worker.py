@@ -19,8 +19,7 @@ class ExifWorker(Thread):
     def __init__(self, max_record_count):
         Thread.__init__(self)
         self.max_record_count = max_record_count
-        self.relevant_exif = ['ShutterSpeedValue','ApertureValue','ISOSpeedRatings','LensSpecification','LensModel',
-                        'LensMake','DateTimeOriginal','Make','Model','FocalLength','FocalLengthIn35mmFilm','Flash']
+        self.relevant_exif = ['LensSpecification','LensModel','LensMake','DateTimeOriginal','Make','Model','FocalLength','FocalLengthIn35mmFilm','Flash']
         self.exif_codes = {v: k for k, v in TAGS.items() if v in self.relevant_exif}
         self.image_url_extractor_finalizado = False
 
@@ -91,9 +90,6 @@ class ExifWorker(Thread):
                         nm_camera = %s,
                         nm_fabric_camera = %s,
                         nu_dist_focal_35mmEq = %s,
-                        nu_abertura = %s,
-                        nu_tempo_exposicao = %s,
-                        nu_iso = %s,
                         fl_flash = %s,
                         fl_lido = true
                     WHERE id_fotografia = %s
@@ -108,9 +104,6 @@ class ExifWorker(Thread):
                         self.exif_from_dictNA(exif_data, 'Model'),
                         self.exif_from_dictNA(exif_data, 'Make'),
                         self.decimal_exif(exif_data.get(self.exif_codes['FocalLengthIn35mmFilm'])),
-                        self.decimal_exif(exif_data.get(self.exif_codes['ApertureValue'])),
-                        self.decimal_exif(exif_data.get(self.exif_codes['ShutterSpeedValue'])),
-                        self.decimal_exif(exif_data.get(self.exif_codes['ISOSpeedRatings'])),
                         self.flash(exif_data),
                         id_fotografia))
 
@@ -137,14 +130,27 @@ class ExifWorker(Thread):
         """Tenta identificar os principais fabricantes e retorna se tipo é camera ou smartphone."""
 
         make = self.exif_from_dict(exif_data,'Make')
+        model = self.exif_from_dict(exif_data,'Model')
+
         if not make:
-            return 'N/A'
+            return 'Unkown'
 
         make = make.upper()
-        if any(ext in make for ext in ['NIKON', 'CANON', 'SONY', 'PANASONIC', 'LEICA', 'PENTAX', 'OLYMPUS', 'FUJIFILM']):
-            return 'Camera'
-        elif any(ext in make for ext in ['APPLE', 'GOOGLE', 'ALCATEL', 'MOTOROLA', 'HUWAEI', 'SAMSUMG']):
-            return 'Smartphone'
+        model = model.upper()
+        if any(ext in make for ext in ['SONY', 'PANASONIC', 'FUJIFILM']):
+            return 'Mirrorless'
+
+        if 'NIKON Z' in model:
+            return 'Mirrorless'
+
+        if 'EOS' in model:
+            if model == 'EOS R' or model == 'EOS RP' or model == 'EOS R5' or model == 'EOS R6' or model == 'EOS R3':
+                return 'Mirrorless'
+            return 'DSLR'
+
+        if 'NIKON D' in model:
+            return 'DSLR'
+
         return 'Unkown'
 
     def fabric_lente(self, exif_data):
@@ -185,8 +191,6 @@ class ExifWorker(Thread):
                 return 'Fujifilm'
             elif any(ext in lens_model for ext in ['VOIGTLANDER']):
                 return 'Voigtlander'
-
-
 
         return 'N/A'
 
