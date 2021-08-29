@@ -6,7 +6,6 @@ from etl.constants import *
 
 def load():
     print("Carregando DWH")
-    d_fabricante()
     d_categoria()
     d_tipo_lente()
     d_tipo_camera()
@@ -15,20 +14,6 @@ def load():
     d_imagem()
     f_foto()
     print("Carregamento completo")
-
-def d_fabricante():
-    sql = """
-        INSERT INTO d_fabricante (nm_fabricante)
-        	SELECT DISTINCT UPPER(SUBSTRING(nm_fabric_camera, 0, POSITION(' ' in nm_fabric_camera || ' '))) as nome
-        	FROM t_fotografias
-        	WHERE fl_lido = true
-        	UNION DISTINCT
-        	SELECT DISTINCT UPPER(SUBSTRING(nm_fabric_lente, 0, POSITION(' ' in nm_fabric_lente || ' '))) as nome
-        	FROM t_fotografias
-        	WHERE fl_lido = true
-        ON CONFLICT (nm_fabricante) DO NOTHING;
-        """
-    _execute(sql)
 
 def d_categoria():
     sql = """
@@ -62,10 +47,9 @@ def d_tipo_camera():
 
 def d_camera():
     sql = """
-        INSERT INTO d_camera (nm_camera, id_fabricante, id_tipo_camera)
-        	SELECT DISTINCT ft.nm_camera, fab.id_fabricante, tpc.id_tipo_camera
+        INSERT INTO d_camera (nm_camera, nm_fabricante, id_tipo_camera)
+        	SELECT DISTINCT ft.nm_camera, UPPER(SUBSTRING(ft.nm_fabric_camera, 0, POSITION(' ' in ft.nm_fabric_camera || ' '))), tpc.id_tipo_camera
         	FROM t_fotografias ft
-        	JOIN d_fabricante fab ON fab.nm_fabricante = UPPER(SUBSTRING(ft.nm_fabric_camera, 0, POSITION(' ' in ft.nm_fabric_camera || ' ')))
         	JOIN d_tipo_camera tpc ON tpc.nm_tipo_camera = ft.tp_camera
         	WHERE fl_lido = true
         ON CONFLICT (nm_camera) DO NOTHING;
@@ -74,10 +58,9 @@ def d_camera():
 
 def d_lente():
     sql = """
-        INSERT INTO d_lente (nm_modelo, id_fabricante, id_tipo_lente)
-        	SELECT DISTINCT ft.nm_lente, fab.id_fabricante, tpl.id_tipo_lente
+        INSERT INTO d_lente (nm_modelo, nm_fabricante, id_tipo_lente)
+        	SELECT DISTINCT ft.nm_lente, UPPER(SUBSTRING(ft.nm_fabric_lente, 0, POSITION(' ' in ft.nm_fabric_lente || ' '))), tpl.id_tipo_lente
         	FROM t_fotografias ft
-        	JOIN d_fabricante fab ON fab.nm_fabricante = UPPER(SUBSTRING(ft.nm_fabric_lente, 0, POSITION(' ' in ft.nm_fabric_lente || ' ')))
         	JOIN d_tipo_lente tpl ON tpl.nm_tipo_lente = ft.tp_lente
         	WHERE fl_lido = true
         ON CONFLICT (nm_modelo) DO NOTHING;
@@ -99,24 +82,12 @@ def f_foto():
     _execute(sql)
 
     sql = """
-        INSERT INTO f_foto (id_camera, id_categoria, id_lente, id_imagem, fl_flash, nu_iso, nu_distancia_focal, nu_abertura, nu_tempo_exposicao)
-    	SELECT cam.id_camera, cat.id_categoria, len.id_lente, im.id_imagem, ft.fl_flash,
-    		CASE
-    			WHEN ft.nu_iso IS NULL THEN 0
-    			ELSE nu_iso
-    		END as nu_iso,
+        INSERT INTO f_foto (id_camera, id_categoria, id_lente, id_imagem, nu_distancia_focal)
+    	SELECT cam.id_camera, cat.id_categoria, len.id_lente, im.id_imagem,
     		CASE
     			WHEN ft.nu_dist_focal_35mmEq IS NULL THEN ft.nu_dist_focal
     			ELSE ft.nu_dist_focal_35mmEq
-    		END as nu_distancia_focal,
-    		CASE
-    			WHEN ft.nu_abertura IS NULL THEN 0
-    			ELSE ft.nu_abertura
-    		END as nu_abertura,
-    		CASE
-    			WHEN ft.nu_tempo_exposicao IS NULL THEN 0
-    			ELSE ft.nu_tempo_exposicao
-    		END as nu_tempo_exposicao
+    		END as nu_distancia_focal
     	FROM t_fotografias ft
     	JOIN d_camera cam ON cam.nm_camera = ft.nm_camera
     	JOIN d_categoria cat ON cat.nm_categoria = ft.nm_categoria_foto

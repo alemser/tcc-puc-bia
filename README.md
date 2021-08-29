@@ -3,22 +3,32 @@ TCC PUC Minas - Business Intelligence and Analytics
 
 Para maiores detalhes sobre o projeto leia o Relatório Técnico no diretório `docs`.
 
-# Pré-requisitos
+# CSV dataset
 
-## Docker
+O dataset em formato CSV está disponível no diretório `data`.
+
+Trata-se do resultado uma execução dos scripts Python disponíveis neste repositório.
+
+Para saber como gerar o dataset leia as instruções abaixo.
+
+# Gerando o dataset
+
+## Pré-requisitos
+
+### Docker
 
 É preciso ter o Docker instalado para executar os scripts, pois a base de dados é fornecida numa imagem.
 
-## Python 3
+### Python 3
 
 Para a execução dos scripts de ETL é preciso ter o Python3 instalado (juntamente com o pip3).
 
-# Preparando o ambiente para execução
+## Preparando o ambiente para execução
 
 Para executar os scripts de ETL é necessário colocar o banco de dados no ar (docker), obter as bibliotecas requeridas
 pelos scripts (requirements.txt) e executar os scripts.
 
-## Banco de dados
+### Banco de dados
 
 O banco de dados é provido via Docker e usa a [imagem oficial](https://hub.docker.com/_/postgres).
 
@@ -26,7 +36,7 @@ A configuração abaixo foi baseada no nas orientações [deste site](https://ha
 
 Para iniciar o banco de dados execute:
 
-### Linux/Mac
+#### Linux/Mac
 
 ```
 mkdir -p $HOME/docker/volumes/postgres
@@ -34,7 +44,7 @@ docker pull postgres
 docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres
 ```
 
-### Windows
+#### Windows
 
 ```
 mkdir %HOMEDRIVE%%HOMEPATH%/docker/volumes/postgres
@@ -44,20 +54,13 @@ docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v 
 
 > Nota: Os comandos para Windows não foram testados, porém, exceto pelo comando `mkdir`, os demais comandos são padrões do Docker. Caso tenha dificuldades, por favor, revise as variáveis `%HOMEDRIVE%` e `%HOMEPATH%`.
 
-## Bibliotecas Python requeridas
+### Bibliotecas Python requeridas
 
 Para instalar as bibliotecas requeridas execute:
 
 `pip3 install -r requirements.txt`
 
-## Scripts Python
-
-Existem duas opções aqui. 
-
-* Executar todo o processo. Neste caso, o script irá obter os dados do Flickr, extrair o EXIF, transformar os dados e popular a base dimensional.
-* Obter um modelo dimensional pronto. Neste caso, o script popula a base dimensional com dados de uma extração completa executada anteriormente. 
-
-### Executando todo o processo
+### Scripts Python
 
 1. Crie as tabelas do modelo relacional e dimensional
 
@@ -67,30 +70,26 @@ Existem duas opções aqui.
 
 `python3 main.py`
 
-### Inicio rápido com dados pré-processados
-
-Para pular a etapa de ETL e ter uma base dimensional já preparada com os dados de uma
-extração feita anteriormente, execute:
-
-`python3 etl/pre_load_db.py`
-
 # Detalhes dos scripts
 
 O script principal `main.py` está preparado para ser executado mais de uma vez sem prejuízo relacionado a dados duplicados ou perda de processamento.
 
-Numa primeira etapa as URLs das imagens são armazenadas na tabela `f_fotografias` pelo script `image_url_extractor.py`. 
+Numa primeira etapa as URLs das imagens são armazenadas na tabela `f_fotografias` pelo script `image_url_extractor.py`.
 
-Em paralelo, uma thread (`exif_worker.py`) busca as URLs na tabela `f_fotografias` e lê a imagem para extrair o EXIF. Ao ler o EXIF com
-sucesso o registro relativo à URL é atualizado na tabela `f_fotografias` e mercado como processado (`fl_lido=True`).
+Em paralelo, uma thread (`exif_worker.py`) busca as URLs na tabela `f_fotografias` e lê a imagem para extrair o EXIF. Ao ler o EXIF com sucesso o registro relativo à URL é atualizado na tabela `f_fotografias` e mercado como processado (`fl_lido=True`).
 
 Mesmo que o processamento seja abortado no meio e reiniciado posteriormente, não haverá prejuízo para o trabalho já feito.
 
 Ao final do carregamento dos dados de EXIF o script `load_dw.py` povoa a base dimensional.
 
+Uma última etapa gera arquivos CSV para serem usados em outras ferramentas sem a necessidade de ter o banco de dados no ar.
+
 O processo pode ser executado quantas vezes for necessário. A base dimensional irá evoluir sem prejuízo.
 
-> Para executar somente a parte de extração de EXIF e load da base dimensional, execute `python3 main.py X` isso pula a etapa 
+> Para executar somente a parte de extração de EXIF e load da base dimensional, execute `python3 main.py X` isso pula a etapa
 de extração da URL que é a menos custosa e que normalmente finaliza rapidamente.
+
+> Para executar somente a geração do CSV execute `python3 main.py csv`.
 
 # Entendendo a estrutura do projeto
 
@@ -120,4 +119,6 @@ Contém arquivos relacionados ao modelo de dados.
 
 Documentos relacionados ao TCC.
 
+### data
 
+Datasets no format CSV.
