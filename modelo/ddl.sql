@@ -115,31 +115,31 @@ ALTER TABLE "public"."f_foto"
     ADD CONSTRAINT fk_foto_imagem FOREIGN KEY (id_imagem) REFERENCES "public"."d_imagem" (id_imagem);
 
 
--- DROP TABLE IF EXISTS "public"."t_fotografias";
--- -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
---
--- -- Sequence and defined type
--- CREATE SEQUENCE IF NOT EXISTS t_fotografias_id_fotografia_seq;
---
--- -- Table Definition
--- CREATE TABLE "public"."t_fotografias" (
---     "id_fotografia" int4 NOT NULL DEFAULT nextval('t_fotografias_id_fotografia_seq'::regclass),
---     "de_titulo" varchar,
---     "nm_url" varchar UNIQUE NOT NULL,
---     "dt_coleta" timestamp,
---     "dt_foto" timestamp,
---     "tp_lente" varchar,
---     "nm_lente" varchar,
---     "nm_fabric_lente" varchar,
---     "nu_dist_focal" numeric,
---     "tp_camera" varchar,
---     "nm_camera" varchar,
---     "nm_fabric_camera" varchar,
---     "nm_categoria_foto" varchar,
---     "fl_flash" bool,
---     "nm_tags" varchar,
---     "fl_lido" bool DEFAULT false,
---     "fl_falha_exif" bool DEFAULT false,
---     "nu_dist_focal_35mmeq" numeric,
---     PRIMARY KEY ("id_fotografia")
--- );
+DROP TABLE IF EXISTS "public"."t_fotografias";
+-- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
+
+-- Sequence and defined type
+CREATE SEQUENCE IF NOT EXISTS t_fotografias_id_fotografia_seq;
+
+-- Table Definition
+CREATE TABLE "public"."t_fotografias" (
+    "id_fotografia" int4 NOT NULL DEFAULT nextval('t_fotografias_id_fotografia_seq'::regclass),
+    "de_titulo" varchar,
+    "nm_url" varchar UNIQUE NOT NULL,
+    "dt_coleta" timestamp,
+    "dt_foto" timestamp,
+    "tp_lente" varchar,
+    "nm_lente" varchar,
+    "nm_fabric_lente" varchar,
+    "nu_dist_focal" numeric,
+    "tp_camera" varchar,
+    "nm_camera" varchar,
+    "nm_fabric_camera" varchar,
+    "nm_categoria_foto" varchar,
+    "fl_flash" bool,
+    "nm_tags" varchar,
+    "fl_lido" bool DEFAULT false,
+    "fl_falha_exif" bool DEFAULT false,
+    "nu_dist_focal_35mmeq" numeric,
+    PRIMARY KEY ("id_fotografia")
+);
