@@ -13,6 +13,7 @@ def export_csv():
     d_lente()
     d_imagem()
     f_foto()
+    t_fotografia()
     print("Carregamento CSV completo")
 
 def d_categoria():
@@ -56,6 +57,12 @@ def f_foto():
         COPY (SELECT * FROM f_foto) TO STDOUT WITH CSV HEADER DELIMITER ',';
         """
     _execute(sql, 'f_foto')
+
+def t_fotografia():
+    sql = """
+        COPY (SELECT * FROM t_fotografias) TO STDOUT WITH CSV HEADER DELIMITER ',';
+        """
+    _execute(sql, 't_fotografia')
 
 def _execute(sql, csv_file_name):
     with psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST) as conn:
