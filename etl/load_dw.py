@@ -69,8 +69,12 @@ def d_lente():
 
 def d_imagem():
     sql = """
-        INSERT INTO d_imagem (nm_url, dt_imagem, de_titulo, nm_tags)
-        	SELECT ft.nm_url, ft.dt_foto, ft.de_titulo, ft.nm_tags
+        INSERT INTO d_imagem (nm_url, dt_imagem, de_titulo, nm_tags, nu_distancia_focal)
+        	SELECT ft.nm_url, ft.dt_foto, ft.de_titulo, ft.nm_tags,
+    		CASE
+    			WHEN ft.nu_dist_focal_35mmEq IS NULL THEN ft.nu_dist_focal
+    			ELSE ft.nu_dist_focal_35mmEq
+    		END as nu_distancia_focal
         	FROM t_fotografias ft
         	WHERE fl_lido = true
         ON CONFLICT (nm_url) DO NOTHING;
@@ -82,18 +86,15 @@ def f_foto():
     _execute(sql)
 
     sql = """
-        INSERT INTO f_foto (id_camera, id_categoria, id_lente, id_imagem, nu_distancia_focal)
-    	SELECT cam.id_camera, cat.id_categoria, len.id_lente, im.id_imagem,
-    		CASE
-    			WHEN ft.nu_dist_focal_35mmEq IS NULL THEN ft.nu_dist_focal
-    			ELSE ft.nu_dist_focal_35mmEq
-    		END as nu_distancia_focal
+        INSERT INTO f_foto (id_camera, id_categoria, id_lente, id_imagem)
+    	SELECT cam.id_camera, cat.id_categoria, len.id_lente, im.id_imagem
     	FROM t_fotografias ft
     	JOIN d_camera cam ON cam.nm_camera = ft.nm_camera
     	JOIN d_categoria cat ON cat.nm_categoria = ft.nm_categoria_foto
     	JOIN d_lente len ON len.nm_modelo = ft.nm_lente
     	JOIN d_imagem im ON im.nm_url = ft.nm_url
     	WHERE fl_lido = true
+          and ft.tp_camera <> 'Unkown'
         """
     _execute(sql)
 

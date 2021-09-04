@@ -9,7 +9,10 @@ import psycopg2
 import datetime
 from threading import Thread
 import time
+import traceback
 from etl.constants import *
+
+PIL.Image.MAX_IMAGE_PIXELS = 933120000
 
 class ExifWorker(Thread):
     """
@@ -43,17 +46,17 @@ class ExifWorker(Thread):
                 cur.execute("""SELECT id_fotografia, nm_url FROM t_fotografias WHERE fl_falha_exif = false AND fl_lido = false LIMIT 250""")
                 print('Processando {} records'.format(cur.rowcount))
                 for record in cur:
-                    try:
-                        img = PIL.Image.open(requests.get(record[1], stream=True).raw)
-                        exif_data = img._getexif()
-                        if self.contem_relevante_exif_data(exif_data):
-                            self.atualizar_exif(record[0], exif_data)
-                        else:
-                            self.max_record_count = self.max_record_count - 1
-                            self.remover_sem_exif(record[0])
-                    except Exception as e:
-                        print(e)
-                        self.marcar_como_falho(record[0])
+                    # try:
+                    img = PIL.Image.open(requests.get(record[1], stream=True).raw)
+                    exif_data = img._getexif()
+                    if self.contem_relevante_exif_data(exif_data):
+                        self.atualizar_exif(record[0], exif_data)
+                    else:
+                        self.max_record_count = self.max_record_count - 1
+                        self.remover_sem_exif(record[0])
+                    # except Exception as e:
+                    #     print(e)
+                    #     self.marcar_como_falho(record[0])
         return record_count
 
     def check_remaining_size(self):
@@ -76,6 +79,19 @@ class ExifWorker(Thread):
 
     def atualizar_exif(self, id_fotografia, exif_data):
         """Atualiza os dados de EXIF para o registro de fotografia."""
+
+        print(self.parse_exif_date(exif_data))
+        print(self.tipo_lente(exif_data))
+        print(self.exif_from_dictNA(exif_data, 'LensModel'))
+        print(self.fabric_lente(exif_data))
+        print(self.decimal_exif(exif_data.get(self.exif_codes['FocalLength'])))
+        print(self.tipo_camera(exif_data))
+        print(self.exif_from_dictNA(exif_data, 'Model'))
+        print(self.exif_from_dictNA(exif_data, 'Make'))
+        print(self.decimal_exif(exif_data.get(self.exif_codes['FocalLengthIn35mmFilm'])))
+        print(self.flash(exif_data))
+        print(id_fotografia)
+
         with psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST) as conn:
             with conn.cursor() as cur:
                 cur.execute("""
@@ -109,14 +125,14 @@ class ExifWorker(Thread):
 
     def exif_from_dictNA(self, exif_data, exif_code):
         value = self.exif_from_dict(exif_data, exif_code)
-        return 'N/A' if not value else value
+        return 'N/A' if not value else value.replace('\x00', '')
 
     def exif_from_dict(self, exif_data, exif_code):
         if not exif_data:
             return None
         try:
             value = exif_data[self.exif_codes[exif_code]]
-            return value if value else None
+            return value.replace('\x00', '') if value else None
         except Exception:
             return None
 
@@ -127,31 +143,49 @@ class ExifWorker(Thread):
         return False
 
     def tipo_camera(self, exif_data):
-        """Tenta identificar os principais fabricantes e retorna se tipo é camera ou smartphone."""
+        """Identifica os principais fabricantes e retorna o tipo da camera."""
+
+        tipo_dslr = 'DSLR'
+        tipo_mirrorless = 'Mirrorless'
+        tipo_unknown = 'Unkown'
 
         make = self.exif_from_dict(exif_data,'Make')
         model = self.exif_from_dict(exif_data,'Model')
 
         if not make:
-            return 'Unkown'
+            return tipo_unknown
 
         make = make.upper()
         model = model.upper()
-        if any(ext in make for ext in ['SONY', 'PANASONIC', 'FUJIFILM']):
-            return 'Mirrorless'
+
+        if make == 'PANASONIC':
+            if any(ext in model for ext in ['S5', 'S1H', 'S1', 'S1R']):
+                return tipo_mirrorless
+            return tipo_unknown
+
+        if make == 'SONY':
+            if any(ext in model for ext in ['ILCE', 'NEX']):
+                return tipo_mirrorless
+            elif model in 'DSLR':
+                return tipo_dslr
+
+            return tipo_unknown
 
         if 'NIKON Z' in model:
-            return 'Mirrorless'
+            return tipo_mirrorless
+
+        if 'PENTAX K' in model:
+            return tipo_dslr
 
         if 'EOS' in model:
             if model == 'EOS R' or model == 'EOS RP' or model == 'EOS R5' or model == 'EOS R6' or model == 'EOS R3':
-                return 'Mirrorless'
-            return 'DSLR'
+                return tipo_mirrorless
+            return tipo_dslr
 
         if 'NIKON D' in model:
-            return 'DSLR'
+            return tipo_dslr
 
-        return 'Unkown'
+        return tipo_unknown
 
     def fabric_lente(self, exif_data):
         make = self.exif_from_dict(exif_data, 'Make')
@@ -209,8 +243,7 @@ class ExifWorker(Thread):
             if date:
                 return datetime.datetime.strptime(date, '%Y:%m:%d %H:%M:%S')
         except Exception:
-            print('Data invalida, data padrao sera usada (10000 dias atras)')
-
+            print('Data invalida, data padrao sera usada')
         return datetime.datetime.now() - datetime.timedelta(10000)
 
     def tipo_lente(self, exif_data):

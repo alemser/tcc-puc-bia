@@ -6,10 +6,10 @@ CREATE SEQUENCE IF NOT EXISTS d_camera_id_camera_seq;
 
 -- Table Definition
 CREATE TABLE "public"."d_camera" (
-    "id_camera" int4 NOT NULL DEFAULT nextval('d_camera_id_camera_seq'::regclass),
+    "id_camera" bigint NOT NULL DEFAULT nextval('d_camera_id_camera_seq'::regclass),
     "nm_camera" varchar UNIQUE,
     "nm_fabricante" varchar,
-    "id_tipo_camera" int8,
+    "id_tipo_camera" bigint,
     PRIMARY KEY ("id_camera")
 );
 
@@ -21,7 +21,7 @@ CREATE SEQUENCE IF NOT EXISTS d_tipo_camera_id_tipo_camera_seq;
 
 -- Table Definition
 CREATE TABLE "public"."d_tipo_camera" (
-    "id_tipo_camera" int4 NOT NULL DEFAULT nextval('d_tipo_camera_id_tipo_camera_seq'::regclass),
+    "id_tipo_camera" bigint NOT NULL DEFAULT nextval('d_tipo_camera_id_tipo_camera_seq'::regclass),
     "nm_tipo_camera" varchar UNIQUE,
     PRIMARY KEY ("id_tipo_camera")
 );
@@ -37,10 +37,10 @@ CREATE SEQUENCE IF NOT EXISTS d_lente_id_lente_seq;
 
 -- Table Definition
 CREATE TABLE "public"."d_lente" (
-    "id_lente" int4 NOT NULL DEFAULT nextval('d_lente_id_lente_seq'::regclass),
+    "id_lente" bigint NOT NULL DEFAULT nextval('d_lente_id_lente_seq'::regclass),
     "nm_modelo" varchar UNIQUE,
     "nm_fabricante" varchar,
-    "id_tipo_lente" int8,
+    "id_tipo_lente" bigint,
     PRIMARY KEY ("id_lente")
 );
 
@@ -52,7 +52,7 @@ CREATE SEQUENCE IF NOT EXISTS d_tipo_lente_id_tipo_lente_seq;
 
 -- Table Definition
 CREATE TABLE "public"."d_tipo_lente" (
-    "id_tipo_lente" int4 NOT NULL DEFAULT nextval('d_tipo_lente_id_tipo_lente_seq'::regclass),
+    "id_tipo_lente" bigint NOT NULL DEFAULT nextval('d_tipo_lente_id_tipo_lente_seq'::regclass),
     "nm_tipo_lente" varchar UNIQUE,
     PRIMARY KEY ("id_tipo_lente")
 );
@@ -69,7 +69,7 @@ CREATE SEQUENCE IF NOT EXISTS d_categoria_id_categoria_seq;
 
 -- Table Definition
 CREATE TABLE "public"."d_categoria" (
-    "id_categoria" int4 NOT NULL DEFAULT nextval('d_categoria_id_categoria_seq'::regclass),
+    "id_categoria" bigint NOT NULL DEFAULT nextval('d_categoria_id_categoria_seq'::regclass),
     "nm_categoria" varchar UNIQUE,
     PRIMARY KEY ("id_categoria")
 );
@@ -82,11 +82,12 @@ CREATE SEQUENCE IF NOT EXISTS d_imagem_id_imagem_seq;
 
 -- Table Definition
 CREATE TABLE "public"."d_imagem" (
-    "id_imagem" int4 NOT NULL DEFAULT nextval('d_imagem_id_imagem_seq'::regclass),
+    "id_imagem" bigint NOT NULL DEFAULT nextval('d_imagem_id_imagem_seq'::regclass),
     "nm_url" varchar UNIQUE,
     "dt_imagem" timestamp,
     "de_titulo" varchar,
     "nm_tags" varchar,
+    "nu_distancia_focal" decimal NOT NULL,
     PRIMARY KEY ("id_imagem")
 );
 
@@ -95,11 +96,10 @@ DROP TABLE IF EXISTS "public"."f_foto";
 
 -- Table Definition
 CREATE TABLE "public"."f_foto" (
-    "id_camera" int8 NOT NULL,
-    "id_categoria" int8 NOT NULL,
-    "id_lente" int8 NOT NULL,
-    "id_imagem" int8 NOT NULL,
-    "nu_distancia_focal" decimal NOT NULL,
+    "id_camera" bigint NOT NULL,
+    "id_categoria" bigint NOT NULL,
+    "id_lente" bigint NOT NULL,
+    "id_imagem" bigint NOT NULL,
     PRIMARY KEY ("id_camera","id_categoria","id_lente","id_imagem")
 );
 ALTER TABLE "public"."f_foto"
@@ -123,7 +123,7 @@ CREATE SEQUENCE IF NOT EXISTS t_fotografias_id_fotografia_seq;
 
 -- Table Definition
 CREATE TABLE "public"."t_fotografias" (
-    "id_fotografia" int4 NOT NULL DEFAULT nextval('t_fotografias_id_fotografia_seq'::regclass),
+    "id_fotografia" bigint NOT NULL DEFAULT nextval('t_fotografias_id_fotografia_seq'::regclass),
     "de_titulo" varchar,
     "nm_url" varchar UNIQUE NOT NULL,
     "dt_coleta" timestamp,

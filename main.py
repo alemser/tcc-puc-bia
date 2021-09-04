@@ -8,8 +8,8 @@ import sys
 from threading import Thread
 import time
 
-def processar():
-    MAX_COUNT_PER_CATEGORY = 5000
+def processar(ler_categorias):
+    MAX_COUNT_PER_CATEGORY = 10000
     categoria_label_dict = {
         'Esporte': 'sports,olympics,football,soccer',
         'Casamento': 'wedding,bride,bridesmaid',
@@ -40,14 +40,14 @@ def processar():
     print("Processo finalizado")
 
 def main(argv):
-    ler_categorias = True
     if (len(argv) == 1):
         if argv[0] == 'csv':
             export_csv()
         else:
             print("Processar exif somente")
-            ler_categorias = False
-            processar()
+            processar(False)
+    else:
+        processar(True)
 
 if __name__ == '__main__':
     main(sys.argv[1:])
