@@ -41,7 +41,7 @@ Para iniciar o banco de dados execute:
 ```
 mkdir -p $HOME/docker/volumes/postgres
 docker pull postgres
-docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres
+docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -e POSTGRES_USER=postgres -d -p 6432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres
 ```
 
 #### Windows
