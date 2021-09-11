@@ -11,6 +11,7 @@ from threading import Thread
 import time
 import traceback
 from etl.constants import *
+from etl.fake_data import get_website, get_image_value, get_nu_copias
 
 PIL.Image.MAX_IMAGE_PIXELS = 933120000
 
@@ -41,58 +42,47 @@ class ExifWorker(Thread):
         Caso nao tenha informacao EXIF relevante, remove o regsitro da base"""
 
         record_count = 0
-        with psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST) as conn:
+        with psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT) as conn:
             with conn.cursor() as cur:
                 cur.execute("""SELECT id_fotografia, nm_url FROM t_fotografias WHERE fl_falha_exif = false AND fl_lido = false LIMIT 250""")
                 print('Processando {} records'.format(cur.rowcount))
                 for record in cur:
-                    # try:
-                    img = PIL.Image.open(requests.get(record[1], stream=True).raw)
-                    exif_data = img._getexif()
-                    if self.contem_relevante_exif_data(exif_data):
-                        self.atualizar_exif(record[0], exif_data)
-                    else:
-                        self.max_record_count = self.max_record_count - 1
-                        self.remover_sem_exif(record[0])
-                    # except Exception as e:
-                    #     print(e)
-                    #     self.marcar_como_falho(record[0])
+                    try:
+                        img = PIL.Image.open(requests.get(record[1], stream=True).raw)
+                        exif_data = img._getexif()
+                        if exif_data and self.contem_relevante_exif_data(exif_data):
+                            self.atualizar_exif(record[0], exif_data)
+                        else:
+                            self.max_record_count = self.max_record_count - 1
+                            self.remover_sem_exif(record[0])
+                    except Exception as e:
+                        print(e)
+                        self.marcar_como_falho(record[0])
         return record_count
 
     def check_remaining_size(self):
         count = 0
-        with psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST) as conn:
+        with psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT) as conn:
             with conn.cursor() as cur:
                 cur.execute("""select count(*) from t_fotografias where fl_lido = False and fl_falha_exif = False""")
                 count = cur.fetchone()[0]
         return count
 
     def remover_sem_exif(self, id_fotografia):
-        with psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST) as conn:
+        with psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT) as conn:
             with conn.cursor() as cur:
                 cur.execute("""DELETE FROM t_fotografias WHERE id_fotografia = %s""", [id_fotografia])
 
     def marcar_como_falho(self, id_fotografia):
-        with psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST) as conn:
+        with psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT) as conn:
             with conn.cursor() as cur:
                 cur.execute("""UPDATE t_fotografias SET fl_falha_exif = True WHERE id_fotografia = %s""", [id_fotografia])
 
     def atualizar_exif(self, id_fotografia, exif_data):
         """Atualiza os dados de EXIF para o registro de fotografia."""
 
-        print(self.parse_exif_date(exif_data))
-        print(self.tipo_lente(exif_data))
-        print(self.exif_from_dictNA(exif_data, 'LensModel'))
-        print(self.fabric_lente(exif_data))
-        print(self.decimal_exif(exif_data.get(self.exif_codes['FocalLength'])))
-        print(self.tipo_camera(exif_data))
-        print(self.exif_from_dictNA(exif_data, 'Model'))
-        print(self.exif_from_dictNA(exif_data, 'Make'))
-        print(self.decimal_exif(exif_data.get(self.exif_codes['FocalLengthIn35mmFilm'])))
-        print(self.flash(exif_data))
-        print(id_fotografia)
-
-        with psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST) as conn:
+        website = get_website()
+        with psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT) as conn:
             with conn.cursor() as cur:
                 cur.execute("""
                     UPDATE t_fotografias
@@ -107,23 +97,32 @@ class ExifWorker(Thread):
                         nm_fabric_camera = %s,
                         nu_dist_focal_35mmEq = %s,
                         fl_flash = %s,
-                        fl_lido = true
+                        fl_lido = true,
+                        vl_venda = %s,
+                        nm_website = %s,
+                        nm_url_website = %s,
+                        nu_copias = %s
                     WHERE id_fotografia = %s
                     """, (
                         datetime.datetime.now(),
                         self.parse_exif_date(exif_data),
                         self.tipo_lente(exif_data),
-                        self.exif_from_dictNA(exif_data, 'LensModel'),
+                        self.exif_from_dict_NA_if_null(exif_data, 'LensModel'),
                         self.fabric_lente(exif_data),
-                        self.decimal_exif(exif_data.get(self.exif_codes['FocalLength'])),
+                        self.get_focal_length(exif_data),
                         self.tipo_camera(exif_data),
-                        self.exif_from_dictNA(exif_data, 'Model'),
-                        self.exif_from_dictNA(exif_data, 'Make'),
-                        self.decimal_exif(exif_data.get(self.exif_codes['FocalLengthIn35mmFilm'])),
+                        self.exif_from_dict_NA_if_null(exif_data, 'Model'),
+                        self.exif_from_dict_NA_if_null(exif_data, 'Make'),
+                        self.get_focal_length_35mmEq(exif_data),
                         self.flash(exif_data),
+                        get_image_value(self.exif_from_dict_NA_if_null(exif_data, 'LensModel')),
+                        website,
+                        website.lower() + '.com',
+                        get_nu_copias(),
                         id_fotografia))
+        print("Exif processado para fotografia", id_fotografia)
 
-    def exif_from_dictNA(self, exif_data, exif_code):
+    def exif_from_dict_NA_if_null(self, exif_data, exif_code):
         value = self.exif_from_dict(exif_data, exif_code)
         return 'N/A' if not value else value.replace('\x00', '')
 
@@ -132,8 +131,12 @@ class ExifWorker(Thread):
             return None
         try:
             value = exif_data[self.exif_codes[exif_code]]
-            return value.replace('\x00', '') if value else None
-        except Exception:
+            if type(value) == int or type(value) == float:
+                return value if value else None
+            else:
+                return value.replace('\x00', '') if value else None
+        except Exception as e:
+            print(e)
             return None
 
     def flash(self, exif_data):
@@ -228,14 +231,14 @@ class ExifWorker(Thread):
 
         return 'N/A'
 
-    def decimal_exif(self, rational):
+    def decimal_exif(self, rational, default):
         try:
             value = str(rational)
             if value == 'None':
-                return None
+                return None if not default else default
             return value
         except Exception:
-            return None
+            return None if not default else default
 
     def parse_exif_date(self, exif_data):
         try:
@@ -243,8 +246,8 @@ class ExifWorker(Thread):
             if date:
                 return datetime.datetime.strptime(date, '%Y:%m:%d %H:%M:%S')
         except Exception:
-            print('Data invalida, data padrao sera usada')
-        return datetime.datetime.now() - datetime.timedelta(10000)
+            print('Data invalida, data de hoje sera usada')
+        return datetime.datetime.now()
 
     def tipo_lente(self, exif_data):
         lens_model = self.exif_from_dict(exif_data, 'LensModel')
@@ -254,5 +257,12 @@ class ExifWorker(Thread):
         return 'N/A'
 
     def contem_relevante_exif_data(self, exif_data):
-        value = self.exif_from_dict(exif_data, 'FocalLength')
-        return True if value else False
+        focal_lenght = self.get_focal_length(exif_data)
+        return True if focal_lenght else False
+
+    def get_focal_length(self, exif_data):
+        return self.decimal_exif(exif_data.get(self.exif_codes['FocalLength']), None)
+
+    def get_focal_length_35mmEq(self, exif_data):
+        focal_lenght = self.get_focal_length(exif_data)
+        return self.decimal_exif(exif_data.get(self.exif_codes['FocalLengthIn35mmFilm']), focal_lenght)

@@ -74,6 +74,38 @@ CREATE TABLE "public"."d_categoria" (
     PRIMARY KEY ("id_categoria")
 );
 
+
+DROP TABLE IF EXISTS "public"."d_loja" CASCADE;
+-- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
+
+-- Sequence and defined type
+CREATE SEQUENCE IF NOT EXISTS d_loja_id_loja_seq;
+
+-- Table Definition
+CREATE TABLE "public"."d_loja" (
+    "id_loja" bigint NOT NULL DEFAULT nextval('d_loja_id_loja_seq'::regclass),
+    "nm_loja" varchar UNIQUE,
+    "nm_url_site" varchar UNIQUE,
+    PRIMARY KEY ("id_loja")
+);
+
+DROP TABLE IF EXISTS "public"."d_tempo" CASCADE;
+-- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
+
+-- Sequence and defined type
+CREATE SEQUENCE IF NOT EXISTS d_tempo_id_tempo_seq;
+
+-- Table Definition
+CREATE TABLE "public"."d_tempo" (
+    "id_tempo" bigint NOT NULL DEFAULT nextval('d_tempo_id_tempo_seq'::regclass),
+    "nu_dia" int,
+    "nu_mes" int,
+    "nu_ano" int,
+    PRIMARY KEY ("id_tempo")
+);
+ALTER TABLE "public"."d_tempo"
+    ADD CONSTRAINT uniq_tempo UNIQUE (nu_dia, nu_mes, nu_ano);
+
 DROP TABLE IF EXISTS "public"."d_imagem" CASCADE;
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
 
@@ -87,7 +119,7 @@ CREATE TABLE "public"."d_imagem" (
     "dt_imagem" timestamp,
     "de_titulo" varchar,
     "nm_tags" varchar,
-    "nu_distancia_focal" decimal NOT NULL,
+    "nu_distancia_focal" decimal NOT NULL
     PRIMARY KEY ("id_imagem")
 );
 
@@ -100,6 +132,10 @@ CREATE TABLE "public"."f_foto" (
     "id_categoria" bigint NOT NULL,
     "id_lente" bigint NOT NULL,
     "id_imagem" bigint NOT NULL,
+    "id_loja" bigint NOT NULL,
+    "id_tempo" bigint NOT NULL,
+    "vl_imagem" decimal,
+    "nu_copias"int,
     PRIMARY KEY ("id_camera","id_categoria","id_lente","id_imagem")
 );
 ALTER TABLE "public"."f_foto"
@@ -114,6 +150,11 @@ ALTER TABLE "public"."f_foto"
 ALTER TABLE "public"."f_foto"
     ADD CONSTRAINT fk_foto_imagem FOREIGN KEY (id_imagem) REFERENCES "public"."d_imagem" (id_imagem);
 
+ALTER TABLE "public"."f_foto"
+    ADD CONSTRAINT fk_foto_loja FOREIGN KEY (id_loja) REFERENCES "public"."d_loja" (id_loja);
+
+ALTER TABLE "public"."f_foto"
+    ADD CONSTRAINT fk_foto_tempo FOREIGN KEY (id_tempo) REFERENCES "public"."d_tempo" (id_id_tempo);
 
 DROP TABLE IF EXISTS "public"."t_fotografias";
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
@@ -141,5 +182,9 @@ CREATE TABLE "public"."t_fotografias" (
     "fl_lido" bool DEFAULT false,
     "fl_falha_exif" bool DEFAULT false,
     "nu_dist_focal_35mmeq" numeric,
+    "vl_venda" decimal,
+    "nm_website" varchar,
+    "nm_url_website" varchar,
+    "nu_copias" int,
     PRIMARY KEY ("id_fotografia")
 );

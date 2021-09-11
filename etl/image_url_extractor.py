@@ -44,7 +44,7 @@ class ImageUrlExtractor():
         print(count, "URLs de imagens armazenadas para a categoria", self.category)
 
     def inserir_info_basica_bd(self, titulo, url, tags, categoria):
-        with psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST) as conn:
+        with psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT) as conn:
             with conn.cursor() as cur:
                 cur.execute("""
                     INSERT INTO t_fotografias (de_titulo, nm_url, nm_categoria_foto, nm_tags)

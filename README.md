@@ -64,7 +64,7 @@ Para instalar as bibliotecas requeridas execute:
 
 1. Crie as tabelas do modelo relacional e dimensional
 
-`python3 etl/create_tables.py`
+`python3 main.py preload`
 
 2. Execute o script de coleta de dados no Flickr e processamento do EXIF
 
@@ -107,9 +107,10 @@ Contém os scripts de extração, transformação e carga.
 * `image_url_extractor.py` varre a base de imagens do flickr e armazena dados básicos como a URL da imagem, titulo e tags.
 * `exif_worker.py` é uma thread que, a partir de uma URL de imagem, obtém dados de EXIF das mesmas e os armazena no BD.
 * `load_dw.py` é o script que popula a base de dados dimensional, o DWH.
-* `create_tables.py` é o script que cria as tabelas do modelo relcional e dimensional no banco de dados.
+* `create_tables.py` é o script que cria as tabelas do modelo relacional e dimensional no banco de dados.
 * `pre_load_db.py` é o script que pre-carrega a base com uma execução anterior da ETL. Ele permite experimentar um DW já
 com dados carregados de uma execução anterior.
+* `dw_csv.py` exporta o banco de dados para arquivos CSV (execute `python3 main.py csv` para gerar a qualquer momento).
 
 ### modelo
 

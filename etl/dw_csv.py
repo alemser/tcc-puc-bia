@@ -12,6 +12,8 @@ def export_csv():
     d_camera()
     d_lente()
     d_imagem()
+    d_loja()
+    d_tempo()
     f_foto()
     t_fotografia()
     print("Carregamento CSV completo")
@@ -52,6 +54,18 @@ def d_imagem():
         """
     _execute(sql, 'd_imagem')
 
+def d_loja():
+    sql = """
+        COPY (SELECT * FROM d_loja) TO STDOUT WITH CSV HEADER DELIMITER ',';
+        """
+    _execute(sql, 'd_loja')
+
+def d_tempo():
+    sql = """
+        COPY (SELECT * FROM d_tempo) TO STDOUT WITH CSV HEADER DELIMITER ',';
+        """
+    _execute(sql, 'd_tempo')
+
 def f_foto():
     sql = """
         COPY (SELECT * FROM f_foto) TO STDOUT WITH CSV HEADER DELIMITER ',';
@@ -65,7 +79,7 @@ def t_fotografia():
     _execute(sql, 't_fotografia')
 
 def _execute(sql, csv_file_name):
-    with psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST) as conn:
+    with psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT) as conn:
         with conn.cursor() as cur:
             with open('data/'+csv_file_name+'.csv', 'w+') as file:
                 cur.copy_expert(sql, file)
