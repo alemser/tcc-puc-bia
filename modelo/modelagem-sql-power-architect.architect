@@ -752,67 +752,67 @@
     </index>
    </folder>
   </table>
-  <table id="TAB211" populated="true" UUID="7bcccc1d-83cd-4b19-b495-aaa0dfdd0b7c" name="t_fotografias" objectType="TABLE" physicalName="t_fotografias" >
+  <table id="TAB211" populated="true" UUID="7bcccc1d-83cd-4b19-b495-aaa0dfdd0b7c" name="Fotografia" objectType="TABLE" physicalName="Fotografia" >
    <remarks></remarks>
    <folder id="FOLTAB2111" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL212" populated="true" UUID="df8dc286-bce9-4e47-bd11-8c5e121771f2" autoIncrement="true" autoIncrementSequenceName="t_fotografias_id_fotografia_seq" defaultValue="" name="id_fotografia" nullable="0" physicalName="id_fotografia" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+    <column id="COL212" populated="true" UUID="df8dc286-bce9-4e47-bd11-8c5e121771f2" autoIncrement="true" autoIncrementSequenceName="Fotografia_id_fotografia_seq" defaultValue="" name="ID" nullable="0" physicalName="ID" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
      <remarks></remarks>
     </column>
-    <column id="COL213" populated="true" UUID="7120bfac-a8ba-43b9-a935-d0aaec01b8b0" autoIncrement="false" autoIncrementSequenceName="t_fotografias_de_titulo_seq" defaultValue="" name="de_titulo" nullable="1" physicalName="de_titulo" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL213" populated="true" UUID="7120bfac-a8ba-43b9-a935-d0aaec01b8b0" autoIncrement="false" autoIncrementSequenceName="Fotografia_de_titulo_seq" defaultValue="" name="Descrição" nullable="1" physicalName="Descrição" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL214" populated="true" UUID="83ab4f13-bdeb-466a-84ca-47d1c4273adf" autoIncrement="false" autoIncrementSequenceName="t_fotografias_nm_url_seq" defaultValue="" name="nm_url" nullable="0" physicalName="nm_url" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL214" populated="true" UUID="83ab4f13-bdeb-466a-84ca-47d1c4273adf" autoIncrement="false" autoIncrementSequenceName="Fotografia_nm_url_seq" defaultValue="" name="Endereço Imagem" nullable="0" physicalName="Endereço Imagem" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL215" populated="true" UUID="18b0e7d0-b056-47a4-9fa8-9731d50c8261" autoIncrement="false" autoIncrementSequenceName="t_fotografias_dt_coleta_seq" defaultValue="" name="dt_coleta" nullable="0" physicalName="dt_coleta" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+    <column id="COL215" populated="true" UUID="18b0e7d0-b056-47a4-9fa8-9731d50c8261" autoIncrement="false" autoIncrementSequenceName="Fotografia_dt_coleta_seq" defaultValue="" name="Data Coleta" nullable="0" physicalName="Data Coleta" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
      <remarks></remarks>
     </column>
-    <column id="COL216" populated="true" UUID="d2e69b19-0a5c-4cde-bbaf-7b1033e173ad" autoIncrement="false" autoIncrementSequenceName="t_fotografias_tp_lente_seq" defaultValue="" name="tp_lente" nullable="1" physicalName="tp_lente" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL216" populated="true" UUID="d2e69b19-0a5c-4cde-bbaf-7b1033e173ad" autoIncrement="false" autoIncrementSequenceName="Fotografia_tp_lente_seq" defaultValue="" name="Tipo da Lente" nullable="1" physicalName="Tipo da Lente" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL217" populated="true" UUID="b413c1b0-124b-49c5-a188-2689e21ae9d7" autoIncrement="false" autoIncrementSequenceName="t_fotografias_nm_lente_seq" defaultValue="" name="nm_lente" nullable="1" physicalName="nm_lente" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL217" populated="true" UUID="b413c1b0-124b-49c5-a188-2689e21ae9d7" autoIncrement="false" autoIncrementSequenceName="Fotografia_nm_lente_seq" defaultValue="" name="Nome da Lente" nullable="1" physicalName="Nome da Lente" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL218" populated="true" UUID="1d92814f-4f2e-4251-bf5c-3d24cea106de" autoIncrement="false" autoIncrementSequenceName="t_fotografias_nm_fabric_lente_seq" defaultValue="" name="nm_fabric_lente" nullable="1" physicalName="nm_fabric_lente" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL218" populated="true" UUID="1d92814f-4f2e-4251-bf5c-3d24cea106de" autoIncrement="false" autoIncrementSequenceName="Fotografia_nm_fabric_lente_seq" defaultValue="" name="Fabricante da Lente" nullable="1" physicalName="Fabricante da Lente" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL219" populated="true" UUID="b1ff6f16-a31b-4e8c-9c81-619350f44389" autoIncrement="false" autoIncrementSequenceName="t_fotografias_nu_dist_focal_seq" defaultValue="" name="nu_dist_focal" nullable="0" physicalName="nu_dist_focal" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="3" userDefinedTypeUUID="cc1304ea-628a-4fc5-a84a-06ba14759152" >
+    <column id="COL219" populated="true" UUID="b1ff6f16-a31b-4e8c-9c81-619350f44389" autoIncrement="false" autoIncrementSequenceName="Fotografia_nu_dist_focal_seq" defaultValue="" name="Distância Focal" nullable="0" physicalName="Distância Focal" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="3" userDefinedTypeUUID="cc1304ea-628a-4fc5-a84a-06ba14759152" >
      <remarks></remarks>
     </column>
-    <column id="COL220" populated="true" UUID="89c3eb6f-4809-438a-9e3a-1b2a52ecb07c" autoIncrement="false" autoIncrementSequenceName="t_fotografias_tp_camera_seq" defaultValue="" name="tp_camera" nullable="1" physicalName="tp_camera" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL220" populated="true" UUID="89c3eb6f-4809-438a-9e3a-1b2a52ecb07c" autoIncrement="false" autoIncrementSequenceName="Fotografia_tp_camera_seq" defaultValue="" name="Tipo da Câmera" nullable="1" physicalName="Tipo da Câmera" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL221" populated="true" UUID="e2eea9f2-2712-438f-96d1-3bb81a03d84f" autoIncrement="false" autoIncrementSequenceName="t_fotografias_nm_camera_seq" defaultValue="" name="nm_camera" nullable="1" physicalName="nm_camera" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL221" populated="true" UUID="e2eea9f2-2712-438f-96d1-3bb81a03d84f" autoIncrement="false" autoIncrementSequenceName="Fotografia_nm_camera_seq" defaultValue="" name="Nome da Câmera" nullable="1" physicalName="Nome da Câmera" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL222" populated="true" UUID="bfe249e4-8b4f-4c30-bc2c-2f08b81b1d87" autoIncrement="false" autoIncrementSequenceName="t_fotografias_nm_fabric_camera_seq" defaultValue="" name="nm_fabric_camera" nullable="1" physicalName="nm_fabric_camera" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL222" populated="true" UUID="bfe249e4-8b4f-4c30-bc2c-2f08b81b1d87" autoIncrement="false" autoIncrementSequenceName="Fotografia_nm_fabric_camera_seq" defaultValue="" name="Fabricante da Câmera" nullable="1" physicalName="Fabricante da Câmera" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL223" populated="true" UUID="af2fecf2-9fda-4302-8f0d-4b8712f52338" autoIncrement="false" autoIncrementSequenceName="t_fotografias_nm_categoria_foto_seq" defaultValue="" name="nm_categoria_foto" nullable="1" physicalName="nm_categoria_foto" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL223" populated="true" UUID="af2fecf2-9fda-4302-8f0d-4b8712f52338" autoIncrement="false" autoIncrementSequenceName="Fotografia_nm_categoria_foto_seq" defaultValue="" name="Categoria" nullable="1" physicalName="Categoria" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL224" populated="true" UUID="baf1957f-98e5-4347-b6b5-39afb48361a8" autoIncrement="false" autoIncrementSequenceName="t_fotografias_fl_flash_seq" defaultValue="false" name="fl_flash" nullable="1" physicalName="fl_flash" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="16" userDefinedTypeUUID="a26374aa-3026-4bb8-b564-eb2e186dfa5d" >
+    <column id="COL224" populated="true" UUID="baf1957f-98e5-4347-b6b5-39afb48361a8" autoIncrement="false" autoIncrementSequenceName="Fotografia_fl_flash_seq" defaultValue="false" name="Flash" nullable="1" physicalName="Flash" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="16" userDefinedTypeUUID="a26374aa-3026-4bb8-b564-eb2e186dfa5d" >
      <remarks></remarks>
     </column>
-    <column id="COL225" populated="true" UUID="b4363cc4-f0a3-4ddc-89f5-17ee54f3e656" autoIncrement="false" autoIncrementSequenceName="t_fotografias_nm_tags_seq" defaultValue="" name="nm_tags" nullable="0" physicalName="nm_tags" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL225" populated="true" UUID="b4363cc4-f0a3-4ddc-89f5-17ee54f3e656" autoIncrement="false" autoIncrementSequenceName="Fotografia_nm_tags_seq" defaultValue="" name="Rótulos" nullable="0" physicalName="Rótulos" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL226" populated="true" UUID="0bb38304-4299-44ea-bdde-c0c9622c17f5" autoIncrement="false" autoIncrementSequenceName="t_fotografias_nu_dist_focal_35mmEq_seq" defaultValue="" name="nu_dist_focal_35mmEq" nullable="1" physicalName="nu_dist_focal_35mmEq" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="3" userDefinedTypeUUID="cc1304ea-628a-4fc5-a84a-06ba14759152" >
+    <column id="COL226" populated="true" UUID="0bb38304-4299-44ea-bdde-c0c9622c17f5" autoIncrement="false" autoIncrementSequenceName="Fotografia_nu_dist_focal_35mmEq_seq" defaultValue="" name="Distância Focal 35mm" nullable="1" physicalName="Distância Focal 35mm" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="3" userDefinedTypeUUID="cc1304ea-628a-4fc5-a84a-06ba14759152" >
      <remarks></remarks>
     </column>
-    <column id="COL227" populated="true" UUID="2b9290bd-a864-4e53-bee2-ffb9e7f123b4" autoIncrement="false" autoIncrementSequenceName="t_fotografias_fl_falha_exif_seq" defaultValue="false" name="fl_falha_exif" nullable="1" physicalName="fl_falha_exif" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="16" userDefinedTypeUUID="a26374aa-3026-4bb8-b564-eb2e186dfa5d" >
+    <column id="COL227" populated="true" UUID="2b9290bd-a864-4e53-bee2-ffb9e7f123b4" autoIncrement="false" autoIncrementSequenceName="Fotografia_fl_falha_exif_seq" defaultValue="false" name="Flag Falha Exif" nullable="1" physicalName="Flag Falha Exif" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="16" userDefinedTypeUUID="a26374aa-3026-4bb8-b564-eb2e186dfa5d" >
      <remarks></remarks>
     </column>
-    <column id="COL228" populated="true" UUID="e623ab49-b4c5-4635-9589-2e89aa68e8e6" autoIncrement="false" autoIncrementSequenceName="t_fotografias_nm_website_seq" defaultValue="" name="WebSite" nullable="1" physicalName="nm_website" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL228" populated="true" UUID="e623ab49-b4c5-4635-9589-2e89aa68e8e6" autoIncrement="false" autoIncrementSequenceName="Fotografia_nm_website_seq" defaultValue="" name="WebSite Loja" nullable="1" physicalName="nm_website" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL229" populated="true" UUID="3f9744bd-cee1-42d6-a967-4664b504487d" autoIncrement="false" autoIncrementSequenceName="t_fotografias_vl_venda_seq" defaultValue="" name="Valor venda" nullable="1" physicalName="vl_venda" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="3" userDefinedTypeUUID="cc1304ea-628a-4fc5-a84a-06ba14759152" >
+    <column id="COL229" populated="true" UUID="3f9744bd-cee1-42d6-a967-4664b504487d" autoIncrement="false" autoIncrementSequenceName="Fotografia_vl_venda_seq" defaultValue="" name="Valor venda" nullable="1" physicalName="vl_venda" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="3" userDefinedTypeUUID="cc1304ea-628a-4fc5-a84a-06ba14759152" >
      <remarks></remarks>
     </column>
-    <column id="COL230" populated="true" UUID="95f00377-9bd8-4ee5-9d76-12afd742b2ef" autoIncrement="false" autoIncrementSequenceName="t_fotografias_nm_url_website_seq" defaultValue="" name="Endereco WebSite" nullable="1" physicalName="nm_url_website" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL230" populated="true" UUID="95f00377-9bd8-4ee5-9d76-12afd742b2ef" autoIncrement="false" autoIncrementSequenceName="Fotografia_nm_url_website_seq" defaultValue="" name="Endereco WebSite" nullable="1" physicalName="nm_url_website" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL231" populated="true" UUID="dfc4216f-d6d7-49f0-94e2-b73b0f305311" autoIncrement="false" autoIncrementSequenceName="t_fotografias_nu_copias_seq" defaultValue="" name="Copias" nullable="1" physicalName="nu_copias" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL231" populated="true" UUID="dfc4216f-d6d7-49f0-94e2-b73b0f305311" autoIncrement="false" autoIncrementSequenceName="Fotografia_nu_copias_seq" defaultValue="" name="Copias" nullable="1" physicalName="nu_copias" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     </folder>
@@ -822,7 +822,7 @@
     </folder>
     <folder id="FOLTAB2114" populated="true" name="Indices" physicalName="Indices" type="4">
     <index id="IDX232" populated="true" UUID="0a2eff81-28ec-4d3a-a2e5-7d9a668dfe06" clustered="false" name="id_fotografias" physicalName="id_fotografias" primaryKeyIndex="true" unique="false" >
-     <index-column id="IDC233" populated="true" UUID="77267496-09db-4359-a5e1-c4b8b8460c57" ascendingOrDescending="UNSPECIFIED" column-ref="COL212" name="id_fotografia" physicalName="id_fotografia" />
+     <index-column id="IDC233" populated="true" UUID="77267496-09db-4359-a5e1-c4b8b8460c57" ascendingOrDescending="UNSPECIFIED" column-ref="COL212" name="ID" physicalName="ID" />
     </index>
    </folder>
   </table>
@@ -849,19 +849,28 @@
     </index>
    </folder>
   </table>
-  <table id="TAB240" populated="true" UUID="239b7bc7-ff43-423f-ab02-b8bb5686a468" name="New_Table" objectType="TABLE" physicalName="New_Table" >
+  <table id="TAB240" populated="true" UUID="239b7bc7-ff43-423f-ab02-b8bb5686a468" name="Tempo" objectType="TABLE" physicalName="d_tempo" >
    <remarks></remarks>
    <folder id="FOLTAB2401" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL241" populated="true" UUID="dc32c2b2-3f21-4566-a5a6-bf1ee7be02ab" autoIncrement="true" autoIncrementSequenceName="New_Table_id_tempo_seq" defaultValue="" name="Id" nullable="0" physicalName="id_tempo" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+    <column id="COL241" populated="true" UUID="dc32c2b2-3f21-4566-a5a6-bf1ee7be02ab" autoIncrement="true" autoIncrementSequenceName="d_tempo_id_tempo_seq" defaultValue="" name="Id" nullable="0" physicalName="id_tempo" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
      <remarks></remarks>
     </column>
-    <column id="COL242" populated="true" UUID="e736af27-7189-4969-8903-e6a4e613489b" autoIncrement="false" autoIncrementSequenceName="New_Table_nu_dia_seq" defaultValue="" name="Dia" nullable="0" physicalName="nu_dia" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL242" populated="true" UUID="e736af27-7189-4969-8903-e6a4e613489b" autoIncrement="false" autoIncrementSequenceName="d_tempo_nu_dia_seq" defaultValue="" name="Dia" nullable="0" physicalName="nu_dia" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL243" populated="true" UUID="ca7967c8-c422-4edd-8b74-a7b793903ce7" autoIncrement="false" autoIncrementSequenceName="New_Table_nu_mes_seq" defaultValue="" name="Mes" nullable="0" physicalName="nu_mes" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL243" populated="true" UUID="ca7967c8-c422-4edd-8b74-a7b793903ce7" autoIncrement="false" autoIncrementSequenceName="d_tempo_nu_mes_seq" defaultValue="" name="Mes" nullable="0" physicalName="nu_mes" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL244" populated="true" UUID="7ce581f7-4e6b-4eee-a332-d4e713184b82" autoIncrement="false" autoIncrementSequenceName="New_Table_nu_ano_seq" defaultValue="" name="Ano" nullable="0" physicalName="nu_ano" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL244" populated="true" UUID="7ce581f7-4e6b-4eee-a332-d4e713184b82" autoIncrement="false" autoIncrementSequenceName="d_tempo_nu_ano_seq" defaultValue="" name="Ano" nullable="0" physicalName="nu_ano" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL245" populated="true" UUID="b064f45c-4e44-4ebb-8046-2574f3dab91e" autoIncrement="false" autoIncrementSequenceName="d_tempo_nu_trimestre_seq" defaultValue="" name="Trimestre" nullable="0" physicalName="nu_trimestre" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL246" populated="true" UUID="92c7ed4b-4331-48b7-b692-9fc136c61b82" autoIncrement="false" autoIncrementSequenceName="d_tempo_nu_semestre_seq" defaultValue="" name="Semestre" nullable="0" physicalName="nu_semestre" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL247" populated="true" UUID="fab66ecc-9a5d-46a5-9f95-832683fcda75" autoIncrement="false" autoIncrementSequenceName="d_tempo_dt_tempo_seq" defaultValue="" name="Data" nullable="0" physicalName="dt_tempo" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="91" userDefinedTypeUUID="ee349be3-6af2-46e1-b305-975f5354b009" >
      <remarks></remarks>
     </column>
     </folder>
@@ -870,44 +879,44 @@
     <folder id="FOLTAB2402" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
     <folder id="FOLTAB2404" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX245" populated="true" UUID="7af96378-8629-4b74-a91c-0d3793b25ee0" clustered="false" name="New_Table_pk" physicalName="New_Table_pk" primaryKeyIndex="true" unique="false" >
-     <index-column id="IDC246" populated="true" UUID="92f32b5f-deea-45ff-a633-7dccb91297d8" ascendingOrDescending="UNSPECIFIED" column-ref="COL241" name="Id" physicalName="id_tempo" />
+    <index id="IDX248" populated="true" UUID="7af96378-8629-4b74-a91c-0d3793b25ee0" clustered="false" name="id_tempo" physicalName="New_Table_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC249" populated="true" UUID="92f32b5f-deea-45ff-a633-7dccb91297d8" ascendingOrDescending="UNSPECIFIED" column-ref="COL241" name="Id" physicalName="id_tempo" />
     </index>
    </folder>
   </table>
   <relationships>
-   <relationship id="REL247" populated="true" UUID="a79ac314-01e6-48d8-b86c-212066c66aff" deferrability="7" deleteRule="3" fk-table-ref="TAB185" fkCardinality="7" identifying="true" name="d_lente_f_foto_fk" physicalName="d_lente_f_foto_fk" pk-table-ref="TAB156" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP248" populated="true" UUID="92219967-089b-40cf-a51d-9d151484e9ed" fk-column-ref="COL187" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL157" />
+   <relationship id="REL250" populated="true" UUID="a79ac314-01e6-48d8-b86c-212066c66aff" deferrability="7" deleteRule="3" fk-table-ref="TAB185" fkCardinality="7" identifying="true" name="d_lente_f_foto_fk" physicalName="d_lente_f_foto_fk" pk-table-ref="TAB156" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP251" populated="true" UUID="92219967-089b-40cf-a51d-9d151484e9ed" fk-column-ref="COL187" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL157" />
    </relationship>
-   <relationship id="REL249" populated="true" UUID="2ec4d6ac-b609-4ae0-b5f2-b614a0108b21" deferrability="7" deleteRule="3" fk-table-ref="TAB156" fkCardinality="7" identifying="false" name="d_tipo_lente_d_lente_fk" physicalName="d_tipo_lente_d_lente_fk" pk-table-ref="TAB163" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP250" populated="true" UUID="10e1e256-fe11-4895-9219-0f27548f768b" fk-column-ref="COL160" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL164" />
+   <relationship id="REL252" populated="true" UUID="2ec4d6ac-b609-4ae0-b5f2-b614a0108b21" deferrability="7" deleteRule="3" fk-table-ref="TAB156" fkCardinality="7" identifying="false" name="d_tipo_lente_d_lente_fk" physicalName="d_tipo_lente_d_lente_fk" pk-table-ref="TAB163" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP253" populated="true" UUID="10e1e256-fe11-4895-9219-0f27548f768b" fk-column-ref="COL160" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL164" />
    </relationship>
-   <relationship id="REL251" populated="true" UUID="3b4ca52c-6155-410f-8d79-ea4e7a1ca3d3" deferrability="7" deleteRule="3" fk-table-ref="TAB185" fkCardinality="7" identifying="true" name="d_camera_f_foto_fk" physicalName="d_camera_f_foto_fk" pk-table-ref="TAB168" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP252" populated="true" UUID="547e64b2-78a1-49cc-8234-d5113baa7020" fk-column-ref="COL186" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL169" />
+   <relationship id="REL254" populated="true" UUID="3b4ca52c-6155-410f-8d79-ea4e7a1ca3d3" deferrability="7" deleteRule="3" fk-table-ref="TAB185" fkCardinality="7" identifying="true" name="d_camera_f_foto_fk" physicalName="d_camera_f_foto_fk" pk-table-ref="TAB168" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP255" populated="true" UUID="547e64b2-78a1-49cc-8234-d5113baa7020" fk-column-ref="COL186" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL169" />
    </relationship>
-   <relationship id="REL253" populated="true" UUID="b98168db-8004-40c9-a6bf-f63d57c706ba" deferrability="7" deleteRule="3" fk-table-ref="TAB168" fkCardinality="7" identifying="false" name="d_tipo_camera_d_camera_fk" physicalName="d_tipo_camera_d_camera_fk" pk-table-ref="TAB175" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP254" populated="true" UUID="d47b7845-4cc1-4285-9da8-7a2596d9fee2" fk-column-ref="COL172" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL176" />
+   <relationship id="REL256" populated="true" UUID="b98168db-8004-40c9-a6bf-f63d57c706ba" deferrability="7" deleteRule="3" fk-table-ref="TAB168" fkCardinality="7" identifying="false" name="d_tipo_camera_d_camera_fk" physicalName="d_tipo_camera_d_camera_fk" pk-table-ref="TAB175" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP257" populated="true" UUID="d47b7845-4cc1-4285-9da8-7a2596d9fee2" fk-column-ref="COL172" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL176" />
    </relationship>
-   <relationship id="REL255" populated="true" UUID="5bb578f0-9867-4d3f-b7b4-7d6af66c0abc" deferrability="7" deleteRule="3" fk-table-ref="TAB185" fkCardinality="7" identifying="true" name="d_categoria_f_venda_fk" physicalName="d_categoria_f_venda_fk" pk-table-ref="TAB180" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP256" populated="true" UUID="a9e19121-da90-4299-bf46-e5fd8f02d53e" fk-column-ref="COL191" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL181" />
+   <relationship id="REL258" populated="true" UUID="5bb578f0-9867-4d3f-b7b4-7d6af66c0abc" deferrability="7" deleteRule="3" fk-table-ref="TAB185" fkCardinality="7" identifying="true" name="d_categoria_f_venda_fk" physicalName="d_categoria_f_venda_fk" pk-table-ref="TAB180" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP259" populated="true" UUID="a9e19121-da90-4299-bf46-e5fd8f02d53e" fk-column-ref="COL191" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL181" />
    </relationship>
-   <relationship id="REL257" populated="true" UUID="0c915ed1-040e-486d-ad57-2b02473e667d" deferrability="7" deleteRule="3" fk-table-ref="TAB185" fkCardinality="7" identifying="true" name="d_imagem_f_foto_fk" physicalName="d_imagem_f_foto_fk" pk-table-ref="TAB201" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP258" populated="true" UUID="0156faf1-86de-4cbe-bb6f-d48520722d88" fk-column-ref="COL188" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL202" />
+   <relationship id="REL260" populated="true" UUID="0c915ed1-040e-486d-ad57-2b02473e667d" deferrability="7" deleteRule="3" fk-table-ref="TAB185" fkCardinality="7" identifying="true" name="d_imagem_f_foto_fk" physicalName="d_imagem_f_foto_fk" pk-table-ref="TAB201" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP261" populated="true" UUID="0156faf1-86de-4cbe-bb6f-d48520722d88" fk-column-ref="COL188" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL202" />
    </relationship>
-   <relationship id="REL259" populated="true" UUID="10f0c31d-d6e2-453d-8a54-4bd23689a23b" deferrability="7" deleteRule="3" fk-table-ref="TAB185" fkCardinality="7" identifying="true" name="d_loja_f_foto_fk" physicalName="d_loja_f_foto_fk" pk-table-ref="TAB234" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP260" populated="true" UUID="51dda7c9-54ca-4b30-be8a-00777b4bd5db" fk-column-ref="COL189" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL235" />
+   <relationship id="REL262" populated="true" UUID="10f0c31d-d6e2-453d-8a54-4bd23689a23b" deferrability="7" deleteRule="3" fk-table-ref="TAB185" fkCardinality="7" identifying="true" name="d_loja_f_foto_fk" physicalName="d_loja_f_foto_fk" pk-table-ref="TAB234" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP263" populated="true" UUID="51dda7c9-54ca-4b30-be8a-00777b4bd5db" fk-column-ref="COL189" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL235" />
    </relationship>
-   <relationship id="REL261" populated="true" UUID="a7a290eb-21ac-4298-a197-5de91dd50f2e" deferrability="7" deleteRule="3" fk-table-ref="TAB185" fkCardinality="7" identifying="true" name="New_Table_f_venda_fk" physicalName="New_Table_f_venda_fk" pk-table-ref="TAB240" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP262" populated="true" UUID="485be02b-d061-49e4-bf5b-f6b0f78dfdf6" fk-column-ref="COL190" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL241" />
+   <relationship id="REL264" populated="true" UUID="a7a290eb-21ac-4298-a197-5de91dd50f2e" deferrability="7" deleteRule="3" fk-table-ref="TAB185" fkCardinality="7" identifying="true" name="New_Table_f_venda_fk" physicalName="New_Table_f_venda_fk" pk-table-ref="TAB240" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP265" populated="true" UUID="485be02b-d061-49e4-bf5b-f6b0f78dfdf6" fk-column-ref="COL190" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL241" />
    </relationship>
   </relationships>
  </target-database>
  <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="true" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
- <play-pen zoom="1.189207115002721" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="false" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
+ <play-pen zoom="1.189207115002721" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
   <table-pane table-ref="TAB156" x="558" y="165" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-pane table-ref="TAB163" x="854" y="100" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB163" x="853" y="143" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB168" x="105" y="388" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB175" x="79" y="566" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB180" x="455" y="541" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
@@ -916,14 +925,14 @@
   <table-pane table-ref="TAB211" x="5" y="4" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB234" x="269" y="211" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB240" x="803" y="555" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-link relationship-ref="REL251" pkConnection="0.7473684210526316" fkConnection="0.36649214659685864" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="33"/>
-  <table-link relationship-ref="REL247" pkConnection="0.593103448275862" fkConnection="0.44285714285714284" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="132"/>
-  <table-link relationship-ref="REL253" pkConnection="0.2819548872180451" fkConnection="0.8270676691729323" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="72"/>
-  <table-link relationship-ref="REL249" pkConnection="0.36507936507936506" fkConnection="0.5675675675675675" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="18"/>
-  <table-link relationship-ref="REL257" pkConnection="0.6526315789473685" fkConnection="0.2094240837696335" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="18"/>
-  <table-link relationship-ref="REL259" pkConnection="0.9150943396226415" fkConnection="0.03937007874015748" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="132"/>
-  <table-link relationship-ref="REL261" pkConnection="0.2936802973977695" fkConnection="0.9637681159420289" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="72"/>
-  <table-link relationship-ref="REL255" pkConnection="0.5182186234817814" fkConnection="0.46062992125984253" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="72"/>
+  <table-link relationship-ref="REL254" pkConnection="0.7473684210526316" fkConnection="0.36649214659685864" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="33"/>
+  <table-link relationship-ref="REL250" pkConnection="0.593103448275862" fkConnection="0.44285714285714284" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="132"/>
+  <table-link relationship-ref="REL256" pkConnection="0.2819548872180451" fkConnection="0.8270676691729323" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="72"/>
+  <table-link relationship-ref="REL252" pkConnection="0.36507936507936506" fkConnection="0.5675675675675675" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="18"/>
+  <table-link relationship-ref="REL260" pkConnection="0.6526315789473685" fkConnection="0.2094240837696335" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="18"/>
+  <table-link relationship-ref="REL262" pkConnection="0.9150943396226415" fkConnection="0.03937007874015748" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="132"/>
+  <table-link relationship-ref="REL264" pkConnection="0.2936802973977695" fkConnection="0.9637681159420289" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="72"/>
+  <table-link relationship-ref="REL258" pkConnection="0.5182186234817814" fkConnection="0.46062992125984253" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="72"/>
  </play-pen>
  <critic-manager>
   <critic-grouping platformType="Generic" enabled="true">

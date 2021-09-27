@@ -101,10 +101,13 @@ CREATE TABLE "public"."d_tempo" (
     "nu_dia" int,
     "nu_mes" int,
     "nu_ano" int,
+    "nu_trimestre" int,
+    "nu_semestre" int,
+    "dt_tempo" date,
     PRIMARY KEY ("id_tempo")
 );
 ALTER TABLE "public"."d_tempo"
-    ADD CONSTRAINT uniq_tempo UNIQUE (nu_dia, nu_mes, nu_ano);
+    ADD CONSTRAINT uniq_tempo UNIQUE (nu_dia, nu_mes, nu_ano, nu_trimestre, nu_semestre);
 
 DROP TABLE IF EXISTS "public"."d_imagem" CASCADE;
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.

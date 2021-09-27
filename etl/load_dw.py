@@ -95,8 +95,19 @@ def d_loja():
 
 def d_tempo():
     sql = """
-        INSERT INTO d_tempo (nu_dia, nu_mes, nu_ano)
-        	SELECT extract(day from ft.dt_foto), extract(month from ft.dt_foto), extract(year from ft.dt_foto)
+        INSERT INTO d_tempo (nu_dia, nu_mes, nu_ano, nu_trimestre, nu_semestre, dt_tempo)
+        	SELECT extract(day from ft.dt_foto), extract(month from ft.dt_foto), extract(year from ft.dt_foto),
+            CASE
+                WHEN (extract(month from ft.dt_foto) >= 1 AND extract(month from ft.dt_foto) <=3) THEN 1
+                WHEN (extract(month from ft.dt_foto) >= 4 AND extract(month from ft.dt_foto) <=6) THEN 2
+                WHEN (extract(month from ft.dt_foto) >= 7 AND extract(month from ft.dt_foto) <=9) THEN 3
+                WHEN (extract(month from ft.dt_foto) >= 10 AND extract(month from ft.dt_foto) <=12) THEN 4
+            END as nu_tri,
+            CASE
+                WHEN (extract(month from ft.dt_foto) >= 1 AND extract(month from ft.dt_foto) <=6) THEN 1
+                WHEN (extract(month from ft.dt_foto) >= 7 AND extract(month from ft.dt_foto) <=12) THEN 2
+            END as nu_sem, 
+            ft.dt_foto
         	FROM t_fotografias ft
         	WHERE fl_lido = true
             ON CONFLICT DO NOTHING;
@@ -105,7 +116,7 @@ def d_tempo():
 
 
 def f_foto():
-    sql = "DELETE FROM f_foto"
+    sql = "DELETE FROM f_foto;"
     _execute(sql)
 
     sql = """
@@ -122,7 +133,7 @@ def f_foto():
             and tp.nu_mes = extract(month from ft.dt_foto)
             and tp.nu_ano = extract(year from ft.dt_foto)
     	WHERE fl_lido = true
-          and ft.tp_camera <> 'Unkown'
+          and ft.nu_dist_focal >= 14
         """
     _execute(sql)
 
