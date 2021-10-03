@@ -17,7 +17,7 @@
     <WorksheetBackgroundTransparency />
     <ZoneBackgroundTransparency />
   </document-format-change-manifest>
-  <repository-location id='AlessandroLemser-StoryDashboard' path='/workbooks' revision='1.0' />
+  <repository-location id='AlessandroLemser-TCC' path='/workbooks' revision='1.0' />
   <preferences>
     <preference name='ui.encoding.shelf.height' value='24' />
     <preference name='ui.shelf.height' value='26' />
@@ -868,6 +868,39 @@
         </metadata-records>
       </connection>
       <aliases enabled='yes' />
+      <column caption='Valor venda total' datatype='real' name='[Calculation_1365575873634709562]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([nu_copias]*[vl_imagem])' />
+      </column>
+      <column caption='Meta Setembro' datatype='integer' name='[Calculation_1365575873640288316]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='980000' />
+      </column>
+      <column caption='Percentual meta' datatype='real' name='[Calculation_1365575873643085890]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='[Calculation_1365575873634709562] / [Calculation_1365575873640288316]' />
+      </column>
+      <column caption='Meta &lt; 50%' datatype='real' name='[Calculation_1365575873643458627]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF [Calculation_1365575873643085890] &lt; .5 THEN [Calculation_1365575873643085890] ELSE .5 END' />
+      </column>
+      <column caption='Meta &lt; 50% 2' datatype='real' name='[Calculation_1365575873643688004]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF [Calculation_1365575873643085890] &lt; .5 THEN .5 - [Calculation_1365575873643085890] END' />
+      </column>
+      <column caption='Meta &gt; 50%' datatype='real' name='[Calculation_1365575873643933765]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF [Calculation_1365575873643085890] &gt; .5 THEN [Calculation_1365575873643085890] -.5 END' />
+      </column>
+      <column caption='Meta &gt; 50% 2' datatype='real' name='[Calculation_1365575873644228678]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF [Calculation_1365575873643085890] &gt; .5 THEN 1 - [Calculation_1365575873643085890] ELSE .5 END' />
+      </column>
+      <column caption='Fixo MIN 1' datatype='integer' name='[Calculation_1365575873644429383]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='MIN(1)' />
+      </column>
+      <column caption='Agulha1' datatype='real' name='[Calculation_1365575873644486728]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF [Calculation_1365575873643085890] &lt;= .5 THEN .005 END' />
+      </column>
+      <column caption='Agulha2' datatype='real' name='[Calculation_1365575873644593225]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF [Calculation_1365575873643085890] &gt; .5 THEN .005 END' />
+      </column>
+      <column caption='Dummy text' datatype='string' name='[Calculation_1365575873644695626]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='&apos;Dummy&apos;' />
+      </column>
       <column caption='UltimosTresAnos' datatype='boolean' name='[Calculation_726346199070920739]' role='dimension' type='nominal'>
         <calculation class='tableau' formula='[nu_ano] = 2021 or [nu_ano] = 2020 or [nu_ano] = 2019' />
       </column>
@@ -879,7 +912,7 @@
       <_.fcp.ObjectModelTableType.true...column caption='d_tempo.csv' datatype='table' name='[__tableau_internal_object_id__].[d_tempo.csv_0A0743C7180C4F77B23423A1A7EDF41B]' role='measure' type='quantitative' />
       <_.fcp.ObjectModelTableType.true...column caption='d_tipo_camera.csv' datatype='table' name='[__tableau_internal_object_id__].[d_tipo_camera.csv_F12027B0A51343CDBFE63D5D7184CF2A]' role='measure' type='quantitative' />
       <_.fcp.ObjectModelTableType.true...column caption='d_tipo_lente.csv' datatype='table' name='[__tableau_internal_object_id__].[d_tipo_lente.csv_7FEAA15D358B4E0C861B8089CCB09270]' role='measure' type='quantitative' />
-      <_.fcp.ObjectModelTableType.true...column caption='f_foto.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='f_venda.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
       <column caption='Data' datatype='date' name='[dt_tempo]' role='dimension' type='ordinal' />
       <column caption='Id Camera (D Camera.Csv)' datatype='integer' name='[id_camera (d_camera.csv)]' role='dimension' type='ordinal' />
       <column datatype='integer' name='[id_camera]' role='dimension' type='ordinal' />
@@ -913,7 +946,16 @@
       <column aggregation='Sum' caption='Semestre' datatype='integer' name='[nu_semestre]' role='dimension' type='ordinal' />
       <column aggregation='Sum' caption='Trimestre' datatype='integer' name='[nu_trimestre]' role='dimension' type='ordinal' />
       <column caption='Valor venda' datatype='real' name='[vl_imagem]' role='measure' type='quantitative' />
+      <column-instance column='[__tableau_internal_object_id__].[d_camera.csv_EF48F541582C4E4D801A3334BC2CA0EA]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:d_camera.csv_EF48F541582C4E4D801A3334BC2CA0EA:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[__tableau_internal_object_id__].[d_categoria.csv_9286A74F73344504825330708FB88C99]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:d_categoria.csv_9286A74F73344504825330708FB88C99:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[__tableau_internal_object_id__].[d_imagem.csv_0BC0FDCFAED244868243B7735163D67C]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:d_imagem.csv_0BC0FDCFAED244868243B7735163D67C:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[__tableau_internal_object_id__].[d_lente.csv_5E600D6377824BD59B28E094129B76B6]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:d_lente.csv_5E600D6377824BD59B28E094129B76B6:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[__tableau_internal_object_id__].[d_loja.csv_29A4119532494ABAA7860D6B24BDFA97]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:d_loja.csv_29A4119532494ABAA7860D6B24BDFA97:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[__tableau_internal_object_id__].[d_tempo.csv_0A0743C7180C4F77B23423A1A7EDF41B]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:d_tempo.csv_0A0743C7180C4F77B23423A1A7EDF41B:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[__tableau_internal_object_id__].[d_tipo_camera.csv_F12027B0A51343CDBFE63D5D7184CF2A]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:d_tipo_camera.csv_F12027B0A51343CDBFE63D5D7184CF2A:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[__tableau_internal_object_id__].[d_tipo_lente.csv_7FEAA15D358B4E0C861B8089CCB09270]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:d_tipo_lente.csv_7FEAA15D358B4E0C861B8089CCB09270:qk]' pivot='key' type='quantitative' />
       <column-instance column='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation_1365575873644695626]' derivation='None' name='[none:Calculation_1365575873644695626:nk]' pivot='key' type='nominal' />
       <column-instance column='[nm_categoria]' derivation='None' name='[none:nm_categoria:nk]' pivot='key' type='nominal' />
       <column-instance column='[nm_loja]' derivation='None' name='[none:nm_loja:nk]' pivot='key' type='nominal' />
       <column-instance column='[nm_tipo_camera]' derivation='None' name='[none:nm_tipo_camera:nk]' pivot='key' type='nominal' />
@@ -921,6 +963,15 @@
       <column-instance column='[nu_ano]' derivation='Sum' name='[sum:nu_ano:qk]' pivot='key' type='quantitative' />
       <column-instance column='[nu_copias]' derivation='Sum' name='[sum:nu_copias:qk]' pivot='key' type='quantitative' />
       <column-instance column='[vl_imagem]' derivation='Sum' name='[sum:vl_imagem:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation_1365575873634709562]' derivation='User' name='[usr:Calculation_1365575873634709562:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation_1365575873643085890]' derivation='User' name='[usr:Calculation_1365575873643085890:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation_1365575873643458627]' derivation='User' name='[usr:Calculation_1365575873643458627:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation_1365575873643688004]' derivation='User' name='[usr:Calculation_1365575873643688004:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation_1365575873643933765]' derivation='User' name='[usr:Calculation_1365575873643933765:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation_1365575873644228678]' derivation='User' name='[usr:Calculation_1365575873644228678:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation_1365575873644429383]' derivation='User' name='[usr:Calculation_1365575873644429383:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation_1365575873644486728]' derivation='User' name='[usr:Calculation_1365575873644486728:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation_1365575873644593225]' derivation='User' name='[usr:Calculation_1365575873644593225:qk]' pivot='key' type='quantitative' />
       <group caption='Action (Categoria)' hidden='true' name='[Action (Categoria)]' name-style='unqualified' user:auto-column='sheet_link'>
         <groupfilter function='crossjoin'>
           <groupfilter function='level-members' level='[nm_categoria]' />
@@ -1562,6 +1613,45 @@
       <style>
         <style-rule element='mark'>
           <encoding attr='color' field='[:Measure Names]' type='palette'>
+            <map to='#000000'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873538932790:qk]&quot;</bucket>
+            </map>
+            <map to='#000000'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873539035191:qk]&quot;</bucket>
+            </map>
+            <map to='#000000'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873644486728:qk]&quot;</bucket>
+            </map>
+            <map to='#000000'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873644593225:qk]&quot;</bucket>
+            </map>
+            <map to='#0000ff'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873538261041:qk]&quot;</bucket>
+            </map>
+            <map to='#0000ff'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873538707507:qk]&quot;</bucket>
+            </map>
+            <map to='#0000ff'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873643458627:qk]&quot;</bucket>
+            </map>
+            <map to='#0000ff'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873643933765:qk]&quot;</bucket>
+            </map>
+            <map to='#0a0303'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873528115234:qk]&quot;</bucket>
+            </map>
+            <map to='#0b0404'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873527980065:qk]&quot;</bucket>
+            </map>
+            <map to='#19ac09'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873527144479:qk]&quot;</bucket>
+            </map>
+            <map to='#1ba30b'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873526726685:qk]&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[__tableau_internal_object_id__].[cnt:d_tipo_lente.csv_7FEAA15D358B4E0C861B8089CCB09270:qk]&quot;</bucket>
+            </map>
             <map to='#4e79a7'>
               <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk]&quot;</bucket>
             </map>
@@ -1575,6 +1665,9 @@
               <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:Calculation_1365575873287528450:qk]&quot;</bucket>
             </map>
             <map to='#4e79a7'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[sum:Calculation_1365575873525211162:qk]&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
               <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[sum:nu_ano:qk]&quot;</bucket>
             </map>
             <map to='#4e79a7'>
@@ -1586,11 +1679,68 @@
             <map to='#4e79a7'>
               <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873288708101:qk]&quot;</bucket>
             </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873536741423:qk]&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873641816129:qk]&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[__tableau_internal_object_id__].[cnt:d_tipo_camera.csv_F12027B0A51343CDBFE63D5D7184CF2A:qk]&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873649483851:qk]&quot;</bucket>
+            </map>
+            <map to='#7b848f'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873526980638:qk]&quot;</bucket>
+            </map>
+            <map to='#7b848f'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873527672864:qk]&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[__tableau_internal_object_id__].[cnt:d_loja.csv_29A4119532494ABAA7860D6B24BDFA97:qk]&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[__tableau_internal_object_id__].[cnt:d_categoria.csv_9286A74F73344504825330708FB88C99:qk]&quot;</bucket>
+            </map>
+            <map to='#a9a9a9'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873538818100:qk]&quot;</bucket>
+            </map>
+            <map to='#afafaf'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873538478130:qk]&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[__tableau_internal_object_id__].[cnt:d_imagem.csv_0BC0FDCFAED244868243B7735163D67C:qk]&quot;</bucket>
+            </map>
+            <map to='#cccccc'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873643688004:qk]&quot;</bucket>
+            </map>
+            <map to='#cccccc'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873644228678:qk]&quot;</bucket>
+            </map>
             <map to='#e15759'>
               <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[sum:Calculation_726346199003566101:qk]&quot;</bucket>
             </map>
             <map to='#e15759'>
               <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[sum:vl_imagem:qk]&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873517907982:qk]&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873523527695:qk]&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873523765264:qk]&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873532362789:qk]&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873544753209:qk]&quot;</bucket>
             </map>
             <map to='#e15759'>
               <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_726346198777499663:qk]&quot;</bucket>
@@ -1619,6 +1769,12 @@
             <map to='#e15759'>
               <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_90564590530048002:qk]&quot;</bucket>
             </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[__tableau_internal_object_id__].[cnt:d_lente.csv_5E600D6377824BD59B28E094129B76B6:qk]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[sum:Calculation_1365575873525198872:qk]&quot;</bucket>
+            </map>
             <map to='#f28e2b'>
               <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[sum:nu_copias:qk]&quot;</bucket>
             </map>
@@ -1645,6 +1801,33 @@
             </map>
             <map to='#f28e2b'>
               <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873291689997:qk]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873536741423:qk]:1&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873641791551:qk]&quot;</bucket>
+            </map>
+            <map to='#fdf9fa'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873526472732:qk]&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[__tableau_internal_object_id__].[cnt:d_tempo.csv_0A0743C7180C4F77B23423A1A7EDF41B:qk]&quot;</bucket>
+            </map>
+            <map to='#ff9da7'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873525833755:qk]&quot;</bucket>
+            </map>
+            <map to='#ff9da7'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873643085890:qk]&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[__tableau_internal_object_id__].[cnt:d_camera.csv_EF48F541582C4E4D801A3334BC2CA0EA:qk]&quot;</bucket>
+            </map>
+            <map to='#ffffff'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873538887733:qk]&quot;</bucket>
+            </map>
+            <map to='#ffffff'>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873644429383:qk]&quot;</bucket>
             </map>
           </encoding>
           <encoding attr='color' field='[none:nm_tipo_camera:nk]' type='palette'>
@@ -1684,6 +1867,9 @@
             <map to='#4e79a7'>
               <bucket>&quot;Casamento&quot;</bucket>
             </map>
+            <map to='#59a14f'>
+              <bucket>%null%</bucket>
+            </map>
             <map to='#76b7b2'>
               <bucket>&quot;Retratos&quot;</bucket>
             </map>
@@ -1692,6 +1878,67 @@
             </map>
             <map to='#f28e2b'>
               <bucket>&quot;Esporte&quot;</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[none:nm_loja:nk]&#10;[:Measure Names]' type='palette'>
+            <map-pri to='multiordinal_blue_10_0'>
+              <bucket>&quot;AdoreStock&quot;</bucket>
+            </map-pri>
+            <map-pri to='multiordinal_green_10_0'>
+              <bucket>&quot;ShelterStock&quot;</bucket>
+            </map-pri>
+            <map-pri to='multiordinal_orange_10_0'>
+              <bucket>&quot;FlickrBuy&quot;</bucket>
+            </map-pri>
+          </encoding>
+          <encoding attr='color' field='[:Measure Names]&#10;[none:Calculation_1365575873644695626:nk]' type='palette'>
+            <map to='#000000'>
+              <multibucket>
+                <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873644486728:qk]&quot;</bucket>
+                <bucket>&quot;Dummy&quot;</bucket>
+              </multibucket>
+            </map>
+            <map to='#000000'>
+              <multibucket>
+                <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873644593225:qk]&quot;</bucket>
+                <bucket>&quot;Dummy&quot;</bucket>
+              </multibucket>
+            </map>
+            <map to='#ff9da7'>
+              <multibucket>
+                <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873643085890:qk]&quot;</bucket>
+                <bucket>&quot;Dummy&quot;</bucket>
+              </multibucket>
+            </map>
+            <map to='#ffffff'>
+              <multibucket>
+                <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873643458627:qk]&quot;</bucket>
+                <bucket>&quot;Dummy&quot;</bucket>
+              </multibucket>
+            </map>
+            <map to='#ffffff'>
+              <multibucket>
+                <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873643688004:qk]&quot;</bucket>
+                <bucket>&quot;Dummy&quot;</bucket>
+              </multibucket>
+            </map>
+            <map to='#ffffff'>
+              <multibucket>
+                <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873643933765:qk]&quot;</bucket>
+                <bucket>&quot;Dummy&quot;</bucket>
+              </multibucket>
+            </map>
+            <map to='#ffffff'>
+              <multibucket>
+                <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873644228678:qk]&quot;</bucket>
+                <bucket>&quot;Dummy&quot;</bucket>
+              </multibucket>
+            </map>
+            <map to='#ffffff'>
+              <multibucket>
+                <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873644429383:qk]&quot;</bucket>
+                <bucket>&quot;Dummy&quot;</bucket>
+              </multibucket>
             </map>
           </encoding>
         </style-rule>
@@ -1820,7 +2067,7 @@
               <relation name='d_tipo_lente.csv_7FEAA15D358B4E0C861B8089CCB09270' table='[Extract].[d_tipo_lente.csv_7FEAA15D358B4E0C861B8089CCB09270]' type='table' />
             </properties>
           </object>
-          <object caption='f_foto.csv' id='f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA'>
+          <object caption='f_venda.csv' id='f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA'>
             <properties context=''>
               <relation connection='textscan.0kykkin0bga2su1e5jz3e0fog440' name='f_foto.csv' table='[f_foto#csv]' type='table'>
                 <columns character-set='UTF-8' header='yes' locale='en_IE' separator=','>
@@ -1914,6 +2161,7 @@
       <activation auto-clear='true' type='on-select' />
       <source dashboard='Painel Estratégico' type='sheet' worksheet='Categoria mais vendida - 2021' />
       <command command='tsc:tsl-filter'>
+        <param name='exclude' value='Meta 2021' />
         <param name='special-fields' value='all' />
         <param name='target' value='Painel Estratégico' />
       </command>
@@ -1922,6 +2170,7 @@
       <activation auto-clear='true' type='on-select' />
       <source dashboard='Painel Estratégico' type='sheet' worksheet='Vendas por loja 2021' />
       <command command='tsc:tsl-filter'>
+        <param name='exclude' value='Meta 2021' />
         <param name='special-fields' value='all' />
         <param name='target' value='Painel Estratégico' />
       </command>
@@ -1932,7 +2181,7 @@
       <layout-options>
         <title>
           <formatted-text>
-            <run>Das categorias relevantes para o negócio, vemos que esporte teve o maior número de cópias e valor total</run>
+            <run>Performance por categoria - acumulado</run>
           </formatted-text>
         </title>
       </layout-options>
@@ -1942,129 +2191,133 @@
             <datasource caption='f_foto.csv+ (Multiple Connections)' name='federated.0ahvwmh0pdid8y1a01mgf0umxna2' />
           </datasources>
           <datasource-dependencies datasource='federated.0ahvwmh0pdid8y1a01mgf0umxna2'>
-            <column caption='SUM(Copias * [Valor venda])' datatype='real' name='[Calculation_726346198781521936]' role='measure' type='quantitative' user:unnamed='Categoria mais vendida - 2021'>
-              <calculation class='tableau' formula='SUM([nu_copias] * [vl_imagem])' />
+            <column caption='Valor venda total' datatype='real' name='[Calculation_1365575873634709562]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([nu_copias]*[vl_imagem])' />
             </column>
             <column caption='Categoria' datatype='string' name='[nm_categoria]' role='dimension' type='nominal' />
             <column caption='Loja' datatype='string' name='[nm_loja]' role='dimension' type='nominal' />
             <column-instance column='[nm_categoria]' derivation='None' name='[none:nm_categoria:nk]' pivot='key' type='nominal' />
+            <column-instance column='[nu_ano]' derivation='None' name='[none:nu_ano:ok]' pivot='key' type='ordinal' />
             <column aggregation='Sum' caption='Ano' datatype='integer' name='[nu_ano]' role='dimension' type='ordinal' />
             <column caption='Copias' datatype='integer' name='[nu_copias]' role='measure' type='quantitative' />
-            <column-instance column='[nu_copias]' derivation='Sum' name='[sum:nu_copias:qk]' pivot='key' type='quantitative' />
-            <column-instance column='[Calculation_726346198781521936]' derivation='User' name='[usr:Calculation_726346198781521936:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1365575873634709562]' derivation='User' name='[usr:Calculation_1365575873634709562:qk]' pivot='key' type='quantitative' />
             <column caption='Valor venda' datatype='real' name='[vl_imagem]' role='measure' type='quantitative' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Loja)]'>
             <groupfilter function='level-members' level='[nm_loja]' user:ui-action-filter='[Action2]' user:ui-enumeration='all' user:ui-marker='enumerate' />
           </filter>
-          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Loja,Ano)]'>
-            <groupfilter function='crossjoin' user:ui-action-filter='[Action2]' user:ui-enumeration='all' user:ui-marker='enumerate'>
-              <groupfilter function='level-members' level='[nm_loja]' />
-              <groupfilter function='level-members' level='[nu_ano]' />
-            </groupfilter>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]'>
+            <groupfilter function='member' level='[none:nu_ano:ok]' member='2021' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <slices>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]</column>
             <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Loja)]</column>
-            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Loja,Ano)]</column>
           </slices>
           <aggregation value='true' />
         </view>
         <style>
-          <style-rule element='axis'>
-            <format attr='title' class='0' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_726346198781521936:qk]' scope='cols' value='Valor total' />
+          <style-rule element='cell'>
+            <format attr='text-format' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]' value='C6153%' />
           </style-rule>
         </style>
         <panes>
-          <pane selection-relaxation-option='selection-relaxation-allow'>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow'>
             <view>
               <breakdown value='auto' />
             </view>
             <mark class='Automatic' />
-          </pane>
-          <pane id='1' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[sum:nu_copias:qk]'>
-            <view>
-              <breakdown value='auto' />
-            </view>
-            <mark class='Automatic' />
-          </pane>
-          <pane id='2' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_726346198781521936:qk]'>
-            <view>
-              <breakdown value='auto' />
-            </view>
-            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]' />
+            </encodings>
+            <customized-tooltip>
+              <formatted-text />
+            </customized-tooltip>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
           </pane>
         </panes>
         <rows>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_categoria:nk]</rows>
-        <cols>([federated.0ahvwmh0pdid8y1a01mgf0umxna2].[sum:nu_copias:qk] + [federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_726346198781521936:qk])</cols>
+        <cols>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]</cols>
       </table>
       <simple-id uuid='{8A96611C-5E8F-4901-9204-E212FF8A2842}' />
     </worksheet>
-    <worksheet name='Compras por loja 2021'>
+    <worksheet name='Categoria mais vendida - Setembro'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Performance por categoria - Setembro</run>
+          </formatted-text>
+        </title>
+      </layout-options>
       <table>
         <view>
           <datasources>
             <datasource caption='f_foto.csv+ (Multiple Connections)' name='federated.0ahvwmh0pdid8y1a01mgf0umxna2' />
           </datasources>
           <datasource-dependencies datasource='federated.0ahvwmh0pdid8y1a01mgf0umxna2'>
-            <_.fcp.ObjectModelTableType.false...column caption='f_foto.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
-            <column-instance column='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk]' pivot='key' type='quantitative' />
-            <_.fcp.ObjectModelTableType.true...column caption='f_foto.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <column caption='Valor venda total' datatype='real' name='[Calculation_1365575873634709562]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([nu_copias]*[vl_imagem])' />
+            </column>
             <column caption='Categoria' datatype='string' name='[nm_categoria]' role='dimension' type='nominal' />
             <column caption='Loja' datatype='string' name='[nm_loja]' role='dimension' type='nominal' />
-            <column-instance column='[nm_loja]' derivation='None' name='[none:nm_loja:nk]' pivot='key' type='nominal' />
+            <column-instance column='[nm_categoria]' derivation='None' name='[none:nm_categoria:nk]' pivot='key' type='nominal' />
+            <column-instance column='[nu_ano]' derivation='None' name='[none:nu_ano:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[nu_mes]' derivation='None' name='[none:nu_mes:ok]' pivot='key' type='ordinal' />
             <column aggregation='Sum' caption='Ano' datatype='integer' name='[nu_ano]' role='dimension' type='ordinal' />
+            <column caption='Copias' datatype='integer' name='[nu_copias]' role='measure' type='quantitative' />
+            <column aggregation='Sum' caption='Mês' datatype='integer' name='[nu_mes]' role='dimension' type='ordinal' />
+            <column-instance column='[Calculation_1365575873634709562]' derivation='User' name='[usr:Calculation_1365575873634709562:qk]' pivot='key' type='quantitative' />
+            <column caption='Valor venda' datatype='real' name='[vl_imagem]' role='measure' type='quantitative' />
           </datasource-dependencies>
-          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Categoria)]'>
-            <groupfilter function='member' level='[nm_categoria]' member='&quot;Retratos&quot;' user:ui-action-filter='[Action1]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Loja)]'>
+            <groupfilter function='level-members' level='[nm_loja]' user:ui-action-filter='[Action2]' user:ui-enumeration='all' user:ui-marker='enumerate' />
           </filter>
-          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Loja,Ano)]'>
-            <groupfilter function='reorder-dimensionality' user:ui-action-filter='[Action2]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
-              <groupfilter function='crossjoin'>
-                <groupfilter function='member' level='[nu_ano]' member='2021' />
-                <groupfilter function='union'>
-                  <groupfilter function='member' level='[nm_loja]' member='&quot;AdoreStock&quot;' />
-                  <groupfilter function='member' level='[nm_loja]' member='&quot;FlickrBuy&quot;' />
-                  <groupfilter function='member' level='[nm_loja]' member='&quot;ShelterStock&quot;' />
-                </groupfilter>
-              </groupfilter>
-              <order>
-                <hierarchy name='[nm_loja]' />
-                <hierarchy name='[nu_ano]' />
-              </order>
-            </groupfilter>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]'>
+            <groupfilter function='member' level='[none:nu_ano:ok]' member='2021' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_mes:ok]'>
+            <groupfilter function='member' level='[none:nu_mes:ok]' member='9' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <slices>
-            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Categoria)]</column>
-            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Loja,Ano)]</column>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]</column>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_mes:ok]</column>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Loja)]</column>
           </slices>
           <aggregation value='true' />
         </view>
         <style>
-          <style-rule element='axis'>
-            <format attr='title' class='0' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk]' scope='cols' value='Quantidade' />
+          <style-rule element='cell'>
+            <format attr='text-format' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]' value='C1046%' />
           </style-rule>
         </style>
         <panes>
-          <pane selection-relaxation-option='selection-relaxation-allow'>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow'>
             <view>
               <breakdown value='auto' />
             </view>
             <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]' />
+            </encodings>
             <customized-tooltip>
-              <formatted-text>
-                <run fontcolor='#787878'>Loja:&#9;</run>
-                <run bold='true'><![CDATA[<[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_loja:nk]>]]></run>
-                <run>Æ&#10;</run>
-                <run fontcolor='#787878'>Quantidade:&#9;</run>
-                <run bold='true'><![CDATA[<[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk]>]]></run>
-              </formatted-text>
+              <formatted-text />
             </customized-tooltip>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
           </pane>
         </panes>
-        <rows>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_loja:nk]</rows>
-        <cols>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk]</cols>
+        <rows>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_categoria:nk]</rows>
+        <cols>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]</cols>
       </table>
-      <simple-id uuid='{E328F76B-6917-4B3E-9381-C8BE35416F2F}' />
+      <simple-id uuid='{23D53F65-9317-4183-9160-A683C3DB022A}' />
     </worksheet>
     <worksheet name='Distância focal mais utilizada por categoria'>
       <layout-options>
@@ -2083,9 +2336,9 @@
             <column caption='STR([Distância focal])+&quot;mm&quot;' datatype='string' name='[Calculation_1660983850041741315]' role='dimension' type='nominal' user:unnamed='Sheet 1'>
               <calculation class='tableau' formula='STR([nu_distancia_focal])+&quot;mm&quot;' />
             </column>
-            <_.fcp.ObjectModelTableType.false...column caption='f_foto.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.false...column caption='f_venda.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column-instance column='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk]' pivot='key' type='quantitative' />
-            <_.fcp.ObjectModelTableType.true...column caption='f_foto.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.true...column caption='f_venda.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column caption='Categoria' datatype='string' name='[nm_categoria]' role='dimension' type='nominal' />
             <column-instance column='[Calculation_1660983850041741315]' derivation='None' name='[none:Calculation_1660983850041741315:nk]' pivot='key' type='nominal' />
             <column-instance column='[nm_categoria]' derivation='None' name='[none:nm_categoria:nk]' pivot='key' type='nominal' />
@@ -2166,126 +2419,91 @@
             <datasource caption='f_foto.csv+ (Multiple Connections)' name='federated.0ahvwmh0pdid8y1a01mgf0umxna2' />
           </datasources>
           <datasource-dependencies datasource='federated.0ahvwmh0pdid8y1a01mgf0umxna2'>
-            <column caption='SUM(Copias * [Valor venda])' datatype='real' name='[Calculation_726346199006961688]' role='measure' type='quantitative' user:unnamed='Evolução categorias'>
-              <calculation class='tableau' formula='SUM([nu_copias] * [vl_imagem])' />
+            <column caption='Valor venda total' datatype='real' name='[Calculation_1365575873634709562]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([nu_copias]*[vl_imagem])' />
             </column>
             <column caption='UltimosTresAnos' datatype='boolean' name='[Calculation_726346199070920739]' role='dimension' type='nominal'>
               <calculation class='tableau' formula='[nu_ano] = 2021 or [nu_ano] = 2020 or [nu_ano] = 2019' />
             </column>
-            <column caption='SUM([Copias]*[Valor venda])' datatype='real' name='[Calculation_726346199072210980]' role='measure' type='quantitative' user:unnamed='Evolução categorias'>
-              <calculation class='tableau' formula='SUM([nu_copias]*[vl_imagem])' />
-            </column>
-            <_.fcp.ObjectModelTableType.false...column caption='f_foto.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
-            <column-instance column='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk]' pivot='key' type='quantitative' />
-            <_.fcp.ObjectModelTableType.true...column caption='f_foto.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column caption='Data' datatype='date' name='[dt_tempo]' role='dimension' type='ordinal' />
+            <column-instance column='[dt_tempo]' derivation='Max' name='[max:dt_tempo:qk]' pivot='key' type='quantitative' />
             <column caption='Categoria' datatype='string' name='[nm_categoria]' role='dimension' type='nominal' />
+            <column caption='Loja' datatype='string' name='[nm_loja]' role='dimension' type='nominal' />
             <column-instance column='[Calculation_726346199070920739]' derivation='None' name='[none:Calculation_726346199070920739:nk]' pivot='key' type='nominal' />
             <column-instance column='[nm_categoria]' derivation='None' name='[none:nm_categoria:nk]' pivot='key' type='nominal' />
+            <column-instance column='[nm_loja]' derivation='None' name='[none:nm_loja:nk]' pivot='key' type='nominal' />
+            <column-instance column='[nu_mes]' derivation='None' name='[none:nu_mes:ok]' pivot='key' type='ordinal' />
             <column aggregation='Sum' caption='Ano' datatype='integer' name='[nu_ano]' role='dimension' type='ordinal' />
             <column caption='Copias' datatype='integer' name='[nu_copias]' role='measure' type='quantitative' />
+            <column aggregation='Sum' caption='Mês' datatype='integer' name='[nu_mes]' role='dimension' type='ordinal' />
             <column-instance column='[dt_tempo]' derivation='Quarter-Trunc' name='[tqr:dt_tempo:qk]' pivot='key' type='quantitative' />
-            <column-instance column='[Calculation_726346199006961688]' derivation='User' name='[usr:Calculation_726346199006961688:qk]' pivot='key' type='quantitative' />
-            <column-instance column='[Calculation_726346199072210980]' derivation='User' name='[usr:Calculation_726346199072210980:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1365575873634709562]' derivation='User' name='[usr:Calculation_1365575873634709562:qk]' pivot='key' type='quantitative' />
             <column caption='Valor venda' datatype='real' name='[vl_imagem]' role='measure' type='quantitative' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:Calculation_726346199070920739:nk]'>
             <groupfilter function='member' level='[none:Calculation_726346199070920739:nk]' member='true' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_loja:nk]' filter-group='3'>
+            <groupfilter function='level-members' level='[none:nm_loja:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_mes:ok]'>
+            <groupfilter from='5' function='range' level='[none:nu_mes:ok]' to='12' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
           <slices>
             <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:Calculation_726346199070920739:nk]</column>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_mes:ok]</column>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_loja:nk]</column>
           </slices>
           <aggregation value='true' />
         </view>
         <style>
           <style-rule element='axis'>
-            <format attr='title' class='0' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk]' scope='rows' value='Quantidade' />
-            <format attr='title' class='0' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_726346199006961688:qk]' scope='rows' value='Valor vendas' />
             <format attr='title' class='0' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[tqr:dt_tempo:qk]' scope='cols' value='Quadrimestre' />
           </style-rule>
           <style-rule element='cell'>
-            <format attr='text-format' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_726346199006961688:qk]' value='C1046%' />
-            <format attr='text-format' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk]' value='N' />
-            <format attr='text-format' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_726346199072210980:qk]' value='C1046%' />
+            <format attr='text-format' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]' value='C1046%' />
           </style-rule>
         </style>
         <panes>
-          <pane selection-relaxation-option='selection-relaxation-allow'>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow'>
             <view>
               <breakdown value='auto' />
             </view>
             <mark class='Automatic' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
             <encodings>
               <color column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_categoria:nk]' />
-              <text column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_categoria:nk]' />
+              <text column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]' />
             </encodings>
-            <style>
-              <style-rule element='mark'>
-                <format attr='mark-labels-show' value='true' />
-                <format attr='mark-labels-cull' value='true' />
-              </style-rule>
-            </style>
-          </pane>
-          <pane id='1' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk]'>
-            <view>
-              <breakdown value='auto' />
-            </view>
-            <mark class='Automatic' />
-            <encodings>
-              <color column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_categoria:nk]' />
-              <text column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_categoria:nk]' />
-              <text column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk]' />
-            </encodings>
+            <label-data column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[max:dt_tempo:qk]' />
             <customized-tooltip>
               <formatted-text>
                 <run fontcolor='#787878'>Categoria:&#9;</run>
-                <run bold='true'><![CDATA[<[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_categoria:nk]>]]></run>
                 <run>Æ&#10;</run>
                 <run fontcolor='#787878'>Quadrimestre:&#9;</run>
                 <run bold='true'><![CDATA[<[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[tqr:dt_tempo:qk]>]]></run>
                 <run>Æ&#10;</run>
-                <run fontcolor='#787878'>Quantidade:&#9;</run>
-                <run bold='true'><![CDATA[<[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk]>]]></run>
+                <run fontcolor='#787878'><![CDATA[Valor:	<[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]>]]></run>
               </formatted-text>
             </customized-tooltip>
             <style>
-              <style-rule element='mark'>
-                <format attr='mark-labels-show' value='true' />
-                <format attr='mark-labels-cull' value='true' />
+              <style-rule element='datalabel'>
+                <format attr='color-mode' value='user' />
+                <format attr='font-size' value='8' />
+                <format attr='color' value='#000000' />
+                <format attr='font-weight' value='bold' />
               </style-rule>
-            </style>
-          </pane>
-          <pane id='2' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_726346199006961688:qk]'>
-            <view>
-              <breakdown value='auto' />
-            </view>
-            <mark class='Automatic' />
-            <encodings>
-              <color column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_categoria:nk]' />
-              <text column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_categoria:nk]' />
-              <text column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_726346199072210980:qk]' />
-            </encodings>
-            <customized-tooltip>
-              <formatted-text>
-                <run fontcolor='#787878'>Categoria:&#9;</run>
-                <run bold='true'><![CDATA[<[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_categoria:nk]>]]></run>
-                <run>Æ&#10;</run>
-                <run fontcolor='#787878'>Quadrimestre:&#9;</run>
-                <run bold='true'><![CDATA[<[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[tqr:dt_tempo:qk]>]]></run>
-                <run>Æ&#10;</run>
-                <run fontcolor='#787878'>Valor:&#9;</run>
-                <run bold='true'><![CDATA[<[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_726346199072210980:qk]>]]></run>
-              </formatted-text>
-            </customized-tooltip>
-            <style>
               <style-rule element='mark'>
+                <format attr='size' value='0.77961325645446777' />
+                <format attr='mark-labels-mode' value='most-recent' />
+                <format attr='mark-labels-range-scope' value='table' />
+                <format attr='mark-labels-cull' value='false' />
                 <format attr='mark-labels-show' value='true' />
-                <format attr='mark-labels-cull' value='true' />
               </style-rule>
             </style>
           </pane>
         </panes>
-        <rows>([federated.0ahvwmh0pdid8y1a01mgf0umxna2].[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk] + [federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_726346199006961688:qk])</rows>
+        <rows>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]</rows>
         <cols>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[tqr:dt_tempo:qk]</cols>
       </table>
       <simple-id uuid='{9000238F-274E-4486-A1BA-5DA9243A9435}' />
@@ -2304,11 +2522,8 @@
             <datasource caption='f_foto.csv+ (Multiple Connections)' name='federated.0ahvwmh0pdid8y1a01mgf0umxna2' />
           </datasources>
           <datasource-dependencies datasource='federated.0ahvwmh0pdid8y1a01mgf0umxna2'>
-            <column caption='SUM(Copias * [Valor venda])' datatype='real' name='[Calculation_726346199001260052]' role='measure' type='quantitative' user:unnamed='Evolução vendas - site'>
-              <calculation class='tableau' formula='SUM([nu_copias] * [vl_imagem])' />
-            </column>
-            <column caption='SUM([Copias] * [Valor venda])' datatype='real' name='[Calculation_726346199003656214]' role='measure' type='quantitative' user:unnamed='Evolução vendas - site'>
-              <calculation class='tableau' formula='SUM([nu_copias] * [vl_imagem])' />
+            <column caption='Valor venda total' datatype='real' name='[Calculation_1365575873634709562]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([nu_copias]*[vl_imagem])' />
             </column>
             <column caption='UltimosTresAnos' datatype='boolean' name='[Calculation_726346199070920739]' role='dimension' type='nominal'>
               <calculation class='tableau' formula='[nu_ano] = 2021 or [nu_ano] = 2020 or [nu_ano] = 2019' />
@@ -2320,25 +2535,30 @@
             <column aggregation='Sum' caption='Ano' datatype='integer' name='[nu_ano]' role='dimension' type='ordinal' />
             <column caption='Copias' datatype='integer' name='[nu_copias]' role='measure' type='quantitative' />
             <column-instance column='[dt_tempo]' derivation='Quarter-Trunc' name='[tqr:dt_tempo:qk]' pivot='key' type='quantitative' />
-            <column-instance column='[Calculation_726346199001260052]' derivation='User' name='[usr:Calculation_726346199001260052:qk]' pivot='key' type='quantitative' />
-            <column-instance column='[Calculation_726346199003656214]' derivation='User' name='[usr:Calculation_726346199003656214:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1365575873634709562]' derivation='User' name='[usr:Calculation_1365575873634709562:qk]' pivot='key' type='quantitative' />
             <column caption='Valor venda' datatype='real' name='[vl_imagem]' role='measure' type='quantitative' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:Calculation_726346199070920739:nk]'>
             <groupfilter function='member' level='[none:Calculation_726346199070920739:nk]' member='true' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_loja:nk]' filter-group='3'>
+            <groupfilter function='level-members' level='[none:nm_loja:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
           <slices>
             <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:Calculation_726346199070920739:nk]</column>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_loja:nk]</column>
           </slices>
           <aggregation value='true' />
         </view>
         <style>
           <style-rule element='axis'>
             <format attr='title' class='0' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[tqr:dt_tempo:qk]' scope='cols' value='Quadrimestres' />
-            <format attr='title' class='0' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_726346199001260052:qk]' scope='rows' value='Valor vendas' />
           </style-rule>
           <style-rule element='cell'>
-            <format attr='text-format' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_726346199003656214:qk]' value='C1046%' />
+            <format attr='text-format' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]' value='C1046%' />
+          </style-rule>
+          <style-rule element='data-highlighter-title'>
+            <format attr='title' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_loja:nk]' value='Loja' />
           </style-rule>
         </style>
         <panes>
@@ -2346,34 +2566,20 @@
             <view>
               <breakdown value='auto' />
             </view>
-            <mark class='Automatic' />
-            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <mark class='Area' />
             <encodings>
               <color column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_loja:nk]' />
-              <text column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_726346199003656214:qk]' />
+              <text column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]' />
             </encodings>
-            <customized-tooltip>
-              <formatted-text>
-                <run fontcolor='#787878'>Loja:&#9;</run>
-                <run bold='true'><![CDATA[<[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_loja:nk]>]]></run>
-                <run>Æ&#10;</run>
-                <run fontcolor='#787878'>Ano:&#9;</run>
-                <run bold='true'><![CDATA[<[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[tqr:dt_tempo:qk]>]]></run>
-                <run>Æ&#10;</run>
-                <run fontcolor='#787878'>Valor:&#9;</run>
-                <run bold='true'><![CDATA[<[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_726346199001260052:qk]>]]></run>
-              </formatted-text>
-            </customized-tooltip>
             <style>
               <style-rule element='mark'>
-                <format attr='size' value='1' />
                 <format attr='mark-labels-show' value='true' />
                 <format attr='mark-labels-cull' value='true' />
               </style-rule>
             </style>
           </pane>
         </panes>
-        <rows>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_726346199001260052:qk]</rows>
+        <rows>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]</rows>
         <cols>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[tqr:dt_tempo:qk]</cols>
       </table>
       <simple-id uuid='{2AC8FA3B-24AA-4372-92C6-BF8766B28A10}' />
@@ -2392,13 +2598,15 @@
             <datasource caption='f_foto.csv+ (Multiple Connections)' name='federated.0ahvwmh0pdid8y1a01mgf0umxna2' />
           </datasources>
           <datasource-dependencies datasource='federated.0ahvwmh0pdid8y1a01mgf0umxna2'>
-            <_.fcp.ObjectModelTableType.false...column caption='f_foto.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.false...column caption='f_venda.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column-instance column='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk]' pivot='key' type='quantitative' />
-            <_.fcp.ObjectModelTableType.true...column caption='f_foto.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.true...column caption='f_venda.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column caption='Categoria' datatype='string' name='[nm_categoria]' role='dimension' type='nominal' />
             <column caption='Fabricante' datatype='string' name='[nm_fabricante]' role='dimension' type='nominal' />
             <column-instance column='[nm_categoria]' derivation='None' name='[none:nm_categoria:nk]' pivot='key' type='nominal' />
             <column-instance column='[nm_fabricante]' derivation='None' name='[none:nm_fabricante:nk]' pivot='key' type='nominal' />
+            <column-instance column='[nu_ano]' derivation='None' name='[none:nu_ano:ok]' pivot='key' type='ordinal' />
+            <column aggregation='Sum' caption='Ano' datatype='integer' name='[nu_ano]' role='dimension' type='ordinal' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_fabricante:nk]'>
             <groupfilter expression='COUNT([__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]) &gt; 200' function='filter' user:ui-filter-by-field='true' user:ui-marker='filter-by'>
@@ -2408,8 +2616,12 @@
               </groupfilter>
             </groupfilter>
           </filter>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]' filter-group='6'>
+            <groupfilter function='member' level='[none:nu_ano:ok]' member='2021' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
           <slices>
             <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_fabricante:nk]</column>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -2472,9 +2684,9 @@
             <datasource caption='f_foto.csv+ (Multiple Connections)' name='federated.0ahvwmh0pdid8y1a01mgf0umxna2' />
           </datasources>
           <datasource-dependencies datasource='federated.0ahvwmh0pdid8y1a01mgf0umxna2'>
-            <_.fcp.ObjectModelTableType.false...column caption='f_foto.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.false...column caption='f_venda.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column-instance column='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk]' pivot='key' type='quantitative' />
-            <_.fcp.ObjectModelTableType.true...column caption='f_foto.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.true...column caption='f_venda.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column caption='Categoria' datatype='string' name='[nm_categoria]' role='dimension' type='nominal' />
             <column caption='Fabricante lente' datatype='string' name='[nm_fabricante (d_lente.csv)]' role='dimension' type='nominal' />
             <column-instance column='[nm_categoria]' derivation='None' name='[none:nm_categoria:nk]' pivot='key' type='nominal' />
@@ -2545,13 +2757,15 @@
             <datasource caption='f_foto.csv+ (Multiple Connections)' name='federated.0ahvwmh0pdid8y1a01mgf0umxna2' />
           </datasources>
           <datasource-dependencies datasource='federated.0ahvwmh0pdid8y1a01mgf0umxna2'>
-            <_.fcp.ObjectModelTableType.false...column caption='f_foto.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.false...column caption='f_venda.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column-instance column='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk]' pivot='key' type='quantitative' />
-            <_.fcp.ObjectModelTableType.true...column caption='f_foto.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.true...column caption='f_venda.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column caption='Fabricante' datatype='string' name='[nm_fabricante]' role='dimension' type='nominal' />
             <column caption='Tipo câmera' datatype='string' name='[nm_tipo_camera]' role='dimension' type='nominal' />
             <column-instance column='[nm_fabricante]' derivation='None' name='[none:nm_fabricante:nk]' pivot='key' type='nominal' />
             <column-instance column='[nm_tipo_camera]' derivation='None' name='[none:nm_tipo_camera:nk]' pivot='key' type='nominal' />
+            <column-instance column='[nu_ano]' derivation='None' name='[none:nu_ano:ok]' pivot='key' type='ordinal' />
+            <column aggregation='Sum' caption='Ano' datatype='integer' name='[nu_ano]' role='dimension' type='ordinal' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_tipo_camera:nk]'>
             <groupfilter function='union' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
@@ -2559,8 +2773,12 @@
               <groupfilter function='member' level='[none:nm_tipo_camera:nk]' member='&quot;Mirrorless&quot;' />
             </groupfilter>
           </filter>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]' filter-group='6'>
+            <groupfilter function='member' level='[none:nu_ano:ok]' member='2021' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
           <slices>
             <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_tipo_camera:nk]</column>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -2623,13 +2841,15 @@
             <datasource caption='f_foto.csv+ (Multiple Connections)' name='federated.0ahvwmh0pdid8y1a01mgf0umxna2' />
           </datasources>
           <datasource-dependencies datasource='federated.0ahvwmh0pdid8y1a01mgf0umxna2'>
-            <_.fcp.ObjectModelTableType.false...column caption='f_foto.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.false...column caption='f_venda.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column-instance column='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk]' pivot='key' type='quantitative' />
-            <_.fcp.ObjectModelTableType.true...column caption='f_foto.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.true...column caption='f_venda.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column caption='Fabricante lente' datatype='string' name='[nm_fabricante (d_lente.csv)]' role='dimension' type='nominal' />
             <column caption='Tipo lente' datatype='string' name='[nm_tipo_lente]' role='dimension' type='nominal' />
             <column-instance column='[nm_fabricante (d_lente.csv)]' derivation='None' name='[none:nm_fabricante (d_lente.csv):nk]' pivot='key' type='nominal' />
             <column-instance column='[nm_tipo_lente]' derivation='None' name='[none:nm_tipo_lente:nk]' pivot='key' type='nominal' />
+            <column-instance column='[nu_ano]' derivation='None' name='[none:nu_ano:ok]' pivot='key' type='ordinal' />
+            <column aggregation='Sum' caption='Ano' datatype='integer' name='[nu_ano]' role='dimension' type='ordinal' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_fabricante (d_lente.csv):nk]'>
             <groupfilter function='union' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
@@ -2655,9 +2875,13 @@
               <groupfilter function='member' level='[none:nm_tipo_lente:nk]' member='&quot;Zoom&quot;' />
             </groupfilter>
           </filter>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]' filter-group='5'>
+            <groupfilter function='member' level='[none:nu_ano:ok]' member='2021' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
           <slices>
             <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_tipo_lente:nk]</column>
             <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_fabricante (d_lente.csv):nk]</column>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -2730,11 +2954,11 @@
                 <table-calc ordering-type='Rows' />
               </calculation>
             </column>
-            <_.fcp.ObjectModelTableType.false...column caption='f_foto.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.false...column caption='f_venda.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column caption='[Fabricante lente] + &apos; &apos; + [Modelo lente]' datatype='string' name='[Calculation_726346198784725011]' role='dimension' type='nominal' user:unnamed='Lentes mais utilizadas - casamento'>
               <calculation class='tableau' formula='[nm_fabricante (d_lente.csv)] + &apos; &apos; + [nm_modelo]' />
             </column>
-            <_.fcp.ObjectModelTableType.true...column caption='f_foto.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.true...column caption='f_venda.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column caption='Categoria' datatype='string' name='[nm_categoria]' role='dimension' type='nominal' />
             <column caption='Fabricante lente' datatype='string' name='[nm_fabricante (d_lente.csv)]' role='dimension' type='nominal' />
             <column caption='Modelo lente' datatype='string' name='[nm_modelo]' role='dimension' type='nominal' />
@@ -2751,7 +2975,6 @@
             <column-instance column='[Calculation_1365575873291202571]' derivation='User' name='[usr:Calculation_1365575873291202571:qk]' pivot='key' type='quantitative'>
               <table-calc ordering-type='Columns' />
             </column-instance>
-            <style />
           </datasource-dependencies>
           <manual-sort column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:Calculation_726346198784725011:nk]' direction='ASC'>
             <dictionary>
@@ -2876,7 +3099,7 @@
               </groupfilter>
             </groupfilter>
           </filter>
-          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]'>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]' filter-group='4'>
             <groupfilter function='member' level='[none:nu_ano:ok]' member='2021' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <slices>
@@ -2955,11 +3178,11 @@
                 <table-calc ordering-type='Rows' />
               </calculation>
             </column>
-            <_.fcp.ObjectModelTableType.false...column caption='f_foto.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.false...column caption='f_venda.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column caption='[Fabricante lente] + &apos; &apos; + [Modelo lente]' datatype='string' name='[Calculation_726346198784725011]' role='dimension' type='nominal' user:unnamed='Lentes mais utilizadas - casamento'>
               <calculation class='tableau' formula='[nm_fabricante (d_lente.csv)] + &apos; &apos; + [nm_modelo]' />
             </column>
-            <_.fcp.ObjectModelTableType.true...column caption='f_foto.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.true...column caption='f_venda.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column caption='Categoria' datatype='string' name='[nm_categoria]' role='dimension' type='nominal' />
             <column caption='Fabricante lente' datatype='string' name='[nm_fabricante (d_lente.csv)]' role='dimension' type='nominal' />
             <column caption='Modelo lente' datatype='string' name='[nm_modelo]' role='dimension' type='nominal' />
@@ -2976,7 +3199,6 @@
             <column-instance column='[Calculation_1365575873291481100]' derivation='User' name='[usr:Calculation_1365575873291481100:qk]' pivot='key' type='quantitative'>
               <table-calc ordering-type='Columns' />
             </column-instance>
-            <style />
           </datasource-dependencies>
           <manual-sort column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:Calculation_726346198784725011:nk]' direction='ASC'>
             <dictionary>
@@ -3107,12 +3329,8 @@
               </groupfilter>
             </groupfilter>
           </filter>
-          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]'>
-            <groupfilter function='union' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
-              <groupfilter function='member' level='[none:nu_ano:ok]' member='2019' />
-              <groupfilter function='member' level='[none:nu_ano:ok]' member='2020' />
-              <groupfilter function='member' level='[none:nu_ano:ok]' member='2021' />
-            </groupfilter>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]' filter-group='4'>
+            <groupfilter function='member' level='[none:nu_ano:ok]' member='2021' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <slices>
             <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_categoria:nk]</column>
@@ -3190,11 +3408,11 @@
                 <table-calc ordering-type='Rows' />
               </calculation>
             </column>
-            <_.fcp.ObjectModelTableType.false...column caption='f_foto.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.false...column caption='f_venda.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column caption='[Fabricante lente] + &apos; &apos; + [Modelo lente]' datatype='string' name='[Calculation_726346198784725011]' role='dimension' type='nominal' user:unnamed='Lentes mais utilizadas - casamento'>
               <calculation class='tableau' formula='[nm_fabricante (d_lente.csv)] + &apos; &apos; + [nm_modelo]' />
             </column>
-            <_.fcp.ObjectModelTableType.true...column caption='f_foto.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.true...column caption='f_venda.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column caption='Categoria' datatype='string' name='[nm_categoria]' role='dimension' type='nominal' />
             <column caption='Fabricante lente' datatype='string' name='[nm_fabricante (d_lente.csv)]' role='dimension' type='nominal' />
             <column caption='Modelo lente' datatype='string' name='[nm_modelo]' role='dimension' type='nominal' />
@@ -3211,7 +3429,6 @@
             <column-instance column='[Calculation_1365575873291689997]' derivation='User' name='[usr:Calculation_1365575873291689997:qk]' pivot='key' type='quantitative'>
               <table-calc ordering-type='Columns' />
             </column-instance>
-            <style />
           </datasource-dependencies>
           <manual-sort column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:Calculation_726346198784725011:nk]' direction='ASC'>
             <dictionary>
@@ -3345,12 +3562,8 @@
               </groupfilter>
             </groupfilter>
           </filter>
-          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]'>
-            <groupfilter function='union' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
-              <groupfilter function='member' level='[none:nu_ano:ok]' member='2019' />
-              <groupfilter function='member' level='[none:nu_ano:ok]' member='2020' />
-              <groupfilter function='member' level='[none:nu_ano:ok]' member='2021' />
-            </groupfilter>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]' filter-group='4'>
+            <groupfilter function='member' level='[none:nu_ano:ok]' member='2021' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <slices>
             <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_categoria:nk]</column>
@@ -3418,11 +3631,11 @@
                 <table-calc ordering-type='Rows' />
               </calculation>
             </column>
-            <_.fcp.ObjectModelTableType.false...column caption='f_foto.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.false...column caption='f_venda.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column caption='[Fabricante lente] + &apos; &apos; + [Modelo lente]' datatype='string' name='[Calculation_726346198784725011]' role='dimension' type='nominal' user:unnamed='Lentes mais utilizadas - casamento'>
               <calculation class='tableau' formula='[nm_fabricante (d_lente.csv)] + &apos; &apos; + [nm_modelo]' />
             </column>
-            <_.fcp.ObjectModelTableType.true...column caption='f_foto.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.true...column caption='f_venda.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column caption='Categoria' datatype='string' name='[nm_categoria]' role='dimension' type='nominal' />
             <column caption='Fabricante lente' datatype='string' name='[nm_fabricante (d_lente.csv)]' role='dimension' type='nominal' />
             <column caption='Modelo lente' datatype='string' name='[nm_modelo]' role='dimension' type='nominal' />
@@ -3439,7 +3652,6 @@
             <column-instance column='[Calculation_1365575873290375178]' derivation='User' name='[usr:Calculation_1365575873290375178:qk]' pivot='key' type='quantitative'>
               <table-calc ordering-type='Columns' />
             </column-instance>
-            <style />
           </datasource-dependencies>
           <manual-sort column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:Calculation_726346198784725011:nk]' direction='ASC'>
             <dictionary>
@@ -3573,12 +3785,8 @@
               </groupfilter>
             </groupfilter>
           </filter>
-          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]'>
-            <groupfilter function='union' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
-              <groupfilter function='member' level='[none:nu_ano:ok]' member='2019' />
-              <groupfilter function='member' level='[none:nu_ano:ok]' member='2020' />
-              <groupfilter function='member' level='[none:nu_ano:ok]' member='2021' />
-            </groupfilter>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]' filter-group='4'>
+            <groupfilter function='member' level='[none:nu_ano:ok]' member='2021' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <slices>
             <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_categoria:nk]</column>
@@ -3596,6 +3804,9 @@
           <style-rule element='cell'>
             <format attr='text-format' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873289658377:qk:1]' value='p0.00%' />
             <format attr='text-format' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873290375178:qk]' value='p0.00%' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='height-header' value='10' />
           </style-rule>
           <style-rule element='worksheet'>
             <format attr='display-field-labels' scope='rows' value='false' />
@@ -3633,6 +3844,270 @@
       </table>
       <simple-id uuid='{44F8951D-CF3F-4D44-9C73-9AF37E6EC480}' />
     </worksheet>
+    <worksheet name='Meta 2021'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='f_foto.csv+ (Multiple Connections)' name='federated.0ahvwmh0pdid8y1a01mgf0umxna2' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0ahvwmh0pdid8y1a01mgf0umxna2'>
+            <column caption='Valor venda total' datatype='real' name='[Calculation_1365575873634709562]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([nu_copias]*[vl_imagem])' />
+            </column>
+            <column caption='Meta Setembro' datatype='integer' name='[Calculation_1365575873640288316]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='980000' />
+            </column>
+            <column caption='MIN(0)' datatype='integer' name='[Calculation_1365575873641791551]' role='measure' type='quantitative' user:unnamed='Vendas - meta Setembro'>
+              <calculation class='tableau' formula='MIN(0)' />
+            </column>
+            <column caption='MIN(0)' datatype='integer' name='[Calculation_1365575873641816129]' role='measure' type='quantitative' user:unnamed='Vendas - meta Setembro'>
+              <calculation class='tableau' formula='MIN(0)' />
+            </column>
+            <column caption='Percentual meta' datatype='real' name='[Calculation_1365575873643085890]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='[Calculation_1365575873634709562] / [Calculation_1365575873640288316]' />
+            </column>
+            <column caption='Meta &lt; 50%' datatype='real' name='[Calculation_1365575873643458627]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF [Calculation_1365575873643085890] &lt; .5 THEN [Calculation_1365575873643085890] ELSE .5 END' />
+            </column>
+            <column caption='Meta &lt; 50% 2' datatype='real' name='[Calculation_1365575873643688004]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF [Calculation_1365575873643085890] &lt; .5 THEN .5 - [Calculation_1365575873643085890] END' />
+            </column>
+            <column caption='Meta &gt; 50%' datatype='real' name='[Calculation_1365575873643933765]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF [Calculation_1365575873643085890] &gt; .5 THEN [Calculation_1365575873643085890] -.5 END' />
+            </column>
+            <column caption='Meta &gt; 50% 2' datatype='real' name='[Calculation_1365575873644228678]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF [Calculation_1365575873643085890] &gt; .5 THEN 1 - [Calculation_1365575873643085890] ELSE .5 END' />
+            </column>
+            <column caption='Fixo MIN 1' datatype='integer' name='[Calculation_1365575873644429383]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='MIN(1)' />
+            </column>
+            <column caption='Agulha1' datatype='real' name='[Calculation_1365575873644486728]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF [Calculation_1365575873643085890] &lt;= .5 THEN .005 END' />
+            </column>
+            <column caption='Agulha2' datatype='real' name='[Calculation_1365575873644593225]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF [Calculation_1365575873643085890] &gt; .5 THEN .005 END' />
+            </column>
+            <column caption='Dummy text' datatype='string' name='[Calculation_1365575873644695626]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='&apos;Dummy&apos;' />
+            </column>
+            <column-instance column='[Calculation_1365575873644695626]' derivation='None' name='[none:Calculation_1365575873644695626:nk]' pivot='key' type='nominal' />
+            <column-instance column='[nu_ano]' derivation='None' name='[none:nu_ano:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[nu_mes]' derivation='None' name='[none:nu_mes:ok]' pivot='key' type='ordinal' />
+            <column aggregation='Sum' caption='Ano' datatype='integer' name='[nu_ano]' role='dimension' type='ordinal' />
+            <column caption='Copias' datatype='integer' name='[nu_copias]' role='measure' type='quantitative' />
+            <column aggregation='Sum' caption='Mês' datatype='integer' name='[nu_mes]' role='dimension' type='ordinal' />
+            <column-instance column='[Calculation_1365575873641791551]' derivation='User' name='[usr:Calculation_1365575873641791551:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1365575873641816129]' derivation='User' name='[usr:Calculation_1365575873641816129:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1365575873643085890]' derivation='User' name='[usr:Calculation_1365575873643085890:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1365575873643458627]' derivation='User' name='[usr:Calculation_1365575873643458627:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1365575873643688004]' derivation='User' name='[usr:Calculation_1365575873643688004:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1365575873643933765]' derivation='User' name='[usr:Calculation_1365575873643933765:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1365575873644228678]' derivation='User' name='[usr:Calculation_1365575873644228678:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1365575873644429383]' derivation='User' name='[usr:Calculation_1365575873644429383:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1365575873644486728]' derivation='User' name='[usr:Calculation_1365575873644486728:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1365575873644593225]' derivation='User' name='[usr:Calculation_1365575873644593225:qk]' pivot='key' type='quantitative' />
+            <column caption='Valor venda' datatype='real' name='[vl_imagem]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[:Measure Names]'>
+            <groupfilter function='union' user:op='manual'>
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873643933765:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873644593225:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873644228678:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873644429383:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873643458627:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873644486728:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873643688004:qk]&quot;' />
+            </groupfilter>
+          </filter>
+          <manual-sort column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[:Measure Names]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873643933765:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873644593225:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873644228678:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873644429383:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873643458627:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873644486728:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873643688004:qk]&quot;</bucket>
+            </dictionary>
+          </manual-sort>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]'>
+            <groupfilter function='member' level='[none:nu_ano:ok]' member='2021' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_mes:ok]'>
+            <groupfilter function='member' level='[none:nu_mes:ok]' member='9' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]</column>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_mes:ok]</column>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[:Measure Names]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873641816129:qk]' field-type='quantitative' fold='true' max='0' min='0' range-type='fixed' scope='cols' type='space' />
+            <format attr='display' class='0' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873641816129:qk]' scope='cols' value='false' />
+            <format attr='display' class='0' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873641791551:qk]' scope='cols' value='false' />
+            <encoding attr='space' class='0' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873641791551:qk]' field-type='quantitative' max='0' min='0' range-type='fixed' scope='cols' type='space' />
+          </style-rule>
+          <style-rule element='cell'>
+            <format attr='text-format' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873643085890:qk]' value='p0.00%' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='border-width' data-class='total' value='0' />
+            <format attr='border-style' data-class='total' value='none' />
+          </style-rule>
+          <style-rule element='pane'>
+            <format attr='border-width' data-class='total' value='0' />
+            <format attr='border-style' data-class='total' value='none' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Pie' />
+            <encodings>
+              <color column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[:Measure Names]' />
+              <wedge-size column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Multiple Values]' />
+            </encodings>
+            <customized-tooltip>
+              <formatted-text />
+            </customized-tooltip>
+          </pane>
+          <pane id='3' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873641791551:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Pie' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <color column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[:Measure Names]' />
+              <wedge-size column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Multiple Values]' />
+              <text column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873643085890:qk]' />
+            </encodings>
+            <customized-tooltip>
+              <formatted-text />
+            </customized-tooltip>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='2.5082871913909912' />
+                <format attr='mark-labels-mode' value='all' />
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='4' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873641816129:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Pie' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <color column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[:Measure Names]' />
+              <wedge-size column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Multiple Values]' />
+              <color column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:Calculation_1365575873644695626:nk]' />
+            </encodings>
+            <customized-tooltip>
+              <formatted-text />
+            </customized-tooltip>
+            <style>
+              <style-rule element='cell'>
+                <format attr='text-align' value='center' />
+                <format attr='text-orientation' value='0' />
+                <format attr='wrap' value='on' />
+                <format attr='vertical-align' value='top' />
+              </style-rule>
+              <style-rule element='mark'>
+                <format attr='size' value='1.5932043790817261' />
+                <format attr='mark-labels-mode' value='all' />
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='false' />
+                <format attr='mark-color' value='#ffffff' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols>([federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873641791551:qk] + [federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873641816129:qk])</cols>
+      </table>
+      <simple-id uuid='{E60C2D6B-38CB-498D-9D64-D3E808F07C2B}' />
+    </worksheet>
+    <worksheet name='Percentual meta 2021'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='f_foto.csv+ (Multiple Connections)' name='federated.0ahvwmh0pdid8y1a01mgf0umxna2' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0ahvwmh0pdid8y1a01mgf0umxna2'>
+            <column caption='Valor venda total' datatype='real' name='[Calculation_1365575873634709562]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([nu_copias]*[vl_imagem])' />
+            </column>
+            <column caption='Meta Setembro' datatype='integer' name='[Calculation_1365575873640288316]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='980000' />
+            </column>
+            <column caption='Percentual meta' datatype='real' name='[Calculation_1365575873643085890]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='[Calculation_1365575873634709562] / [Calculation_1365575873640288316]' />
+            </column>
+            <column caption='Loja' datatype='string' name='[nm_loja]' role='dimension' type='nominal' />
+            <column-instance column='[nu_ano]' derivation='None' name='[none:nu_ano:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[nu_mes]' derivation='None' name='[none:nu_mes:ok]' pivot='key' type='ordinal' />
+            <column aggregation='Sum' caption='Ano' datatype='integer' name='[nu_ano]' role='dimension' type='ordinal' />
+            <column caption='Copias' datatype='integer' name='[nu_copias]' role='measure' type='quantitative' />
+            <column aggregation='Sum' caption='Mês' datatype='integer' name='[nu_mes]' role='dimension' type='ordinal' />
+            <column-instance column='[Calculation_1365575873643085890]' derivation='User' name='[usr:Calculation_1365575873643085890:qk]' pivot='key' type='quantitative' />
+            <column caption='Valor venda' datatype='real' name='[vl_imagem]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Loja)]'>
+            <groupfilter function='level-members' level='[nm_loja]' user:ui-action-filter='[Action2]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]'>
+            <groupfilter function='member' level='[none:nu_ano:ok]' member='2021' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_mes:ok]'>
+            <groupfilter function='member' level='[none:nu_mes:ok]' member='9' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]</column>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_mes:ok]</column>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Loja)]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='text-format' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873643085890:qk]' value='p0.00%' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='in-tooltip' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873643085890:qk]' value='false' />
+            <format attr='font-size' value='28' />
+            <format attr='font-weight' value='bold' />
+            <format attr='color' value='#4e79a7' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873643085890:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{88AB8B51-D829-41B4-983B-E5BEF2831017}' />
+    </worksheet>
     <worksheet name='Tipo de câmera mais usada'>
       <layout-options>
         <title>
@@ -3652,9 +4127,9 @@
                 <table-calc ordering-type='Rows' />
               </calculation>
             </column>
-            <_.fcp.ObjectModelTableType.false...column caption='f_foto.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.false...column caption='f_venda.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column-instance column='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk]' pivot='key' type='quantitative' />
-            <_.fcp.ObjectModelTableType.true...column caption='f_foto.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.true...column caption='f_venda.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column caption='Tipo câmera' datatype='string' name='[nm_tipo_camera]' role='dimension' type='nominal' />
             <column-instance column='[nm_tipo_camera]' derivation='None' name='[none:nm_tipo_camera:nk]' pivot='key' type='nominal' />
             <column-instance column='[nu_ano]' derivation='None' name='[none:nu_ano:ok]' pivot='key' type='ordinal' />
@@ -3669,7 +4144,7 @@
               <groupfilter function='member' level='[none:nm_tipo_camera:nk]' member='&quot;Mirrorless&quot;' />
             </groupfilter>
           </filter>
-          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]'>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]' filter-group='6'>
             <groupfilter function='member' level='[none:nu_ano:ok]' member='2021' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <slices>
@@ -3740,9 +4215,9 @@
                 <table-calc ordering-type='Rows' />
               </calculation>
             </column>
-            <_.fcp.ObjectModelTableType.false...column caption='f_foto.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.false...column caption='f_venda.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column-instance column='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk]' pivot='key' type='quantitative' />
-            <_.fcp.ObjectModelTableType.true...column caption='f_foto.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.true...column caption='f_venda.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column caption='Tipo lente' datatype='string' name='[nm_tipo_lente]' role='dimension' type='nominal' />
             <column-instance column='[nm_tipo_lente]' derivation='None' name='[none:nm_tipo_lente:nk]' pivot='key' type='nominal' />
             <column-instance column='[nu_ano]' derivation='None' name='[none:nu_ano:ok]' pivot='key' type='ordinal' />
@@ -3757,7 +4232,7 @@
               <groupfilter function='member' level='[none:nm_tipo_lente:nk]' member='&quot;Zoom&quot;' />
             </groupfilter>
           </filter>
-          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]'>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]' filter-group='5'>
             <groupfilter function='member' level='[none:nu_ano:ok]' member='2021' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <slices>
@@ -3823,9 +4298,9 @@
             <datasource caption='f_foto.csv+ (Multiple Connections)' name='federated.0ahvwmh0pdid8y1a01mgf0umxna2' />
           </datasources>
           <datasource-dependencies datasource='federated.0ahvwmh0pdid8y1a01mgf0umxna2'>
-            <_.fcp.ObjectModelTableType.false...column caption='f_foto.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.false...column caption='f_venda.csv' datatype='integer' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column-instance column='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA:qk]' pivot='key' type='quantitative' />
-            <_.fcp.ObjectModelTableType.true...column caption='f_foto.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
+            <_.fcp.ObjectModelTableType.true...column caption='f_venda.csv' datatype='table' name='[__tableau_internal_object_id__].[f_foto.csv_75A4832FE2D54753BCF2FAAA7BEC68BA]' role='measure' type='quantitative' />
             <column caption='Categoria' datatype='string' name='[nm_categoria]' role='dimension' type='nominal' />
             <column caption='Tipo lente' datatype='string' name='[nm_tipo_lente]' role='dimension' type='nominal' />
             <column-instance column='[nm_categoria]' derivation='None' name='[none:nm_categoria:nk]' pivot='key' type='nominal' />
@@ -3882,11 +4357,11 @@
       </table>
       <simple-id uuid='{C2FD709D-1333-4AEF-8BD8-293AF928134D}' />
     </worksheet>
-    <worksheet name='Total vendas'>
+    <worksheet name='Total vendas - 2021'>
       <layout-options>
         <title>
           <formatted-text>
-            <run>O total de vendas no ano de 2021 foi de </run>
+            <run>Acumulado de vendas no ano</run>
           </formatted-text>
         </title>
       </layout-options>
@@ -3896,32 +4371,25 @@
             <datasource caption='f_foto.csv+ (Multiple Connections)' name='federated.0ahvwmh0pdid8y1a01mgf0umxna2' />
           </datasources>
           <datasource-dependencies datasource='federated.0ahvwmh0pdid8y1a01mgf0umxna2'>
-            <column caption='Copias * [Valor venda]' datatype='real' name='[Calculation_1716645530792587274]' role='measure' type='quantitative' user:unnamed='Total vendas'>
-              <calculation class='tableau' formula='[nu_copias] * [vl_imagem]' />
+            <column caption='Valor venda total' datatype='real' name='[Calculation_1365575873634709562]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([nu_copias]*[vl_imagem])' />
             </column>
-            <column caption='Categoria' datatype='string' name='[nm_categoria]' role='dimension' type='nominal' />
             <column caption='Loja' datatype='string' name='[nm_loja]' role='dimension' type='nominal' />
+            <column-instance column='[nu_ano]' derivation='None' name='[none:nu_ano:ok]' pivot='key' type='ordinal' />
             <column aggregation='Sum' caption='Ano' datatype='integer' name='[nu_ano]' role='dimension' type='ordinal' />
             <column caption='Copias' datatype='integer' name='[nu_copias]' role='measure' type='quantitative' />
-            <column-instance column='[Calculation_1716645530792587274]' derivation='Sum' name='[sum:Calculation_1716645530792587274:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1365575873634709562]' derivation='User' name='[usr:Calculation_1365575873634709562:qk]' pivot='key' type='quantitative' />
             <column caption='Valor venda' datatype='real' name='[vl_imagem]' role='measure' type='quantitative' />
           </datasource-dependencies>
-          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Categoria)]'>
-            <groupfilter function='level-members' level='[nm_categoria]' user:ui-action-filter='[Action1]' user:ui-enumeration='all' user:ui-marker='enumerate' />
-          </filter>
           <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Loja)]'>
             <groupfilter function='level-members' level='[nm_loja]' user:ui-action-filter='[Action2]' user:ui-enumeration='all' user:ui-marker='enumerate' />
           </filter>
-          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Loja,Ano)]'>
-            <groupfilter function='crossjoin' user:ui-action-filter='[Action2]' user:ui-enumeration='all' user:ui-marker='enumerate'>
-              <groupfilter function='level-members' level='[nm_loja]' />
-              <groupfilter function='level-members' level='[nu_ano]' />
-            </groupfilter>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]'>
+            <groupfilter function='member' level='[none:nu_ano:ok]' member='2021' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <slices>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]</column>
             <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Loja)]</column>
-            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Loja,Ano)]</column>
-            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Categoria)]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -3930,13 +4398,10 @@
             <format attr='font-weight' data-class='subtotal' value='bold' />
             <format attr='color' data-class='subtotal' value='#ffffff' />
             <format attr='font-size' data-class='subtotal' value='22' />
-            <format attr='text-format' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[sum:Calculation_1716645530792587274:qk]' value='C1046%' />
+            <format attr='text-format' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]' value='C1046%' />
           </style-rule>
           <style-rule element='header'>
             <format attr='font-size' data-class='total' value='9' />
-          </style-rule>
-          <style-rule element='label'>
-            <format attr='text-format' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[sum:Calculation_1716645530792587274:qk]' value='C1046%' />
           </style-rule>
           <style-rule element='table'>
             <format attr='band-size' scope='rows' value='0' />
@@ -3954,7 +4419,7 @@
             <mark class='Automatic' />
             <mark-sizing mark-sizing-setting='marks-scaling-off' />
             <encodings>
-              <text column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[sum:Calculation_1716645530792587274:qk]' />
+              <text column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]' />
             </encodings>
             <style>
               <style-rule element='mark'>
@@ -3970,11 +4435,11 @@
       </table>
       <simple-id uuid='{8B24C8BA-59C6-45CB-B187-5802A084C85A}' />
     </worksheet>
-    <worksheet name='Vendas por loja 2021'>
+    <worksheet name='Total vendas - Setembro'>
       <layout-options>
         <title>
           <formatted-text>
-            <run>A distribuição de vendas por loja se deu da seguinte forma</run>
+            <run>Vendas em Setembro</run>
           </formatted-text>
         </title>
       </layout-options>
@@ -3984,42 +4449,112 @@
             <datasource caption='f_foto.csv+ (Multiple Connections)' name='federated.0ahvwmh0pdid8y1a01mgf0umxna2' />
           </datasources>
           <datasource-dependencies datasource='federated.0ahvwmh0pdid8y1a01mgf0umxna2'>
-            <column caption='SUM(Copias * [Valor venda])' datatype='real' name='[Calculation_90564590529040384]' role='measure' type='quantitative' user:unnamed='Vendas por loja 2021'>
-              <calculation class='tableau' formula='SUM([nu_copias] * [vl_imagem])' />
+            <column caption='Valor venda total' datatype='real' name='[Calculation_1365575873634709562]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([nu_copias]*[vl_imagem])' />
             </column>
-            <column caption='Categoria' datatype='string' name='[nm_categoria]' role='dimension' type='nominal' />
+            <column caption='Loja' datatype='string' name='[nm_loja]' role='dimension' type='nominal' />
+            <column-instance column='[nu_ano]' derivation='None' name='[none:nu_ano:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[nu_mes]' derivation='None' name='[none:nu_mes:ok]' pivot='key' type='ordinal' />
+            <column aggregation='Sum' caption='Ano' datatype='integer' name='[nu_ano]' role='dimension' type='ordinal' />
+            <column caption='Copias' datatype='integer' name='[nu_copias]' role='measure' type='quantitative' />
+            <column aggregation='Sum' caption='Mês' datatype='integer' name='[nu_mes]' role='dimension' type='ordinal' />
+            <column-instance column='[Calculation_1365575873634709562]' derivation='User' name='[usr:Calculation_1365575873634709562:qk]' pivot='key' type='quantitative' />
+            <column caption='Valor venda' datatype='real' name='[vl_imagem]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Loja)]'>
+            <groupfilter function='level-members' level='[nm_loja]' user:ui-action-filter='[Action2]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]'>
+            <groupfilter function='member' level='[none:nu_ano:ok]' member='2021' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_mes:ok]'>
+            <groupfilter function='member' level='[none:nu_mes:ok]' member='9' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]</column>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_mes:ok]</column>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Loja)]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='font-weight' data-class='subtotal' value='bold' />
+            <format attr='color' data-class='subtotal' value='#ffffff' />
+            <format attr='font-size' data-class='subtotal' value='22' />
+            <format attr='text-format' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]' value='C1046%' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='font-size' data-class='total' value='9' />
+          </style-rule>
+          <style-rule element='table'>
+            <format attr='band-size' scope='rows' value='0' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='font-size' value='26' />
+            <format attr='color' value='#606b76' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <text column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='size' value='0.84558010101318359' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{7105FA2F-03E1-4F21-BDD1-2E7D69F12CD4}' />
+    </worksheet>
+    <worksheet name='Vendas por loja 2021'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Performance por loja - acumulado</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='f_foto.csv+ (Multiple Connections)' name='federated.0ahvwmh0pdid8y1a01mgf0umxna2' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0ahvwmh0pdid8y1a01mgf0umxna2'>
+            <column caption='Valor venda total' datatype='real' name='[Calculation_1365575873634709562]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([nu_copias]*[vl_imagem])' />
+            </column>
             <column caption='Loja' datatype='string' name='[nm_loja]' role='dimension' type='nominal' />
             <column-instance column='[nm_loja]' derivation='None' name='[none:nm_loja:nk]' pivot='key' type='nominal' />
             <column-instance column='[nu_ano]' derivation='None' name='[none:nu_ano:ok]' pivot='key' type='ordinal' />
             <column aggregation='Sum' caption='Ano' datatype='integer' name='[nu_ano]' role='dimension' type='ordinal' />
             <column caption='Copias' datatype='integer' name='[nu_copias]' role='measure' type='quantitative' />
-            <column-instance column='[Calculation_90564590529040384]' derivation='User' name='[usr:Calculation_90564590529040384:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1365575873634709562]' derivation='User' name='[usr:Calculation_1365575873634709562:qk]' pivot='key' type='quantitative' />
             <column caption='Valor venda' datatype='real' name='[vl_imagem]' role='measure' type='quantitative' />
           </datasource-dependencies>
-          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Categoria)]'>
-            <groupfilter function='level-members' level='[nm_categoria]' user:ui-action-filter='[Action1]' user:ui-enumeration='all' user:ui-marker='enumerate' />
-          </filter>
           <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]'>
             <groupfilter function='member' level='[none:nu_ano:ok]' member='2021' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <slices>
-            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Categoria)]</column>
             <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]</column>
           </slices>
           <aggregation value='true' />
         </view>
         <style>
-          <style-rule element='axis'>
-            <format attr='display' class='0' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_90564590529040384:qk]' scope='cols' value='false' />
-          </style-rule>
           <style-rule element='cell'>
-            <format attr='text-format' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_90564590529040384:qk]' value='C1046%' />
-          </style-rule>
-          <style-rule element='label'>
-            <format attr='text-format' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_90564590529040384:qk]' value='C1046%' />
-          </style-rule>
-          <style-rule element='mark'>
-            <encoding attr='size-bar' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_90564590529040384:qk]' field-type='quantitative' max-size='1' min-size='0.005' type='centersize' />
+            <format attr='text-format' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]' value='C1046%' />
           </style-rule>
         </style>
         <panes>
@@ -4048,10 +4583,89 @@
             </style>
           </pane>
         </panes>
-        <rows>([federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok] / [federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_loja:nk])</rows>
-        <cols>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_90564590529040384:qk]</cols>
+        <rows>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_loja:nk]</rows>
+        <cols>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]</cols>
       </table>
       <simple-id uuid='{4476DAB7-600B-4D11-AB92-273B8337F9FF}' />
+    </worksheet>
+    <worksheet name='Vendas por loja Setembro'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Performance por loja - Setembro</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='f_foto.csv+ (Multiple Connections)' name='federated.0ahvwmh0pdid8y1a01mgf0umxna2' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0ahvwmh0pdid8y1a01mgf0umxna2'>
+            <column caption='Valor venda total' datatype='real' name='[Calculation_1365575873634709562]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([nu_copias]*[vl_imagem])' />
+            </column>
+            <column caption='Loja' datatype='string' name='[nm_loja]' role='dimension' type='nominal' />
+            <column-instance column='[nm_loja]' derivation='None' name='[none:nm_loja:nk]' pivot='key' type='nominal' />
+            <column-instance column='[nu_ano]' derivation='None' name='[none:nu_ano:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[nu_mes]' derivation='None' name='[none:nu_mes:ok]' pivot='key' type='ordinal' />
+            <column aggregation='Sum' caption='Ano' datatype='integer' name='[nu_ano]' role='dimension' type='ordinal' />
+            <column caption='Copias' datatype='integer' name='[nu_copias]' role='measure' type='quantitative' />
+            <column aggregation='Sum' caption='Mês' datatype='integer' name='[nu_mes]' role='dimension' type='ordinal' />
+            <column-instance column='[Calculation_1365575873634709562]' derivation='User' name='[usr:Calculation_1365575873634709562:qk]' pivot='key' type='quantitative' />
+            <column caption='Valor venda' datatype='real' name='[vl_imagem]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Loja)]'>
+            <groupfilter function='level-members' level='[nm_loja]' user:ui-action-filter='[Action2]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]'>
+            <groupfilter function='member' level='[none:nu_ano:ok]' member='2021' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_mes:ok]'>
+            <groupfilter function='member' level='[none:nu_mes:ok]' member='9' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]</column>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_mes:ok]</column>
+            <column>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[Action (Loja)]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='text-format' field='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]' value='C1046%' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>Loja:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_loja:nk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Ano:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Valor:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_90564590529040384:qk]>]]></run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_loja:nk]</rows>
+        <cols>[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[usr:Calculation_1365575873634709562:qk]</cols>
+      </table>
+      <simple-id uuid='{F3FC0C91-B056-4A40-9DDB-DFF6087C888B}' />
     </worksheet>
   </worksheets>
   <dashboards>
@@ -4090,20 +4704,20 @@
         <zone h='100000' id='2' type-v2='layout-basic' w='100000' x='0' y='0'>
           <zone h='98340' id='7' param='vert' removable='false' type-v2='layout-flow' w='98426' x='787' y='830'>
             <zone h='98340' id='1' param='vert' removable='false' type-v2='layout-flow' w='98426' x='787' y='830'>
-              <zone fixed-size='142' h='14730' id='4' is-fixed='true' paired-zone-id='5' removable='false' type-v2='flipboard-nav' w='98426' x='787' y='830' />
-              <zone h='83610' id='5' paired-zone-id='4' removable='false' type-v2='flipboard' w='98426' x='787' y='15560'>
-                <flipboard active-id='6' nav-type='caption' show-nav-arrows='true'>
+              <zone fixed-size='137' h='14212' id='4' is-fixed='true' paired-zone-id='5' removable='false' type-v2='flipboard-nav' w='98426' x='787' y='830' />
+              <zone h='84128' id='5' paired-zone-id='4' removable='false' type-v2='flipboard' w='98426' x='787' y='15042'>
+                <flipboard active-id='2' nav-type='caption' show-nav-arrows='true'>
                   <story-points>
                     <story-point caption='Faturamento com vendas de imagens nos sites da agência ano de 2021 (Q1, Q2 e Q3).' captured-sheet='Painel Estratégico' id='2' />
-                    <story-point caption='A evolução nas vendas nos últimos 3 anos reafirma a tendência de altas nas vendas e a categoria de destaque é esporte.' captured-sheet='Painel Táctico' id='5'>
+                    <story-point caption='A evolução nas vendas nos últimos 3 anos reafirma a tendência de altas nas vendas e a categoria de destaque é esporte.  ' captured-sheet='Painel Táctico' id='5'>
                       <capturedDeltas>
                         <worksheet name='Evolução categorias'>
                           <selection-collection />
                         </worksheet>
                       </capturedDeltas>
                     </story-point>
-                    <story-point caption='O mercado enfrenta uma transição de formato de cameras. As câmeras DSLRs ainda representam grande fatia do mercado. Mas a tendência é o aumento do uso de mirrorless.' captured-sheet='Painel Operacioal 2' id='7' />
-                    <story-point caption='Saber qual lente é mais utilizada em cada categoria é fundamental para ampliar as possibilidades do fotógrafo. Os dados abaixos consideram os últimos três anos.' captured-sheet='Painel Estratégico 2' id='3'>
+                    <story-point caption='O mercado enfrenta uma transição de formato de cameras. As câmeras DSLRs ainda representam grande fatia do mercado. Mas a tendência é o aumento do uso de mirrorless.' captured-sheet='Painel Operacioal 3' id='7' />
+                    <story-point caption='Saber qual lente é mais utilizada em cada categoria é fundamental para ampliar as possibilidades do fotógrafo. Os dados abaixos consideram os últimos três anos.' captured-sheet='Painel Tático' id='3'>
                       <capturedDeltas>
                         <worksheet name='Lentes mais utilizadas - Retrato'>
                           <selection-collection>
@@ -4119,8 +4733,8 @@
                         </worksheet>
                       </capturedDeltas>
                     </story-point>
-                    <story-point caption='Não somente a lente mais usada é de interesse do fotógrafo. Saber a distância focal mais utilizada por categoria amplia e facilita a escolha entre lentes Zoom our fixa (Prime).' captured-sheet='Painel Estratégico 3' id='4' />
-                    <story-point caption='Lentes Zoom oferecem alta flexibilidade enquanto as Primes oferecem portabilidade e melhor desempenho com em baixa luminosidade. ' captured-sheet='Painel Operacioal' id='6' />
+                    <story-point caption='Não somente a lente mais usada é de interesse do fotógrafo. Saber a distância focal mais utilizada por categoria amplia e facilita a escolha entre lentes Zoom our fixa (Prime).' captured-sheet='Painel Operacional 1' id='4' />
+                    <story-point caption='Lentes Zoom oferecem alta flexibilidade enquanto as Primes oferecem portabilidade e melhor desempenho com em baixa luminosidade. ' captured-sheet='Painel Operacioal 2' id='6' />
                   </story-points>
                 </flipboard>
               </zone>
@@ -4143,9 +4757,10 @@
             <run fontalignment='0'>Esporte se destaca como a categoria com maior faturamento</run>
           </formatted-text>
         </zone>
-        <zone flipboard-zone-id='5' forceUpdate='true' h='24066' id='10' story-point-id='6' type-v2='text' w='60433' x='886' y='75934'>
+        <zone flipboard-zone-id='5' forceUpdate='true' h='24066' hidden='true' id='10' story-point-id='6' type-v2='text' w='60433' x='886' y='75934'>
           <formatted-text>
-            <run fontalignment='0'>Canon segura uma posição firme como sendo o fabricantes mais recorrente para lentes lentes Zoom.
+            <run fontalignment='0'>Canon segura uma posição firme como sendo o fabricantes
+ mais recorrente para lentes lentes Zoom.
 
 A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A maioria das imagem foram obtidas com lentes do tipo Zoom da fabricante Canon. Isso indica que a versatilidade da lente é preferência entre os fotográfos.</run>
           </formatted-text>
@@ -4153,16 +4768,6 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
         <zone flipboard-zone-id='5' h='21784' hidden='true' id='11' story-point-id='7' type-v2='text' w='47638' x='50000' y='74170'>
           <formatted-text>
             <run fontalignment='0'>Foi somente em 2019 que fabricantes com Canon e Nikon passaram a oferecer câmeras mirrorless profissionais. A Sony, que ja vem a mais tempo oferendo essa opção tem a maior participação atualmente.</run>
-          </formatted-text>
-        </zone>
-        <zone flipboard-zone-id='5' h='14004' hidden='true' id='12' story-point-id='2' type-v2='text' w='33268' x='63287' y='18983'>
-          <formatted-text>
-            <run fontalignment='0'>As lojas possuem um desepenho semelhante e a categoria Esportes se destaca como a que gera um maior faturamento e vende uma maior número de cópias.</run>
-          </formatted-text>
-        </zone>
-        <zone flipboard-zone-id='5' forceUpdate='true' h='4046' hidden='true' id='13' story-point-id='2' type-v2='text' w='20669' x='4331' y='15664'>
-          <formatted-text>
-            <run bold='true' fontalignment='0' fontcolor='#b6992d' fontsize='24'>Agência - ASD</run>
           </formatted-text>
         </zone>
       </zones>
@@ -4176,14 +4781,30 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
           </formatted-text>
         </title>
       </layout-options>
-      <style />
+      <style>
+        <style-rule element='dash-text'>
+          <format attr='text-orientation' id='dash-text_159' value='0' />
+          <format attr='vertical-align' id='dash-text_159' value='top' />
+          <format attr='wrap' id='dash-text_159' value='off' />
+        </style-rule>
+      </style>
       <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
       <zones>
-        <zone h='24000' id='17' name='Vendas por loja 2021' w='64500' x='12900' y='26125' />
-        <zone h='38625' id='23' name='Categoria mais vendida - 2021' w='68200' x='13000' y='55875' />
-        <zone h='18125' id='32' name='Total vendas' w='37200' x='7400' y='8500'>
+        <zone h='100000' id='141' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone h='100000' id='146' param='vert' type-v2='layout-flow' w='100000' x='0' y='0'>
+            <zone h='100000' id='144' type-v2='layout-basic' w='100000' x='0' y='0' />
+          </zone>
+        </zone>
+        <zone h='31625' id='205' name='Meta 2021' w='33300' x='34400' y='68000' />
+        <zone h='25000' id='17' name='Vendas por loja 2021' w='44800' x='800' y='18000' />
+        <zone h='25125' id='23' name='Categoria mais vendida - 2021' w='47500' x='0' y='43500' />
+        <zone h='18125' id='32' name='Total vendas - 2021' w='37200' x='4200' y='2500'>
           <layout-cache type-h='fixed' type-w='fixed' />
         </zone>
+        <zone h='16625' id='140' name='Total vendas - Setembro' w='31500' x='62900' y='2250' />
+        <zone h='25125' id='147' name='Vendas por loja Setembro' w='44400' x='52500' y='18125' />
+        <zone h='25250' id='156' name='Categoria mais vendida - Setembro' w='47700' x='52300' y='44250' />
+        <zone h='7875' id='204' name='Percentual meta 2021' show-title='false' w='20400' x='42800' y='90250' />
       </zones>
       <devicelayouts>
         <devicelayout auto-generated='true' name='Phone'>
@@ -4194,11 +4815,20 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
               </formatted-text>
             </title>
           </layout-options>
-          <size maxheight='700' minheight='700' sizing-mode='vscroll' />
+          <size maxheight='1500' minheight='1500' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='129' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='128' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
-                <zone fixed-size='145' h='18125' id='32' is-fixed='true' name='Total vendas' w='37200' x='7400' y='8500'>
+            <zone h='100000' id='207' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='206' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+                <zone fixed-size='133' h='16625' id='140' is-fixed='true' name='Total vendas - Setembro' w='31500' x='62900' y='2250'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='145' h='18125' id='32' is-fixed='true' name='Total vendas - 2021' w='37200' x='4200' y='2500'>
                   <layout-cache type-h='fixed' type-w='fixed' />
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -4208,7 +4838,7 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='192' h='24000' id='17' is-fixed='true' name='Vendas por loja 2021' w='64500' x='12900' y='26125'>
+                <zone fixed-size='200' h='25000' id='17' is-fixed='true' name='Vendas por loja 2021' w='44800' x='800' y='18000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -4217,7 +4847,43 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='280' h='38625' id='23' is-fixed='true' name='Categoria mais vendida - 2021' w='68200' x='13000' y='55875'>
+                <zone fixed-size='201' h='25125' id='147' is-fixed='true' name='Vendas por loja Setembro' w='44400' x='52500' y='18125'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='201' h='25125' id='23' is-fixed='true' name='Categoria mais vendida - 2021' w='47500' x='0' y='43500'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='202' h='25250' id='156' is-fixed='true' name='Categoria mais vendida - Setembro' w='47700' x='52300' y='44250'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='252' h='31500' id='205' is-fixed='true' name='Meta 2021' w='33300' x='34400' y='70125'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='63' h='7875' id='204' is-fixed='true' name='Percentual meta 2021' show-title='false' w='20400' x='42800' y='90250'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -4227,55 +4893,37 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
                   </zone-style>
                 </zone>
               </zone>
-              <zone-style>
-                <format attr='border-color' value='#000000' />
-                <format attr='border-style' value='none' />
-                <format attr='border-width' value='0' />
-                <format attr='margin' value='8' />
-              </zone-style>
             </zone>
           </zones>
         </devicelayout>
       </devicelayouts>
       <simple-id uuid='{B0AB0165-7F9A-4546-934C-927B088E62E7}' />
     </dashboard>
-    <dashboard name='Painel Estratégico 2'>
-      <layout-options>
-        <title>
-          <formatted-text>
-            <run>&lt;Sheet Name&gt; </run>
-          </formatted-text>
-        </title>
-      </layout-options>
+    <dashboard name='Painel Operacioal 2'>
       <style />
       <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <datasources>
+        <datasource caption='f_foto.csv+ (Multiple Connections)' name='federated.0ahvwmh0pdid8y1a01mgf0umxna2' />
+      </datasources>
+      <datasource-dependencies datasource='federated.0ahvwmh0pdid8y1a01mgf0umxna2'>
+        <column-instance column='[nu_ano]' derivation='None' name='[none:nu_ano:ok]' pivot='key' type='ordinal' />
+        <column aggregation='Sum' caption='Ano' datatype='integer' name='[nu_ano]' role='dimension' type='ordinal' />
+      </datasource-dependencies>
       <zones>
-        <zone h='100000' id='6' type-v2='layout-basic' w='100000' x='0' y='0'>
-          <zone h='49000' id='5' name='Lentes mais utilizadas - casamento' w='49200' x='800' y='1000'>
-            <zone-style>
-              <format attr='border-color' value='#000000' />
-              <format attr='border-style' value='none' />
-              <format attr='border-width' value='0' />
-              <format attr='margin' value='4' />
-            </zone-style>
+        <zone h='100000' id='70' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone h='98000' id='79' param='horz' type-v2='layout-flow' w='49200' x='50000' y='1000'>
+            <zone h='98000' id='71' type-v2='layout-basic' w='49200' x='50000' y='1000'>
+              <zone h='98000' id='76' name='Fabricantes por tipo de lente' w='49200' x='50000' y='1000'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+            </zone>
           </zone>
-          <zone h='49000' id='7' name='Lentes mais utilizadas - Esportes' w='49200' x='50000' y='1000'>
-            <zone-style>
-              <format attr='border-color' value='#000000' />
-              <format attr='border-style' value='none' />
-              <format attr='border-width' value='0' />
-              <format attr='margin' value='4' />
-            </zone-style>
-          </zone>
-          <zone h='49000' id='8' name='Lentes mais utilizadas - Natureza' w='49200' x='800' y='50000'>
-            <zone-style>
-              <format attr='border-color' value='#000000' />
-              <format attr='border-style' value='none' />
-              <format attr='border-width' value='0' />
-              <format attr='margin' value='4' />
-            </zone-style>
-          </zone>
-          <zone h='49000' id='9' name='Lentes mais utilizadas - Retrato' w='49200' x='50000' y='50000'>
+          <zone h='98000' id='77' name='Tipo de lente mais usada' w='49200' x='800' y='1000'>
             <zone-style>
               <format attr='border-color' value='#000000' />
               <format attr='border-style' value='none' />
@@ -4290,21 +4938,15 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
             <format attr='margin' value='8' />
           </zone-style>
         </zone>
+        <zone h='9375' id='80' mode='slider' name='Tipo de lente mais usada' param='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]' type-v2='filter' w='16800' x='82500' y='6125' />
       </zones>
       <devicelayouts>
         <devicelayout auto-generated='true' name='Phone'>
-          <layout-options>
-            <title>
-              <formatted-text>
-                <run>&lt;Sheet Name&gt; </run>
-              </formatted-text>
-            </title>
-          </layout-options>
-          <size maxheight='1200' minheight='1200' sizing-mode='vscroll' />
+          <size maxheight='700' minheight='700' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='129' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='128' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
-                <zone fixed-size='280' h='49000' id='5' is-fixed='true' name='Lentes mais utilizadas - casamento' w='49200' x='800' y='1000'>
+            <zone h='100000' id='174' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='173' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+                <zone h='9375' id='80' mode='slider' name='Tipo de lente mais usada' param='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]' type-v2='filter' w='16800' x='82500' y='6125'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -4313,7 +4955,7 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='280' h='49000' id='7' is-fixed='true' name='Lentes mais utilizadas - Esportes' w='49200' x='50000' y='1000'>
+                <zone fixed-size='280' h='98000' id='77' is-fixed='true' name='Tipo de lente mais usada' w='49200' x='800' y='1000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -4322,16 +4964,7 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='280' h='49000' id='8' is-fixed='true' name='Lentes mais utilizadas - Natureza' w='49200' x='800' y='50000'>
-                  <zone-style>
-                    <format attr='border-color' value='#000000' />
-                    <format attr='border-style' value='none' />
-                    <format attr='border-width' value='0' />
-                    <format attr='margin' value='4' />
-                    <format attr='padding' value='0' />
-                  </zone-style>
-                </zone>
-                <zone fixed-size='280' h='49000' id='9' is-fixed='true' name='Lentes mais utilizadas - Retrato' w='49200' x='50000' y='50000'>
+                <zone fixed-size='280' h='98000' id='76' is-fixed='true' name='Fabricantes por tipo de lente' w='49200' x='50000' y='1000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -4351,9 +4984,113 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
           </zones>
         </devicelayout>
       </devicelayouts>
-      <simple-id uuid='{F9E80017-7B8C-4059-A6EB-AD1BD79F9272}' />
+      <simple-id uuid='{32DDC28D-C10F-456D-938C-599A909EB64C}' />
     </dashboard>
-    <dashboard name='Painel Estratégico 3'>
+    <dashboard name='Painel Operacioal 3'>
+      <style />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <datasources>
+        <datasource caption='f_foto.csv+ (Multiple Connections)' name='federated.0ahvwmh0pdid8y1a01mgf0umxna2' />
+      </datasources>
+      <datasource-dependencies datasource='federated.0ahvwmh0pdid8y1a01mgf0umxna2'>
+        <column-instance column='[nu_ano]' derivation='None' name='[none:nu_ano:ok]' pivot='key' type='ordinal' />
+        <column aggregation='Sum' caption='Ano' datatype='integer' name='[nu_ano]' role='dimension' type='ordinal' />
+      </datasource-dependencies>
+      <zones>
+        <zone h='100000' id='2' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone h='98000' id='16' param='horz' type-v2='layout-flow' w='98400' x='800' y='1000'>
+            <zone h='98000' id='3' type-v2='layout-basic' w='98400' x='800' y='1000'>
+              <zone h='98000' id='9' name='Fabricante camera categoria' w='49200' x='50000' y='1000'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+              <zone h='49000' id='14' name='Fabricantes por tipo de câmera' w='49200' x='800' y='1000'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+              <zone h='49000' id='18' name='Tipo de câmera mais usada' w='49200' x='800' y='50000'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+            </zone>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+        <zone h='9375' id='19' mode='slider' name='Tipo de câmera mais usada' param='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]' type-v2='filter' w='16800' x='83000' y='6000' />
+      </zones>
+      <devicelayouts>
+        <devicelayout auto-generated='true' name='Phone'>
+          <size maxheight='950' minheight='950' sizing-mode='vscroll' />
+          <zones>
+            <zone h='100000' id='159' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='158' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+                <zone fixed-size='280' h='49000' id='14' is-fixed='true' name='Fabricantes por tipo de câmera' w='49200' x='800' y='1000'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='98000' id='9' is-fixed='true' name='Fabricante camera categoria' w='49200' x='50000' y='1000'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone h='9375' id='19' mode='slider' name='Tipo de câmera mais usada' param='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]' type-v2='filter' w='16800' x='83000' y='6000'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='49000' id='18' is-fixed='true' name='Tipo de câmera mais usada' w='49200' x='800' y='50000'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+              </zone>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='8' />
+              </zone-style>
+            </zone>
+          </zones>
+        </devicelayout>
+      </devicelayouts>
+      <simple-id uuid='{41FCB8F3-69DD-4B18-82F5-FCA58778478C}' />
+    </dashboard>
+    <dashboard name='Painel Operacional 1'>
       <layout-options>
         <title>
           <formatted-text>
@@ -4414,8 +5151,8 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
           </layout-options>
           <size maxheight='700' minheight='700' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='129' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='128' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+            <zone h='100000' id='195' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='194' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
                 <zone fixed-size='280' h='64000' id='1' is-fixed='true' name='Distância focal mais utilizada por categoria' w='85300' x='800' y='1000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -4456,211 +5193,28 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
       </devicelayouts>
       <simple-id uuid='{FEA110AD-AADC-48E5-89B0-4D6582C36F47}' />
     </dashboard>
-    <dashboard name='Painel Operacioal'>
-      <style />
-      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
-      <datasources>
-        <datasource caption='f_foto.csv+ (Multiple Connections)' name='federated.0ahvwmh0pdid8y1a01mgf0umxna2' />
-      </datasources>
-      <datasource-dependencies datasource='federated.0ahvwmh0pdid8y1a01mgf0umxna2'>
-        <column-instance column='[nu_ano]' derivation='None' name='[none:nu_ano:ok]' pivot='key' type='ordinal' />
-        <column aggregation='Sum' caption='Ano' datatype='integer' name='[nu_ano]' role='dimension' type='ordinal' />
-      </datasource-dependencies>
-      <zones>
-        <zone h='100000' id='70' type-v2='layout-basic' w='100000' x='0' y='0'>
-          <zone h='98000' id='79' param='horz' type-v2='layout-flow' w='49200' x='50000' y='1000'>
-            <zone h='98000' id='71' type-v2='layout-basic' w='49200' x='50000' y='1000'>
-              <zone h='98000' id='76' name='Fabricantes por tipo de lente' w='49200' x='50000' y='1000'>
-                <zone-style>
-                  <format attr='border-color' value='#000000' />
-                  <format attr='border-style' value='none' />
-                  <format attr='border-width' value='0' />
-                  <format attr='margin' value='4' />
-                </zone-style>
-              </zone>
-            </zone>
-          </zone>
-          <zone h='98000' id='77' name='Tipo de lente mais usada' w='49200' x='800' y='1000'>
-            <zone-style>
-              <format attr='border-color' value='#000000' />
-              <format attr='border-style' value='none' />
-              <format attr='border-width' value='0' />
-              <format attr='margin' value='4' />
-            </zone-style>
-          </zone>
-          <zone-style>
-            <format attr='border-color' value='#000000' />
-            <format attr='border-style' value='none' />
-            <format attr='border-width' value='0' />
-            <format attr='margin' value='8' />
-          </zone-style>
-        </zone>
-        <zone h='9375' id='80' mode='slider' name='Tipo de lente mais usada' param='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]' type-v2='filter' w='16800' x='82500' y='6125' />
-      </zones>
-      <devicelayouts>
-        <devicelayout auto-generated='true' name='Phone'>
-          <size maxheight='700' minheight='700' sizing-mode='vscroll' />
-          <zones>
-            <zone h='100000' id='108' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='107' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
-                <zone h='9375' id='80' mode='slider' name='Tipo de lente mais usada' param='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]' type-v2='filter' w='16800' x='82500' y='6125'>
-                  <zone-style>
-                    <format attr='border-color' value='#000000' />
-                    <format attr='border-style' value='none' />
-                    <format attr='border-width' value='0' />
-                    <format attr='margin' value='4' />
-                    <format attr='padding' value='0' />
-                  </zone-style>
-                </zone>
-                <zone fixed-size='280' h='98000' id='77' is-fixed='true' name='Tipo de lente mais usada' w='49200' x='800' y='1000'>
-                  <zone-style>
-                    <format attr='border-color' value='#000000' />
-                    <format attr='border-style' value='none' />
-                    <format attr='border-width' value='0' />
-                    <format attr='margin' value='4' />
-                    <format attr='padding' value='0' />
-                  </zone-style>
-                </zone>
-                <zone fixed-size='280' h='98000' id='76' is-fixed='true' name='Fabricantes por tipo de lente' w='49200' x='50000' y='1000'>
-                  <zone-style>
-                    <format attr='border-color' value='#000000' />
-                    <format attr='border-style' value='none' />
-                    <format attr='border-width' value='0' />
-                    <format attr='margin' value='4' />
-                    <format attr='padding' value='0' />
-                  </zone-style>
-                </zone>
-              </zone>
-              <zone-style>
-                <format attr='border-color' value='#000000' />
-                <format attr='border-style' value='none' />
-                <format attr='border-width' value='0' />
-                <format attr='margin' value='8' />
-              </zone-style>
-            </zone>
-          </zones>
-        </devicelayout>
-      </devicelayouts>
-      <simple-id uuid='{32DDC28D-C10F-456D-938C-599A909EB64C}' />
-    </dashboard>
-    <dashboard name='Painel Operacioal 2'>
-      <style />
-      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
-      <datasources>
-        <datasource caption='f_foto.csv+ (Multiple Connections)' name='federated.0ahvwmh0pdid8y1a01mgf0umxna2' />
-      </datasources>
-      <datasource-dependencies datasource='federated.0ahvwmh0pdid8y1a01mgf0umxna2'>
-        <column-instance column='[nu_ano]' derivation='None' name='[none:nu_ano:ok]' pivot='key' type='ordinal' />
-        <column aggregation='Sum' caption='Ano' datatype='integer' name='[nu_ano]' role='dimension' type='ordinal' />
-      </datasource-dependencies>
-      <zones>
-        <zone h='100000' id='2' type-v2='layout-basic' w='100000' x='0' y='0'>
-          <zone h='98000' id='16' param='horz' type-v2='layout-flow' w='98400' x='800' y='1000'>
-            <zone h='98000' id='3' type-v2='layout-basic' w='98400' x='800' y='1000'>
-              <zone h='98000' id='9' name='Fabricante camera categoria' w='49200' x='50000' y='1000'>
-                <zone-style>
-                  <format attr='border-color' value='#000000' />
-                  <format attr='border-style' value='none' />
-                  <format attr='border-width' value='0' />
-                  <format attr='margin' value='4' />
-                </zone-style>
-              </zone>
-              <zone h='49000' id='14' name='Fabricantes por tipo de câmera' w='49200' x='800' y='1000'>
-                <zone-style>
-                  <format attr='border-color' value='#000000' />
-                  <format attr='border-style' value='none' />
-                  <format attr='border-width' value='0' />
-                  <format attr='margin' value='4' />
-                </zone-style>
-              </zone>
-              <zone h='49000' id='18' name='Tipo de câmera mais usada' w='49200' x='800' y='50000'>
-                <zone-style>
-                  <format attr='border-color' value='#000000' />
-                  <format attr='border-style' value='none' />
-                  <format attr='border-width' value='0' />
-                  <format attr='margin' value='4' />
-                </zone-style>
-              </zone>
-            </zone>
-          </zone>
-          <zone-style>
-            <format attr='border-color' value='#000000' />
-            <format attr='border-style' value='none' />
-            <format attr='border-width' value='0' />
-            <format attr='margin' value='8' />
-          </zone-style>
-        </zone>
-        <zone h='9375' id='19' mode='slider' name='Tipo de câmera mais usada' param='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]' type-v2='filter' w='16800' x='83000' y='6000' />
-      </zones>
-      <devicelayouts>
-        <devicelayout auto-generated='true' name='Phone'>
-          <size maxheight='950' minheight='950' sizing-mode='vscroll' />
-          <zones>
-            <zone h='100000' id='93' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='92' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
-                <zone fixed-size='280' h='49000' id='14' is-fixed='true' name='Fabricantes por tipo de câmera' w='49200' x='800' y='1000'>
-                  <zone-style>
-                    <format attr='border-color' value='#000000' />
-                    <format attr='border-style' value='none' />
-                    <format attr='border-width' value='0' />
-                    <format attr='margin' value='4' />
-                    <format attr='padding' value='0' />
-                  </zone-style>
-                </zone>
-                <zone fixed-size='280' h='98000' id='9' is-fixed='true' name='Fabricante camera categoria' w='49200' x='50000' y='1000'>
-                  <zone-style>
-                    <format attr='border-color' value='#000000' />
-                    <format attr='border-style' value='none' />
-                    <format attr='border-width' value='0' />
-                    <format attr='margin' value='4' />
-                    <format attr='padding' value='0' />
-                  </zone-style>
-                </zone>
-                <zone h='9375' id='19' mode='slider' name='Tipo de câmera mais usada' param='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nu_ano:ok]' type-v2='filter' w='16800' x='83000' y='6000'>
-                  <zone-style>
-                    <format attr='border-color' value='#000000' />
-                    <format attr='border-style' value='none' />
-                    <format attr='border-width' value='0' />
-                    <format attr='margin' value='4' />
-                    <format attr='padding' value='0' />
-                  </zone-style>
-                </zone>
-                <zone fixed-size='280' h='49000' id='18' is-fixed='true' name='Tipo de câmera mais usada' w='49200' x='800' y='50000'>
-                  <zone-style>
-                    <format attr='border-color' value='#000000' />
-                    <format attr='border-style' value='none' />
-                    <format attr='border-width' value='0' />
-                    <format attr='margin' value='4' />
-                    <format attr='padding' value='0' />
-                  </zone-style>
-                </zone>
-              </zone>
-              <zone-style>
-                <format attr='border-color' value='#000000' />
-                <format attr='border-style' value='none' />
-                <format attr='border-width' value='0' />
-                <format attr='margin' value='8' />
-              </zone-style>
-            </zone>
-          </zones>
-        </devicelayout>
-      </devicelayouts>
-      <simple-id uuid='{41FCB8F3-69DD-4B18-82F5-FCA58778478C}' />
-    </dashboard>
     <dashboard name='Painel Táctico'>
       <style />
       <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <datasources>
+        <datasource caption='f_foto.csv+ (Multiple Connections)' name='federated.0ahvwmh0pdid8y1a01mgf0umxna2' />
+      </datasources>
+      <datasource-dependencies datasource='federated.0ahvwmh0pdid8y1a01mgf0umxna2'>
+        <column caption='Loja' datatype='string' name='[nm_loja]' role='dimension' type='nominal' />
+        <column-instance column='[nm_loja]' derivation='None' name='[none:nm_loja:nk]' pivot='key' type='nominal' />
+      </datasource-dependencies>
       <zones>
-        <zone h='40250' id='13' name='Evolução vendas - site' w='95600' x='2300' y='2125' />
-        <zone h='53625' id='17' name='Evolução categorias' w='98700' x='800' y='45875' />
+        <zone h='48875' id='13' name='Evolução vendas - site' w='97100' x='2300' y='3000' />
+        <zone h='45875' id='17' name='Evolução categorias' w='98500' x='800' y='53625' />
+        <zone h='6750' id='151' mode='checkdropdown' name='Evolução categorias' param='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_loja:nk]' type-v2='filter' values='database' w='16000' x='83400' y='375' />
       </zones>
       <devicelayouts>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='700' minheight='700' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='115' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='114' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
-                <zone fixed-size='280' h='40250' id='13' is-fixed='true' name='Evolução vendas - site' w='95600' x='2300' y='2125'>
+            <zone h='100000' id='183' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='182' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+                <zone fixed-size='280' h='48875' id='13' is-fixed='true' name='Evolução vendas - site' w='97100' x='2300' y='3000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -4669,7 +5223,16 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='280' h='53625' id='17' is-fixed='true' name='Evolução categorias' w='98700' x='800' y='45875'>
+                <zone h='6750' id='151' mode='checkdropdown' name='Evolução categorias' param='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_loja:nk]' type-v2='filter' values='database' w='16000' x='83400' y='375'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='45875' id='17' is-fixed='true' name='Evolução categorias' w='98500' x='800' y='53625'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -4691,27 +5254,133 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
       </devicelayouts>
       <simple-id uuid='{0C86512D-1C56-440E-93D5-5EF55FF99343}' />
     </dashboard>
+    <dashboard name='Painel Tático'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>&lt;Sheet Name&gt; </run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <style />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <zones>
+        <zone h='100000' id='6' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone h='98000' id='166' param='horz' type-v2='layout-flow' w='98400' x='800' y='1000'>
+            <zone h='98000' id='164' type-v2='layout-basic' w='95200' x='800' y='1000' />
+            <zone fixed-size='32' h='98000' id='165' is-fixed='true' param='vert' type-v2='layout-flow' w='3200' x='96000' y='1000' />
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+        <zone h='43250' id='9' name='Lentes mais utilizadas - Retrato' w='47500' x='51000' y='55125' />
+        <zone h='45500' id='7' name='Lentes mais utilizadas - Esportes' w='48200' x='50600' y='9625' />
+        <zone h='45500' id='5' name='Lentes mais utilizadas - casamento' w='48300' x='300' y='8625' />
+        <zone h='43000' id='8' name='Lentes mais utilizadas - Natureza' w='49200' x='100' y='56625' />
+      </zones>
+      <devicelayouts>
+        <devicelayout auto-generated='true' name='Phone'>
+          <layout-options>
+            <title>
+              <formatted-text>
+                <run>&lt;Sheet Name&gt; </run>
+              </formatted-text>
+            </title>
+          </layout-options>
+          <size maxheight='1200' minheight='1200' sizing-mode='vscroll' />
+          <zones>
+            <zone h='100000' id='198' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='197' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+                <zone fixed-size='280' h='45500' id='5' is-fixed='true' name='Lentes mais utilizadas - casamento' w='48300' x='300' y='8625'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='45500' id='7' is-fixed='true' name='Lentes mais utilizadas - Esportes' w='48200' x='50600' y='9625'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='43250' id='9' is-fixed='true' name='Lentes mais utilizadas - Retrato' w='47500' x='51000' y='55125'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='43000' id='8' is-fixed='true' name='Lentes mais utilizadas - Natureza' w='49200' x='100' y='56625'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+              </zone>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='8' />
+              </zone-style>
+            </zone>
+          </zones>
+        </devicelayout>
+      </devicelayouts>
+      <simple-id uuid='{F9E80017-7B8C-4059-A6EB-AD1BD79F9272}' />
+    </dashboard>
   </dashboards>
-  <windows pres-mode='true' source-height='30'>
-    <window class='dashboard' maximized='true' name='Lentes fotográficas, a melhor compra'>
+  <windows source-height='30'>
+    <window class='dashboard' name='Lentes fotográficas, a melhor compra'>
       <viewpoints />
-      <active id='-1' />
+      <active id='5' />
       <simple-id uuid='{114F0B8F-9E84-4EDB-B25F-E2DCFB986147}' />
     </window>
     <window class='dashboard' name='Painel Estratégico'>
       <viewpoints>
-        <viewpoint name='Categoria mais vendida - 2021'>
+        <viewpoint name='Categoria mais vendida - 2021' />
+        <viewpoint name='Categoria mais vendida - Setembro' />
+        <viewpoint name='Meta 2021'>
           <zoom type='entire-view' />
+          <floating-toolbar-visibility value='2' />
         </viewpoint>
-        <viewpoint name='Total vendas' />
-        <viewpoint name='Vendas por loja 2021'>
-          <zoom type='entire-view' />
-        </viewpoint>
+        <viewpoint name='Percentual meta 2021' />
+        <viewpoint name='Total vendas - 2021' />
+        <viewpoint name='Total vendas - Setembro' />
+        <viewpoint name='Vendas por loja 2021' />
+        <viewpoint name='Vendas por loja Setembro' />
       </viewpoints>
       <active id='-1' />
       <simple-id uuid='{F42C9B28-AF5E-4888-B98D-F66E5FBFDFD5}' />
     </window>
-    <window class='dashboard' name='Painel Estratégico 2'>
+    <window class='dashboard' maximized='true' name='Painel Táctico'>
+      <viewpoints>
+        <viewpoint name='Evolução categorias'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Evolução vendas - site'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='-1' />
+      <simple-id uuid='{99336A77-B91D-4AC5-8B06-2F21FD0E6B7E}' />
+    </window>
+    <window class='dashboard' name='Painel Tático'>
       <viewpoints>
         <viewpoint name='Lentes mais utilizadas - Esportes' />
         <viewpoint name='Lentes mais utilizadas - Natureza' />
@@ -4721,7 +5390,7 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
       <active id='-1' />
       <simple-id uuid='{657AD941-12E9-4509-8AC7-DC3A714C08DB}' />
     </window>
-    <window class='dashboard' name='Painel Estratégico 3'>
+    <window class='dashboard' name='Painel Operacional 1'>
       <viewpoints>
         <viewpoint name='Distância focal mais utilizada por categoria'>
           <zoom type='entire-view' />
@@ -4733,19 +5402,7 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
       <active id='6' />
       <simple-id uuid='{CB18B924-9863-4055-9AE6-8CD63C9D32E3}' />
     </window>
-    <window class='dashboard' name='Painel Táctico'>
-      <viewpoints>
-        <viewpoint name='Evolução categorias'>
-          <zoom type='entire-view' />
-        </viewpoint>
-        <viewpoint name='Evolução vendas - site'>
-          <zoom type='entire-view' />
-        </viewpoint>
-      </viewpoints>
-      <active id='13' />
-      <simple-id uuid='{99336A77-B91D-4AC5-8B06-2F21FD0E6B7E}' />
-    </window>
-    <window class='dashboard' name='Painel Operacioal'>
+    <window class='dashboard' name='Painel Operacioal 2'>
       <viewpoints>
         <viewpoint name='Fabricantes por tipo de lente'>
           <zoom type='entire-view' />
@@ -4754,10 +5411,10 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
           <zoom type='entire-view' />
         </viewpoint>
       </viewpoints>
-      <active id='80' />
+      <active id='-1' />
       <simple-id uuid='{C0E2C25E-D354-4781-BBB8-AB43C3E67AA0}' />
     </window>
-    <window class='dashboard' name='Painel Operacioal 2'>
+    <window class='dashboard' name='Painel Operacioal 3'>
       <viewpoints>
         <viewpoint name='Fabricante camera categoria' />
         <viewpoint name='Fabricantes por tipo de câmera' />
@@ -4765,7 +5422,7 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
           <zoom type='entire-view' />
         </viewpoint>
       </viewpoints>
-      <active id='19' />
+      <active id='-1' />
       <simple-id uuid='{ECCF80D8-885E-4F28-ABA5-1908C19BC1E7}' />
     </window>
     <window class='worksheet' name='Distância focal mais utilizada por categoria'>
@@ -4970,6 +5627,32 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
       </cards>
       <simple-id uuid='{A0623C46-0E55-48B0-9415-17F4103E7F21}' />
     </window>
+    <window class='worksheet' name='Vendas por loja Setembro'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='fit-width' />
+      </viewpoint>
+      <simple-id uuid='{5DC43F48-DA0F-4058-AB4D-825825D61B3C}' />
+    </window>
     <window class='worksheet' name='Categoria mais vendida - 2021'>
       <cards>
         <edge name='left'>
@@ -4993,7 +5676,30 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
       </cards>
       <simple-id uuid='{8F277664-5B16-48BD-ABB1-5445715455B2}' />
     </window>
-    <window class='worksheet' name='Total vendas'>
+    <window class='worksheet' name='Categoria mais vendida - Setembro'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{76BDEE1B-2505-42DB-BA80-9411394590A1}' />
+    </window>
+    <window class='worksheet' name='Total vendas - 2021'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -5016,7 +5722,7 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
       </cards>
       <simple-id uuid='{984933C3-94C5-4CD2-A5BA-E5D750223265}' />
     </window>
-    <window class='worksheet' name='Compras por loja 2021'>
+    <window class='worksheet' name='Total vendas - Setembro'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -5037,7 +5743,7 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
           </strip>
         </edge>
       </cards>
-      <simple-id uuid='{E5670040-FE36-4900-8EAF-5C9BB701AC09}' />
+      <simple-id uuid='{033D8AA7-B898-425F-85A1-529678DE4B45}' />
     </window>
     <window class='worksheet' name='Evolução vendas - site'>
       <cards>
@@ -5065,6 +5771,9 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
           </strip>
         </edge>
       </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+      </viewpoint>
       <simple-id uuid='{19C4BFB1-1D72-45E3-BCE9-C3990A7F31BD}' />
     </window>
     <window class='worksheet' name='Evolução categorias'>
@@ -5088,8 +5797,8 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
           </strip>
         </edge>
         <edge name='right'>
-          <strip size='160'>
-            <card pane-specification-id='1' param='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_categoria:nk]' type='color' />
+          <strip size='117'>
+            <card pane-specification-id='2' param='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:nm_categoria:nk]' type='color' />
           </strip>
         </edge>
       </cards>
@@ -5242,6 +5951,63 @@ A escolha por uma lente Zoom ou Prime depende do perfil de cada fotógrafo. A ma
         </edge>
       </cards>
       <simple-id uuid='{3243F910-BDE6-4CA0-B911-342CD6F51C1F}' />
+    </window>
+    <window class='worksheet' name='Meta 2021'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card type='measures' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='3' param='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[:Measure Names]' type='color' />
+            <card pane-specification-id='4' param='[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[:Measure Names]&#10;[federated.0ahvwmh0pdid8y1a01mgf0umxna2].[none:Calculation_1365575873644695626:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+        <floating-toolbar-visibility value='1' />
+      </viewpoint>
+      <simple-id uuid='{428A377F-1EDB-4187-AFF9-9BF3A885AFB7}' />
+    </window>
+    <window class='worksheet' name='Percentual meta 2021'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{E6259A08-0773-4F57-9F64-95BCD0C958BA}' />
     </window>
   </windows>
 </workbook>
