@@ -19,7 +19,7 @@ def pre_load_db():
                 cur.copy_from(adjust_before_save('data/d_imagem.csv'), 'd_imagem', sep=',')
                 cur.copy_from(adjust_before_save('data/d_loja.csv'), 'd_loja', sep=',')
                 cur.copy_from(adjust_before_save('data/d_tempo.csv'), 'd_tempo', sep=',')
-                cur.copy_from(adjust_before_save('data/f_foto.csv'), 'f_foto', sep=',')
+                cur.copy_from(adjust_before_save('data/f_venda.csv'), 'f_venda', sep=',')
                 cur.copy_from(adjust_before_save('data/t_fotografia.csv'), 't_fotografias', sep=',')
         print("Finish pre loading the DB")
     except Exception as e:

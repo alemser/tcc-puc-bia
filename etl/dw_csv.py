@@ -14,7 +14,7 @@ def export_csv():
     d_imagem()
     d_loja()
     d_tempo()
-    f_foto()
+    f_venda()
     t_fotografia()
     print("Carregamento CSV completo")
 
@@ -66,11 +66,11 @@ def d_tempo():
         """
     _execute(sql, 'd_tempo')
 
-def f_foto():
+def f_venda():
     sql = """
-        COPY (SELECT * FROM f_foto) TO STDOUT WITH CSV HEADER DELIMITER ',';
+        COPY (SELECT * FROM f_venda) TO STDOUT WITH CSV HEADER DELIMITER ',';
         """
-    _execute(sql, 'f_foto')
+    _execute(sql, 'f_venda')
 
 def t_fotografia():
     sql = """

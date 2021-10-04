@@ -91,6 +91,27 @@ de extração da URL que é a menos custosa e que normalmente finaliza rapidamen
 
 > Para executar somente a geração do CSV execute `python3 main.py csv`.
 
+
+## Opções de comando
+
+### Database to CSV
+
+Para gerar arquivos CSV a partir do banco de dados execute:
+
+`python3 main.py preload`
+
+### Load Data Warehouse
+
+Carrega o DW com base na tabela t_fotografias
+
+`python3 main.py loaddw`
+
+### Load Exif
+
+Carrega o Exif das fotografias com base nos registros disponíveis na tabela t_fotografias.
+
+`python3 main.py exif`
+
 # Entendendo a estrutura do projeto
 
 ## Diretórios

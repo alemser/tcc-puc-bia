@@ -126,11 +126,11 @@ CREATE TABLE "public"."d_imagem" (
     PRIMARY KEY ("id_imagem")
 );
 
-DROP TABLE IF EXISTS "public"."f_foto";
+DROP TABLE IF EXISTS "public"."f_venda";
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
 
 -- Table Definition
-CREATE TABLE "public"."f_foto" (
+CREATE TABLE "public"."f_venda" (
     "id_camera" bigint NOT NULL,
     "id_categoria" bigint NOT NULL,
     "id_lente" bigint NOT NULL,
@@ -141,22 +141,22 @@ CREATE TABLE "public"."f_foto" (
     "nu_copias"int,
     PRIMARY KEY ("id_camera","id_categoria","id_lente","id_imagem")
 );
-ALTER TABLE "public"."f_foto"
+ALTER TABLE "public"."f_venda"
     ADD CONSTRAINT fk_foto_camera FOREIGN KEY (id_camera) REFERENCES "public"."d_camera" (id_camera);
 
-ALTER TABLE "public"."f_foto"
+ALTER TABLE "public"."f_venda"
     ADD CONSTRAINT fk_foto_categ FOREIGN KEY (id_categoria) REFERENCES "public"."d_categoria" (id_categoria);
 
-ALTER TABLE "public"."f_foto"
+ALTER TABLE "public"."f_venda"
     ADD CONSTRAINT fk_foto_lente FOREIGN KEY (id_lente) REFERENCES "public"."d_lente" (id_lente);
 
-ALTER TABLE "public"."f_foto"
+ALTER TABLE "public"."f_venda"
     ADD CONSTRAINT fk_foto_imagem FOREIGN KEY (id_imagem) REFERENCES "public"."d_imagem" (id_imagem);
 
-ALTER TABLE "public"."f_foto"
+ALTER TABLE "public"."f_venda"
     ADD CONSTRAINT fk_foto_loja FOREIGN KEY (id_loja) REFERENCES "public"."d_loja" (id_loja);
 
-ALTER TABLE "public"."f_foto"
+ALTER TABLE "public"."f_venda"
     ADD CONSTRAINT fk_foto_tempo FOREIGN KEY (id_tempo) REFERENCES "public"."d_tempo" (id_id_tempo);
 
 DROP TABLE IF EXISTS "public"."t_fotografias";

@@ -14,7 +14,7 @@ def load():
     d_imagem()
     d_loja()
     d_tempo()
-    f_foto()
+    f_venda()
     print("Carregamento completo")
 
 def d_categoria():
@@ -106,7 +106,7 @@ def d_tempo():
             CASE
                 WHEN (extract(month from ft.dt_foto) >= 1 AND extract(month from ft.dt_foto) <=6) THEN 1
                 WHEN (extract(month from ft.dt_foto) >= 7 AND extract(month from ft.dt_foto) <=12) THEN 2
-            END as nu_sem, 
+            END as nu_sem,
             ft.dt_foto
         	FROM t_fotografias ft
         	WHERE fl_lido = true
@@ -115,12 +115,12 @@ def d_tempo():
     _execute(sql)
 
 
-def f_foto():
-    sql = "DELETE FROM f_foto;"
+def f_venda():
+    sql = "DELETE FROM f_venda;"
     _execute(sql)
 
     sql = """
-        INSERT INTO f_foto (id_camera, id_categoria, id_lente, id_imagem, id_loja, id_tempo, vl_imagem, nu_copias)
+        INSERT INTO f_venda (id_camera, id_categoria, id_lente, id_imagem, id_loja, id_tempo, vl_imagem, nu_copias)
     	SELECT cam.id_camera, cat.id_categoria, len.id_lente, im.id_imagem, lj.id_loja, tp.id_tempo, ft.vl_venda, ft.nu_copias
     	FROM t_fotografias ft
     	JOIN d_camera cam ON cam.nm_camera = ft.nm_camera
