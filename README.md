@@ -3,6 +3,8 @@ TCC PUC Minas - Business Intelligence and Analytics
 
 Para maiores detalhes sobre o projeto leia o Relatório Técnico no diretório `docs`.
 
+O dashboard está disponível na área [pública do Tableau](https://public.tableau.com/app/profile/alessandro.lemser).
+
 # CSV dataset
 
 O dataset em formato CSV está disponível no diretório `data`.
