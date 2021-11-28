@@ -1,0 +1,4 @@
+0 Natureza
+1 Esporte
+2 Casamento
+3 Retrato
