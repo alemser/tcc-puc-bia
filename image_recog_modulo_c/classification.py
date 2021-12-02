@@ -31,7 +31,11 @@ with psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HO
 
         print("Mapa de categorias pronto")
 
-        cur.execute("""SELECT id_imagem, nm_url FROM d_imagem""")
+        count = 0
+        cur.execute(
+            """SELECT i.id_imagem, i.nm_url
+               FROM d_imagem i
+               JOIN f_venda f ON f.id_imagem = i.id_imagem""")
         for record in cur:
             try:
                 req = urllib.request.urlopen(record[1])
@@ -58,8 +62,11 @@ with psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HO
                 if 3 == predicted_class:
                     id_categoria = categorias_existentes["Retrato"]
 
-                # insert_cursor = conn.cursor()
-                # insert_cursor.execute("""Update d_imagem Set id_categoria_ml = %s, nu_categoria_ml_prob = %s Where id_imagem = %s""", (id_categoria, max_prob, record[0]))
+                insert_cursor = conn.cursor()
+                insert_cursor.execute("""Update d_imagem Set id_categoria_ml = %s, nu_categoria_ml_prob = %s Where id_imagem = %s""", (id_categoria, max_prob, record[0]))
+                conn.commit()
+                count = count + 1
+                print(count, "registros processados")
             except Exception as e:
                 print("Error:", e)
 
