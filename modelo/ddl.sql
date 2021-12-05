@@ -123,8 +123,12 @@ CREATE TABLE "public"."d_imagem" (
     "de_titulo" varchar,
     "nm_tags" varchar,
     "nu_distancia_focal" decimal NOT NULL
+    "id_categoria_ml" bigint NULL,
+    "nu_categoria_ml_prob" decimal NULL,
     PRIMARY KEY ("id_imagem")
 );
+ALTER TABLE "public"."d_imagem"
+    ADD CONSTRAINT fk_img_categ FOREIGN KEY (id_categoria_ml) REFERENCES "public"."d_categoria" (id_categoria);
 
 DROP TABLE IF EXISTS "public"."f_venda";
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
