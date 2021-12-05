@@ -146,3 +146,21 @@ Documentos relacionados ao TCC.
 ### data
 
 Datasets no format CSV.
+
+# Aplicação de Aprendizado de Máquina
+
+Dentro do diretório `image_recog_modulo_c` estão todos os artefatos relacionados com a entrega do módulo C.
+
+Para realizar a análise sob as imagens de controle, executar dentro do diretório acima:
+
+```
+python3 classificacao_controle.py
+```
+
+Para realizar a análise sob as imagens capturas no contexto desse TCC, executar dentro do diretório acima:
+
+```
+python3 classificacao.py
+```
+
+> Verifique se o bando de dados está corretamente no ar e povoado antes de executar o comando acima. Veja mais acima neste documento como criar e povoar o banco de dados.
