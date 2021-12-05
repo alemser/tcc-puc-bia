@@ -163,4 +163,4 @@ Para realizar a análise sob as imagens capturas no contexto desse TCC, executar
 python3 classificacao.py
 ```
 
-> Verifique se o bando de dados está corretamente no ar e povoado antes de executar o comando acima. Veja mais acima neste documento como criar e povoar o banco de dados.
+> Verifique se o banco de dados está corretamente no ar e povoado antes de executar o comando acima. Veja mais acima neste documento como criar e povoar o banco de dados.
