@@ -1,7 +1,6 @@
-psycopg2-binary==2.9.1
-psycopg2==2.8.6
+psycopg2-binary
 flickrapi==2.4.0
-pandas==1.3.2
-tensorflow
 numpy
+pandas
+tensorflow
 opencv-python
