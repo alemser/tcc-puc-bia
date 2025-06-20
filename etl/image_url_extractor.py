@@ -13,7 +13,7 @@ from etl.constants import *
 key=u'820a5f399dc0032c41be29241cecdf36'
 secret=u'33d128d07ba9406a'
 
-class ImageUrlExtractor():
+class ImageUrlExtractorFlickr():
 
     def __init__(self, category, tags, max_record_count):
         self.category = category

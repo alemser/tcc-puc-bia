@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-from etl.image_url_extractor import ImageUrlExtractor
+#from etl.image_url_extractor import ImageUrlExtractorFlickr
+from etl.photos_exif_extractor import ImageUrlExtractor
 from etl.exif_worker import ExifWorker
 from etl.load_dw import load
 from etl.dw_csv import export_csv
@@ -28,7 +29,8 @@ def processar(ler_categorias):
     if ler_categorias:
         for k, v in categoria_label_dict.items():
             extractor = ImageUrlExtractor(k, v, MAX_COUNT_PER_CATEGORY)
-            extractor.extract_urls()
+            #extractor.extract_urls()
+            extractor.listar_e_processar_pasta()
 
     worker.image_url_extractor_finalizado = True
     worker.join()
@@ -50,6 +52,9 @@ def main(argv):
             print("Caregando DW e exportando para CSV")
             load()
             export_csv()
+        elif argv[0] == 'tabelas':
+            print("Criando tabelas do BD")
+            create_tables()
         elif argv[0] == 'preload':
             print("Recriando tabela e restaurando dados a partir dos CSVs")
             create_tables()

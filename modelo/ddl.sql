@@ -122,7 +122,7 @@ CREATE TABLE "public"."d_imagem" (
     "dt_imagem" timestamp,
     "de_titulo" varchar,
     "nm_tags" varchar,
-    "nu_distancia_focal" decimal NOT NULL
+    "nu_distancia_focal" decimal NOT NULL,
     "id_categoria_ml" bigint NULL,
     "nu_categoria_ml_prob" decimal NULL,
     PRIMARY KEY ("id_imagem")
@@ -161,7 +161,7 @@ ALTER TABLE "public"."f_venda"
     ADD CONSTRAINT fk_foto_loja FOREIGN KEY (id_loja) REFERENCES "public"."d_loja" (id_loja);
 
 ALTER TABLE "public"."f_venda"
-    ADD CONSTRAINT fk_foto_tempo FOREIGN KEY (id_tempo) REFERENCES "public"."d_tempo" (id_id_tempo);
+    ADD CONSTRAINT fk_foto_tempo FOREIGN KEY (id_tempo) REFERENCES "public"."d_tempo" (id_tempo);
 
 DROP TABLE IF EXISTS "public"."t_fotografias";
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
